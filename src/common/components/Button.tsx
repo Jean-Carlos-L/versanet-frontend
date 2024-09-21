@@ -1,6 +1,6 @@
-function Button({ children, onClick }: ButtonProps): JSX.Element {
+function Button({ children, onClick, type = "button" }: ButtonProps): JSX.Element {
    return (
-      <button onClick={onClick} className="btn btn-active">
+      <button onClick={onClick} className="btn btn-active" type={type}>
          {children}
       </button>
    )
@@ -8,7 +8,8 @@ function Button({ children, onClick }: ButtonProps): JSX.Element {
 
 interface ButtonProps {
    children: React.ReactNode;
-   onClick: () => void;
+   type: "button" | "submit" | "reset";
+   onClick?: () => void;
 }
 
 export default Button;
