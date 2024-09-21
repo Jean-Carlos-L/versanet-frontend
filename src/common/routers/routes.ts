@@ -11,4 +11,5 @@ export const ROUTES = {
    ROLES_CREATE: '/roles/create',
    ROLES_EDIT: '/roles/edit/:id',
    ROLES_DELETE: '/roles/delete/:id',
+   ROLES_VIEW: '/roles/view/:id',
 }
