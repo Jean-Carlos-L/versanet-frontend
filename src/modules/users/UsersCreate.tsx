@@ -2,6 +2,7 @@ import { useState } from "react";
 import FormUser from "./components/FormUser";
 import { UserCreate } from "@/common/models/User";
 import { useUsersCommand } from "./hooks/useUsersCommand";
+import Header from "@/common/components/Header";
 
 function UsersCreate() {
   const [user, setUser] = useState<UserCreate>({
@@ -24,9 +25,7 @@ function UsersCreate() {
 
   return (
     <div>
-      <header className="bg-gray-100 w-11/12 p-3 rounded-md shadow-lg mb-5">
-        <h1 className="text-3xl font-semibold text-gray-700">Crear usuario</h1>
-      </header>
+      <Header title="Crear usuario" />
 
       <FormUser
         user={user}

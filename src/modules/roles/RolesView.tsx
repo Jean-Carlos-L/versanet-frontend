@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useRoleById } from "./hooks/useRoleById";
+import Header from "@/common/components/Header";
 
 function RolesView() {
   const { id } = useParams<{ id: string }>();
@@ -7,11 +8,7 @@ function RolesView() {
 
   return (
     <div>
-      <header className="bg-gray-100 w-11/12 p-3 rounded-md shadow-lg mb-5">
-        <h1 className="text-3xl font-semibold text-gray-700">
-          Detalles del rol
-        </h1>
-      </header>
+      <Header title="Ver rol" />
 
       <div className="bg-gray-800 flex items-center justify-center">
         <div className="bg-gray-900 p-8 rounded-xl shadow-2xl max-w-2xl w-full">

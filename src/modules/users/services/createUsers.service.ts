@@ -9,7 +9,6 @@ export const createUserService =
         method: "post",
         body: user,
       });
-
       return response.data;
     } catch (error) {
       console.error(error);

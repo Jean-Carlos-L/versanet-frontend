@@ -7,7 +7,9 @@ import { UserCircleIcon } from "@heroicons/react/16/solid";
 function Sidebar() {
   return (
     <aside className="bg-gray-200 min-h-screen w-[20%] p-3">
-      <h1 className="text-black text-2xl mb-3">Versnet</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-600">
+        Versanet
+      </h1>
 
       <div className="text-start">
         <Dropdown

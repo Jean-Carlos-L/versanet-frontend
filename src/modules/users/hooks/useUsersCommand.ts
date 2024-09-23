@@ -3,6 +3,7 @@ import { useState } from "react";
 import { UserCreate, UserUpdate } from "@/common/models/User";
 import { deleteUserService } from "../services/deleteUsers.service";
 import { createUserService } from "../services/createUsers.service";
+import { updateUserService } from "../services/updateUsers.service";
 
 export const useUsersCommand = (refresh?: () => void) => {
   const { fetchData } = useFetch();
@@ -16,6 +17,8 @@ export const useUsersCommand = (refresh?: () => void) => {
       if (refresh) {
         refresh();
       }
+
+      alert("Usuario eliminado correctamente");
       return response;
     } catch (error) {
       alert(error.message);
@@ -39,20 +42,20 @@ export const useUsersCommand = (refresh?: () => void) => {
     }
   };
 
-  //   const updateUser = async (user: UserUpdate) => {
-  //     try {
-  //       setLoadingAction(true);
-  //       const response = await updateUserService(fetchData)(user);
-  //       if (refresh) {
-  //         refresh();
-  //       }
-  //       return response;
-  //     } catch (error) {
-  //       alert(error.message);
-  //     } finally {
-  //       setLoadingAction(false);
-  //     }
-  //   };
+  const updateUser = async (user: UserUpdate) => {
+    try {
+      setLoadingAction(true);
+      const response = await updateUserService(fetchData)(user);
+      if (refresh) {
+        refresh();
+      }
+      return response;
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoadingAction(false);
+    }
+  };
 
   const validations = (user: UserCreate | UserUpdate) => {
     const errors: { [key: string]: string } = {};
@@ -69,6 +72,7 @@ export const useUsersCommand = (refresh?: () => void) => {
   return {
     deleteUser,
     createUser,
+    updateUser,
     loadingAction,
     errors,
     validations,

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FormRole from "./components/FormRole";
+import Header from "@/common/components/Header";
 import { RoleCreate } from "@/common/models/Role";
 import { useRolesCommand } from "./hooks/useRolesCommand";
 
@@ -29,10 +30,7 @@ function RolesCreate() {
 
   return (
     <div>
-      <header className="bg-gray-100 w-11/12 p-3 rounded-md shadow-lg mb-5">
-        <h1 className="text-3xl font-semibold text-gray-700">Crear rol</h1>
-      </header>
-
+      <Header title="Crear rol" />
       <FormRole role={role} onChange={handleChange} onSubmit={handleSubmit} />
     </div>
   );
