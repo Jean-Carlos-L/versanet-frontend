@@ -5,7 +5,7 @@ export const updateRoleService =
    (fetch: FetchData) => async (role: RoleUpdate) => {
       try {
          const response = await fetch({
-            url: `/api/v1/roles/${role.id}`,
+            url: `/api/roles/${role.id}`,
             method: "put",
             body: role,
          });

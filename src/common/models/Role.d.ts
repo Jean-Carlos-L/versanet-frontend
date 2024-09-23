@@ -2,8 +2,7 @@ export interface Role {
    id: string;
    description: string;
    status: number;
-   permissions: { id: string, description: string }[];
-   createdAt?: Date;
+   permissions: { id: string, description: string, url: string }[];
    updatedAt?: Date;
 }
 
