@@ -3,7 +3,7 @@ import { FetchData } from "@/common/hooks/useFetch";
 export const deleteRoleService = (fetch: FetchData) => async (id: string) => {
   try {
     const response = await fetch({
-      url: `/api/v1/roles/${id}`,
+      url: `/api/roles/${id}`,
       method: "delete",
     });
 

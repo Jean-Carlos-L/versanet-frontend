@@ -42,7 +42,7 @@ function RolesEdit() {
    return (
       <div>
          <header className="bg-gray-100 w-11/12 p-3 rounded-md shadow-lg mb-5">
-            <h1 className="text-3xl font-semibold text-gray-700">Crear rol</h1>
+            <h1 className="text-3xl font-semibold text-gray-700">Editar rol</h1>
          </header>
 
          <FormRole role={roleUpdate} onChange={handleChange} onSubmit={handleSubmit} />

@@ -17,6 +17,7 @@ export const useRolesCommand = (refresh?: () => void) => {
          if (refresh) {
             refresh();
          }
+         alert("Rol eliminado correctamente")
          return response
       } catch (error) {
          alert(error.message)
@@ -32,6 +33,7 @@ export const useRolesCommand = (refresh?: () => void) => {
          if (refresh) {
             refresh();
          }
+         alert("Rol creado correctamente")
          return response
       } catch (error) {
          alert(error.message)
@@ -47,6 +49,7 @@ export const useRolesCommand = (refresh?: () => void) => {
          if (refresh) {
             refresh();
          }
+         alert("Rol actualizado correctamente")
          return response
       } catch (error) {
          alert(error.message)

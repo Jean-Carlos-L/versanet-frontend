@@ -17,7 +17,13 @@ function RolesCreate() {
 
   const handleSubmit = () => {
     if (!loadingAction) {
-      createRole(role);
+      createRole(role).then(() => {
+        setRole({
+          permissions: [],
+          description: "",
+          status: 1,
+        });
+      });
     }
   };
 
