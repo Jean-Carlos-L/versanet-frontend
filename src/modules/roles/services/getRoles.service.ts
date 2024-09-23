@@ -6,32 +6,13 @@ export const getRolesService =
    (fetch: FetchData) =>
       async (filters?: Record<string, string>): Promise<Role[]> => {
          try {
-            return [
-               {
-                  id: "1",
-                  description: "Admin",
-                  status: "active",
-                  permissions: [],
-                  createdAt: new Date(),
-                  updatedAt: new Date()
-               },
-               {
-                  id: "2",
-                  description: "User",
-                  status: "active",
-                  permissions: [],
-                  createdAt: new Date(),
-                  updatedAt: new Date()
-               }
-            ]
-            /* const searchParams = new URLSearchParams(filters).toString();
-            const response = await fetch<void, Role[]>({
-               url: `/api/v1/roles?${searchParams}`,
+            interface typeResponse { data: Role[], message: string }
+            const searchParams = new URLSearchParams(filters).toString();
+            const response = await fetch<void, typeResponse>({
+               url: `/api/roles?${searchParams}`,
             });
 
-            return response.data.map(roleAdapter); */
-
-            // TODO: Implementar lógica para obtener los roles
+            return response.data.data.map(roleAdapter);
          } catch (error) {
             console.error(error);
             throw new Error(

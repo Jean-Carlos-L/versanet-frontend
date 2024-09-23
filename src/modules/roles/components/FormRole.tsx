@@ -4,17 +4,11 @@ import Radio from "@/common/components/Radio";
 import Textfield from "@/common/components/Textfield";
 import { RoleCreate, RoleUpdate } from "@/common/models/Role";
 import { useRolesCommand } from "../hooks/useRolesCommand";
-
-const permissions = [
-   { id: "1", description: "Permiso 1" },
-   { id: "2", description: "Permiso 2" },
-   { id: "3", description: "Permiso 3" },
-   { id: "4", description: "Permiso 4" },
-   { id: "5", description: "Permiso 5" },
-]
+import { usePermissionsQuery } from "@/common/hooks/usePermissionsQuery";
 
 function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
    const { validations, errors } = useRolesCommand();
+   const { permissions } = usePermissionsQuery();
 
    const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -67,7 +61,7 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
                   onChange={handleChangeRadio}
                />
                <Radio
-                  label="Inactivo"
+                  label="Eliminado"
                   name="status"
                   value={0}
                   checked={role.status === 0}

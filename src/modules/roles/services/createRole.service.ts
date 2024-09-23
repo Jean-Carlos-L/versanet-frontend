@@ -4,9 +4,8 @@ import { RoleCreate } from "@/common/models/Role";
 export const createRoleService =
    (fetch: FetchData) => async (role: RoleCreate) => {
       try {
-         console.log('role', role)
          const response = await fetch({
-            url: "/api/v1/roles",
+            url: "/api/roles",
             method: "post",
             body: role,
          });
