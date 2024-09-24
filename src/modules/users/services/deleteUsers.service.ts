@@ -1,9 +1,9 @@
 import { FetchData } from "@/common/hooks/useFetch";
 
-export const deleteRoleService = (fetch: FetchData) => async (id: string) => {
+export const deleteUserService = (fetch: FetchData) => async (id: string) => {
   try {
     const response = await fetch({
-      url: `/api/roles/${id}`,
+      url: `/api/v1/users/${id}`,
       method: "delete",
     });
 
@@ -11,7 +11,8 @@ export const deleteRoleService = (fetch: FetchData) => async (id: string) => {
   } catch (error) {
     console.error(error);
     throw new Error(
-      error?.response?.data?.message || "Ocurrió un error al obtener los roles"
+      error?.response?.data?.message ||
+        "Ocurrió un error al obtener los usuarios"
     );
   }
 };
