@@ -20,8 +20,18 @@ function UsersCreate() {
   };
 
   const handleSubmit = async () => {
-    await createUser(user);
-  };
+    await createUser(user).then(() => {
+      alert("Usuario creado correctamente");
+      setUser({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        status: 1,
+        role: "",
+      })
+    });
+  }
 
   return (
     <div>

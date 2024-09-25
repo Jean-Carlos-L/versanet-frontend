@@ -18,8 +18,8 @@ export function useUsersFilters(users: User[]) {
     const filtered = users.filter((user) => {
       const nameMatch = user.name.toLowerCase().includes(searchLower);
       const emailMatch = user.email.toLowerCase().includes(searchLower);
-      const roleMatch = user.roles?.description
-        .toLowerCase()
+      const roleMatch = user.role?.description
+        ?.toLowerCase()
         .includes(searchLower);
       return nameMatch || emailMatch || roleMatch;
     });

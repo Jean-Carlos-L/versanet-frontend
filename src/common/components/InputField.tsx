@@ -16,7 +16,7 @@ const InputField = ({
     <Textfield
       label=""
       name={name}
-      value={value}
+      value={value || ""}
       placeholder={placeholder}
       onChange={onChange}
       error={error}

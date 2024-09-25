@@ -3,7 +3,7 @@ import { FetchData } from "@/common/hooks/useFetch";
 export const deleteUserService = (fetch: FetchData) => async (id: string) => {
   try {
     const response = await fetch({
-      url: `/api/v1/users/${id}`,
+      url: `/api/users/delete/${id}`,
       method: "delete",
     });
 
@@ -12,7 +12,7 @@ export const deleteUserService = (fetch: FetchData) => async (id: string) => {
     console.error(error);
     throw new Error(
       error?.response?.data?.message ||
-        "Ocurrió un error al obtener los usuarios"
+      "Ocurrió un error al obtener los usuarios"
     );
   }
 };

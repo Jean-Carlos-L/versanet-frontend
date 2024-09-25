@@ -61,7 +61,30 @@ export const useUsersCommand = (refresh?: () => void) => {
     const errors: { [key: string]: string } = {};
 
     if (!user.name) {
-      errors.description = "El nombre es requerido";
+      errors.name = "El nombre es requerido";
+    }
+
+    if (!user.email) {
+      errors.email = "El correo es requerido";
+    }
+
+    if ('id' in user === false) {
+      if (!user.password) {
+        errors.password = "La contraseña es requerida";
+      }
+
+      if (!user.confirmPassword) {
+        errors.confirmPassword = "La confirmación de contraseña es requerida";
+      }
+
+      if (user.password !== user.confirmPassword) {
+        errors.confirmPassword = "Las contraseñas no coinciden";
+      }
+    }
+
+
+    if (user.role === undefined || user.role === "") {
+      errors.role = "El rol es requerido";
     }
 
     const hasErrors = Object.keys(errors).length > 0;

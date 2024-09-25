@@ -4,7 +4,7 @@ export interface User {
   email: string;
   password: string;
   status: number;
-  roles: Role;
+  role: Role;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -15,7 +15,7 @@ export interface UserCreate {
   password: string;
   confirmPassword: string;
   status?: number;
-  roles?: Role;
+  role?: string;
 }
 
 export interface UserUpdate extends UserCreate {

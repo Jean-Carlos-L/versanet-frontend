@@ -27,8 +27,10 @@ function UsersEdit() {
         password: "",
         confirmPassword: "",
         status: user.status,
+        role: user.role.id,
       });
     }
+
   }, [user]);
 
   const handleChange = (user: UserUpdate) => {

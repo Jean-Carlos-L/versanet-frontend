@@ -7,14 +7,12 @@ import { ROUTES } from "@/common/routers/routes";
 import { useUsersCommand } from "./hooks/useUsersCommand";
 import { useUsersFilters } from "./hooks/useUsersFilters "; // Importar el hook
 
-const HEADERS_TABLE = ["#", "Nombre", "Correo", "ROL", "Eliminar", "Editar"];
+const HEADERS_TABLE = ["#", "Nombre", "Correo", "Rol", "Acciones"];
 
 function UsersList() {
   const navigate = useNavigate();
   const { users, loading, refresh } = useUsersQuery();
   const { deleteUser, loadingAction } = useUsersCommand(refresh);
-
-  // Usar el hook para el filtrado
   const { search, filteredUsers, handleSearchChange } = useUsersFilters(users);
 
   const handleEdit = (id: string) => {
@@ -61,17 +59,16 @@ function UsersList() {
                 <td>{index + 1}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.roles?.description}</td>
-                {/* Mostrar la descripción del rol */}
+                <td>{user.role?.description}</td>
                 <td>
-                  <button onClick={() => handleDelete(user.id)}>
-                    <TrashIcon className="h-5 w-5" />
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => handleEdit(user.id)}>
-                    <PencilIcon className="h-5 w-5" />
-                  </button>
+                  <div className="flex-gap-2">
+                    <button onClick={() => handleDelete(user.id)}>
+                      <TrashIcon className="h-5 w-5" />
+                    </button>
+                    <button onClick={() => handleEdit(user.id)}>
+                      <PencilIcon className="h-5 w-5" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
