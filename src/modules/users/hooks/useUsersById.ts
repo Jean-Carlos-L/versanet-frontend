@@ -1,7 +1,8 @@
 import { useFetch } from "@/common/hooks/useFetch";
 import { User } from "@/common/models/User";
 import { useEffect, useState } from "react";
-import { getRoleByIdService } from "../services/geUsersById.service";
+import { getUserById } from "../services/getUserById.service";
+
 
 export const useUsersById = (id: string) => {
   const { fetchData } = useFetch();
@@ -11,7 +12,7 @@ export const useUsersById = (id: string) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await getRoleByIdService(fetchData)(id);
+        const response = await getUserById(fetchData)(id);
         setUser(response);
       } catch (error) {
         alert(error.message);

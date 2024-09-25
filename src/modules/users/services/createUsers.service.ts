@@ -5,7 +5,7 @@ export const createUserService =
   (fetch: FetchData) => async (user: UserCreate) => {
     try {
       const response = await fetch({
-        url: "/api/v1/users",
+        url: "/api/users",
         method: "post",
         body: user,
       });

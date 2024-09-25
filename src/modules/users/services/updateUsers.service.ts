@@ -5,7 +5,7 @@ export const updateUserService =
   (fetch: FetchData) => async (user: UserUpdate) => {
     try {
       const response = await fetch({
-        url: `/api/v1/users/${user.id}`,
+        url: `/api/users/${user.id}`,
         method: "put",
         body: user,
       });
@@ -15,7 +15,7 @@ export const updateUserService =
       console.error(error);
       throw new Error(
         error?.response?.data?.message ||
-          "Ocurrió un error al actualizar el usuario"
+        "Ocurrió un error al actualizar el usuario"
       );
     }
   };

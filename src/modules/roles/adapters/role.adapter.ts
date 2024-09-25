@@ -6,7 +6,6 @@ export const roleAdapter = (data): Role => {
       description: data.description,
       status: data.status,
       permissions: data.permissions,
-      createdAt: data.createdAt,
       updatedAt: data.updatedAt
    }
 }

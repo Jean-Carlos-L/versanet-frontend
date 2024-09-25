@@ -10,17 +10,16 @@ function Textfield(props: TextfieldProps) {
     type = "text",
   } = props;
   return (
-    <div className="flex gap-5 items-center">
-      <label htmlFor={name} className="font-semibold">
+    <div className="flex gap-5 items-center flex-col">
+      <label htmlFor={name} className="font-semibold text-start w-full">
         {label}
       </label>
       <div className="flex flex-col w-full">
         <input
           type={type}
           placeholder={placeholder}
-          className={`input input-bordered w-full max-w-lg ${
-            error ? "input-error" : ""
-          }`}
+          className={`input input-bordered w-full max-w-lg ${error ? "input-error" : ""
+            }`}
           value={value}
           name={name}
           id={name}
