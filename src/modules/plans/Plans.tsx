@@ -15,7 +15,7 @@ function Plans() {
             </h1>
          </header>
 
-         <section>
+         <section className="w-11/12">
             {loading ? (
                <Spinner />
             ) : (

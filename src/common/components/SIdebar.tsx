@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
-import { UserGroupIcon, UserCircleIcon, ListBulletIcon } from "@heroicons/react/20/solid";
+import { UserGroupIcon, UserCircleIcon, ListBulletIcon, ServerStackIcon } from "@heroicons/react/20/solid";
 import { ROUTES } from "../routers/routes";
 
 function Sidebar() {
@@ -45,8 +45,8 @@ function Sidebar() {
           </LinkComponent>
         </div>
         <div>
-          <LinkComponent to={ROUTES.PLANS_LIST}>
-            <ListBulletIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
+          <LinkComponent to={ROUTES.PLANS_CUSTOMERS_LIST}>
+            <ServerStackIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
             Servicios
           </LinkComponent>
         </div>

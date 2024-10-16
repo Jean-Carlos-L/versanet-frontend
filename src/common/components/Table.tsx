@@ -1,7 +1,7 @@
 function Table({ data, headers }: TableProps) {
    return (
       <div className="overflow-x-auto">
-         <table className="table">
+         <table className="table text-center">
             <thead>
                <tr>
                   {headers.map((header, index) => (
