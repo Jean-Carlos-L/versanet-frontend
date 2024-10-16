@@ -35,6 +35,17 @@ function Sidebar() {
           <Link to={ROUTES.USERS_CREATE}>Crear usuario</Link>
           <Link to={ROUTES.USERS_LIST}>Ver usuarios</Link>
         </Dropdown>
+        <Dropdown
+          type="link"
+          title={
+            <span className="align-middle p-1">
+              <UserCircleIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
+              Perfil
+            </span>
+          }
+        >
+          <Link to={ROUTES.LOGOUT}>Cerrar sesión</Link>
+        </Dropdown>
       </div>
     </aside>
   );
