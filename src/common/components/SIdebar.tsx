@@ -39,17 +39,29 @@ function Sidebar() {
           </Dropdown>
         </div>
         <div>
-          <div className="px-4 py-2 text-gray-600 rounded-md cursor-pointer w-52 hover:bg-gray-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400">
-            <Link to={ROUTES.PLANS_LIST}>
-              <span className="align-middle p-1">
-                <ListBulletIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
-                Planes
-              </span>
-            </Link>
-          </div>
+          <LinkComponent to={ROUTES.PLANS_LIST}>
+            <ListBulletIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
+            Planes
+          </LinkComponent>
+        </div>
+        <div>
+          <LinkComponent to={ROUTES.PLANS_LIST}>
+            <ListBulletIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
+            Servicios
+          </LinkComponent>
         </div>
       </div>
     </aside>
+  );
+}
+
+function LinkComponent({ to, children }) {
+  return (
+    <div className="px-4 py-2 text-gray-600 rounded-md cursor-pointer w-52 hover:bg-gray-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400">
+      <Link to={to}>
+        {children}
+      </Link>
+    </div>
   );
 }
 
