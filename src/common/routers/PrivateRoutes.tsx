@@ -7,6 +7,7 @@ import RolesList from "@/modules/roles/RolesList";
 import RolesCreate from "@/modules/roles/RolesCreate";
 import RolesEdit from "@/modules/roles/RolesEdit";
 import RolesView from "@/modules/roles/RolesView";
+import Plans from "@/modules/plans/Plans";
 
 function PrivateRoutes() {
   return (
@@ -20,6 +21,8 @@ function PrivateRoutes() {
         <Route path={ROUTES.ROLES_CREATE} element={<RolesCreate />} />
         <Route path={ROUTES.ROLES_EDIT} element={<RolesEdit />} />
         <Route path={ROUTES.ROLES_VIEW} element={<RolesView />} />
+
+        <Route path={ROUTES.PLANS_LIST} element={<Plans />} />
       </Route>
     </Routes>
   );
