@@ -1,8 +1,7 @@
-import PageRoutes from './common/routers/PageRoutes'
+import PageRoutes from "./common/routers/PageRoutes";
 
 function App() {
-
-  return <PageRoutes />
+  return <PageRoutes />;
 }
 
-export default App
+export default App;
