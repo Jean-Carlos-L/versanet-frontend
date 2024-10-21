@@ -34,6 +34,7 @@ export const useUsersCommand = (refresh?: () => void) => {
       if (refresh) {
         refresh();
       }
+      alert("Usuario creado correctamente");
       return response;
     } catch (error) {
       alert(error.message);
@@ -68,7 +69,7 @@ export const useUsersCommand = (refresh?: () => void) => {
       errors.email = "El correo es requerido";
     }
 
-    if ('id' in user === false) {
+    if ("id" in user === false) {
       if (!user.password) {
         errors.password = "La contraseña es requerida";
       }
@@ -82,9 +83,20 @@ export const useUsersCommand = (refresh?: () => void) => {
       }
     }
 
-
     if (user.role === undefined || user.role === "") {
       errors.role = "El rol es requerido";
+    }
+
+    // validar que el correo sea un correo
+    const emailRegex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+    if (!emailRegex.test(user.email)) {
+      errors.email = "El correo no es válido";
+    }
+
+    //validar el nombre de usuario que no tenga caracteres especiales
+    const nameRegex = /^[A-Z]+$/i;
+    if (!nameRegex.test(user.name)) {
+      errors.name = "El nombre no es válido";
     }
 
     const hasErrors = Object.keys(errors).length > 0;
