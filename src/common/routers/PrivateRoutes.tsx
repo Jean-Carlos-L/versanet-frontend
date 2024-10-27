@@ -10,17 +10,23 @@ import RolesView from "@/modules/roles/RolesView";
 import AuthLogout from "@/modules/auth/AuthLogout";
 import Plans from "@/modules/plans/Plans";
 import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
-// Helper para verificar si la cookie con el token está presente
-const getCookie = (name: string) => {
-  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
-  return match ? match[2] : null;
-};
+import CustomersCreate from "@/modules/customers/CustomersCreate";
+import CustomersEdit from "@/modules/customers/CustomersEdit";
+import CustomersView from "@/modules/customers/CustomersView";
+import CustomersList from "@/modules/customers/CustomersList";
 
-// Verifica si el token está en las cookies
-const isValidToken = () => {
-  const token = getCookie("token");
-  return !!token; // Devuelve true si la cookie está presente
-};
+
+// // Helper para verificar si la cookie con el token está presente
+// const getCookie = (name: string) => {
+//   const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+//   return match ? match[2] : null;
+// };
+
+// // Verifica si el token está en las cookies
+// const isValidToken = () => {
+//   const token = getCookie("token");
+//   return !!token; // Devuelve true si la cookie está presente
+// };
 
 
 function PrivateRoutes() {
@@ -39,6 +45,12 @@ function PrivateRoutes() {
         <Route path={ROUTES.LOGOUT} element={<AuthLogout />} />
         <Route path={ROUTES.PLANS_LIST} element={<Plans />} />
         <Route path={ROUTES.PLANS_CUSTOMERS_LIST} element={<PlansCustomersList />} />
+
+        <Route path={ROUTES.CUSTOMERS_LIST} element={<CustomersList />} />
+        <Route path={ROUTES.CUSTOMERS_CREATE} element={<CustomersCreate />} />
+        <Route path={ROUTES.CUSTOMERS_EDIT} element={<CustomersEdit />} />
+        <Route path={ROUTES.CUSTOMERS_VIEW} element={<CustomersView />} />
+
       </Route>
     </Routes>
   );
@@ -46,9 +58,9 @@ function PrivateRoutes() {
 
 // Redirige al usuario a la página de login si no hay un token válido en las cookies
 function RequiredAuth() {
-  if (!isValidToken()) {
-    return <Navigate to={ROUTES.LOGIN} />;
-  }
+  // if (!isValidToken()) {
+  //   return <Navigate to={ROUTES.LOGIN} />;
+  // }
 
   return <Outlet />;
 }

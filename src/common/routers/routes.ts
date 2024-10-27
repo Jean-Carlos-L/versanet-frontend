@@ -16,4 +16,11 @@ export const ROUTES = {
   
   PLANS_LIST: '/plans/list',
   PLANS_CUSTOMERS_LIST: '/plans/customers/list',
+
+  CUSTOMERS_LIST: "/customers/list",
+  CUSTOMERS_CREATE: "/customers/create",
+  CUSTOMERS_EDIT: "/customers/edit/:id",
+  CUSTOMERS_DELETE: "/customers/delete/:id",
+  CUSTOMERS_VIEW: "/customers/view/:id",
+
 }
