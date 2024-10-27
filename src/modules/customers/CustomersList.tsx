@@ -6,9 +6,11 @@ import { generatePath, useNavigate } from "react-router-dom";
 import { ROUTES } from "@/common/routers/routes";
 import { useCustomersCommand } from "./hooks/useCustomersCommand";
 
-const HEADERS_TABLE = ["#", "Nombres y apellidos", "Cedula", "Correo", "Telefono", "Direccion", "estado", "Acciones"];
+const HEADERS_TABLE = ["#", "Nombres y apellidos", "Cedula", "Correo", "Telefono", "Direccion", "Acciones"];
 
 function CustomersList() {
+
+    
     const navigate = useNavigate();
     const { customers, loading, refresh } = useCustomersQuery();
     const { deleteCustomer, loadingAction } = useCustomersCommand(refresh);
@@ -33,13 +35,25 @@ function CustomersList() {
         navigate(path);
     };
 
+    const handleAddCustomer = () => {
+        // Llamar al modal de creación de cliente
+        navigate(ROUTES.CUSTOMERS_CREATE);
+    };
     return (
         <div className="flex flex-col items-center">
             <header className="bg-gray-100 w-11/12 p-3 rounded-md shadow-lg mb-5">
                 <h1 className="text-3xl font-semibold text-gray-700">Lista de clientes</h1>
-            </header>
-
-            <div className="w-11/12 text-center">
+                
+            </header>      
+            <div className="w-11/12 flex justify-end mb-5">
+                <button
+                    onClick={handleAddCustomer}
+                    className="bg-green-500 text-white px-4 py-2 rounded-md shadow-md"
+                >
+                    Agregar cliente
+                </button>
+            </div>
+            <div className="w-11/12 text-white">
                 {loading && customers.length === 0 ? (
                     <Spinner />
                 ) : (
@@ -53,7 +67,6 @@ function CustomersList() {
                                 <td>{customer.email}</td>
                                 <td>{customer.phone}</td>
                                 <td>{customer.address}</td>
-                                <td>{customer.status}</td>
                                 <td>
                                     <div className="flex gap-2">
                                         <button onClick={() => handleView(customer.id)}>

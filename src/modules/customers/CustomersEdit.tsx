@@ -33,6 +33,7 @@ function CustomersEdit() {
             });
         }
     }, [customer]);
+
     const handleChange = (customer: CustomerUpdate) => {
         setCustomerUpdate(customer);
     };
@@ -46,7 +47,7 @@ function CustomersEdit() {
     return (
         <div>
             <Header title="Editar cliente" />
-            <FormCustomer customer={customer} loading={loadingAction} onChange={handleChange} onSubmit={handleSubmit} />
+            <FormCustomer customer={customerUpdate} onChange={handleChange} onSubmit={handleSubmit} />
         </div>
     );
 }

@@ -16,17 +16,17 @@ import CustomersView from "@/modules/customers/CustomersView";
 import CustomersList from "@/modules/customers/CustomersList";
 
 
-// // Helper para verificar si la cookie con el token está presente
-// const getCookie = (name: string) => {
-//   const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
-//   return match ? match[2] : null;
-// };
+//Helper para verificar si la cookie con el token está presente
+const getCookie = (name: string) => {
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+  return match ? match[2] : null;
+};
 
-// // Verifica si el token está en las cookies
-// const isValidToken = () => {
-//   const token = getCookie("token");
-//   return !!token; // Devuelve true si la cookie está presente
-// };
+// Verifica si el token está en las cookies
+const isValidToken = () => {
+  const token = getCookie("token");
+  return !!token; // Devuelve true si la cookie está presente
+};
 
 
 function PrivateRoutes() {
@@ -58,9 +58,9 @@ function PrivateRoutes() {
 
 // Redirige al usuario a la página de login si no hay un token válido en las cookies
 function RequiredAuth() {
-  // if (!isValidToken()) {
-  //   return <Navigate to={ROUTES.LOGIN} />;
-  // }
+  if (!isValidToken()) {
+    return <Navigate to={ROUTES.LOGIN} />;
+  }
 
   return <Outlet />;
 }

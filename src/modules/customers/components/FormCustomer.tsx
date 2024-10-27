@@ -2,7 +2,6 @@ import Button from "@/common/components/Button";
 import Textfield from "@/common/components/Textfield";
 import { CustomerCreate, CustomerUpdate } from "@/common/models/Customer";
 import { useCustomersCommand } from "../hooks/useCustomersCommand";
-import { useCustomersQuery } from "../hooks/useCustomersQuery";
 
 
 
@@ -30,7 +29,7 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
                 <Textfield
                     label="Nombres"
                     name="names"
-                    value={customer.names}
+                    value={customer?.names}
                     placeholder="Nombres del cliente"
                     onChange={handleChangeText}
                     error={errors.names}
@@ -39,7 +38,7 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
                 <Textfield
                     label="Cédula"
                     name="cedula"
-                    value={customer.cedula}
+                    value={customer?.cedula}
                     placeholder="Cédula del cliente"
                     onChange={handleChangeText}
                     error={errors.cedula}
@@ -48,7 +47,7 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
                 <Textfield
                     label="Correo Electrónico"
                     name="email"
-                    value={customer.email}
+                    value={customer?.email}
                     placeholder="Correo electrónico del cliente"
                     onChange={handleChangeText}
                     error={errors.email}
@@ -57,7 +56,7 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
                 <Textfield
                     label="Teléfono"
                     name="phone"
-                    value={customer.phone}
+                    value={customer?.phone}
                     placeholder="Teléfono del cliente"
                     onChange={handleChangeText}
                     error={errors.phone}
@@ -66,7 +65,7 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
                 <Textfield
                     label="Dirección"
                     name="address"
-                    value={customer.address}
+                    value={customer?.address}
                     placeholder="Dirección del cliente"
                     onChange={handleChangeText}
                     error={errors.address}
