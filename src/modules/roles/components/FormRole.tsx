@@ -39,7 +39,7 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
    }
 
    return (
-      <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md max-w-lg mx-auto">
+      <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md max-w-xl mx-auto bg-gray-800">
          <div className="flex flex-col gap-6">
             <div>
                <Textfield
@@ -84,7 +84,7 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
             </div>
 
             <div className="mt-4">
-               <Button type="submit">
+               <Button type="submit" theme="light">
                   Guardar
                </Button>
             </div>

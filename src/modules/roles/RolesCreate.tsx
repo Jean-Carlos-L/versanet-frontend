@@ -29,10 +29,10 @@ function RolesCreate() {
   };
 
   return (
-    <div>
+    <main>
       <Header title="Crear rol" />
       <FormRole role={role} onChange={handleChange} onSubmit={handleSubmit} />
-    </div>
+    </main>
   );
 }
 

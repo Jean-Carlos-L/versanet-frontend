@@ -10,6 +10,7 @@ import RolesView from "@/modules/roles/RolesView";
 import AuthLogout from "@/modules/auth/AuthLogout";
 import Plans from "@/modules/plans/Plans";
 import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
+import Configuration from "@/modules/configuration/Configuration";
 // Helper para verificar si la cookie con el token está presente
 const getCookie = (name: string) => {
   const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
@@ -39,6 +40,22 @@ function PrivateRoutes() {
         <Route path={ROUTES.LOGOUT} element={<AuthLogout />} />
         <Route path={ROUTES.PLANS_LIST} element={<Plans />} />
         <Route path={ROUTES.PLANS_CUSTOMERS_LIST} element={<PlansCustomersList />} />
+
+        <Route path={ROUTES.DASHBOARD} element={<div>Dashboard</div>} />
+
+        <Route path={ROUTES.CUSTOMERS} element={<div>Clientes</div>} />
+
+        <Route path={ROUTES.CONTRATS} element={<div>Contratos</div>} />
+
+        <Route path={ROUTES.PLANS} element={<Plans />} />
+
+        <Route path={ROUTES.FACTURATION} element={<div>Facturación</div>} />
+
+        <Route path={ROUTES.INVENTORY} element={<div>Inventario</div>} />
+
+        <Route path={ROUTES.NOTIFICATIONS} element={<div>Notificaciones</div>} />
+
+        <Route path={ROUTES.CONFIGURATION} element={<Configuration />} />
       </Route>
     </Routes>
   );
@@ -46,7 +63,7 @@ function PrivateRoutes() {
 
 // Redirige al usuario a la página de login si no hay un token válido en las cookies
 function RequiredAuth() {
-  if (!isValidToken()) {
+  if (isValidToken()) {
     return <Navigate to={ROUTES.LOGIN} />;
   }
 
