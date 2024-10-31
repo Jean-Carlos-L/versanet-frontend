@@ -14,6 +14,7 @@ import CustomersCreate from "@/modules/customers/CustomersCreate";
 import CustomersEdit from "@/modules/customers/CustomersEdit";
 import CustomersView from "@/modules/customers/CustomersView";
 import CustomersList from "@/modules/customers/CustomersList";
+import CustomerListModal from "@/modules/customers/CustomerListModal";
 
 
 //Helper para verificar si la cookie con el token está presente

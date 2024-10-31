@@ -3,15 +3,13 @@ import Textfield from "@/common/components/Textfield";
 import { CustomerCreate, CustomerUpdate } from "@/common/models/Customer";
 import { useCustomersCommand } from "../hooks/useCustomersCommand";
 
-
-
 function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerProps) {
     const { validations, errors } = useCustomersCommand();
 
-    const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeText = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         onChange({ ...customer, [name]: value });
-    }
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -52,7 +50,7 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
                     onChange={handleChangeText}
                     error={errors.email}
                 />
-                
+
                 <Textfield
                     label="Teléfono"
                     name="phone"
@@ -70,13 +68,13 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
                     onChange={handleChangeText}
                     error={errors.address}
                 />
+
                 <div className="flex justify-end gap-4 mt-4">
                     <Button type="submit">{loading ? "Guardando..." : "Guardar"}</Button>
                 </div>
             </div>
         </form>
     );
-
 }
 
 interface FormCustomerProps {
