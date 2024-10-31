@@ -18,7 +18,7 @@ function Textfield(props: TextfieldProps) {
         <input
           type={type}
           placeholder={placeholder}
-          className={`input input-bordered w-full max-w-lg ${error ? "input-error" : ""
+          className={`input input-bordered w-full max-w-full ${error ? "input-error" : ""
             }`}
           value={value}
           name={name}

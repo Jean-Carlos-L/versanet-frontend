@@ -6,6 +6,7 @@ import { generatePath, useNavigate } from "react-router-dom";
 import { ROUTES } from "@/common/routers/routes";
 import { useUsersCommand } from "./hooks/useUsersCommand";
 import { useUsersFilters } from "./hooks/useUsersFilters "; // Importar el hook
+import Header from "@/common/components/Header";
 
 const HEADERS_TABLE = ["#", "Nombre", "Correo", "Rol", "Acciones"];
 
@@ -30,52 +31,51 @@ function UsersList() {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <header className="bg-gray-100 w-11/12 p-3 rounded-md shadow-lg mb-5">
-        <h1 className="text-3xl font-semibold text-gray-700">
-          Lista de usuarios
-        </h1>
-      </header>
+    <main>
+      <Header title="Lista de usuario" />
 
-      {/* Cuadro de búsqueda único */}
-      <div className="w-11/12 mb-4">
-        <input
-          type="text"
-          placeholder="Buscar por nombre, correo o rol"
-          className="input input-bordered w-full"
-          value={search}
-          onChange={handleSearchChange}
-        />
-      </div>
+      <div className="flex flex-col items-center">
 
-      <div className="w-11/12 text-center">
-        {loading && users.length === 0 ? (
-          <Spinner />
-        ) : (
-          <Table
-            headers={HEADERS_TABLE}
-            data={filteredUsers.map((user, index) => (
-              <tr key={user.id}>
-                <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role?.description}</td>
-                <td>
-                  <div className="flex-gap-2">
-                    <button onClick={() => handleDelete(user.id)}>
-                      <TrashIcon className="h-5 w-5" />
-                    </button>
-                    <button onClick={() => handleEdit(user.id)}>
-                      <PencilIcon className="h-5 w-5" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+        {/* Cuadro de búsqueda único */}
+        <div className="w-11/12 mb-4">
+          <input
+            type="text"
+            placeholder="Buscar por nombre, correo o rol"
+            className="input input-bordered w-full"
+            value={search}
+            onChange={handleSearchChange}
           />
-        )}
+        </div>
+
+        <div className="w-11/12 text-center">
+          {loading && users.length === 0 ? (
+            <Spinner />
+          ) : (
+            <Table
+              headers={HEADERS_TABLE}
+              data={filteredUsers.map((user, index) => (
+                <tr key={user.id}>
+                  <td>{index + 1}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role?.description}</td>
+                  <td>
+                    <div className="flex-gap-2">
+                      <button onClick={() => handleDelete(user.id)}>
+                        <TrashIcon className="h-5 w-5" />
+                      </button>
+                      <button onClick={() => handleEdit(user.id)}>
+                        <PencilIcon className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 

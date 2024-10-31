@@ -28,7 +28,7 @@ function FormUser({ user, loading, onSubmit, onChange }: FormUserProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 rounded-lg shadow-md max-w-lg mx-auto"
+      className="p-4 rounded-lg shadow-md max-w-xl mx-auto bg-gray-800"
       aria-label="Formulario de Usuario"
     >
       <div className="flex flex-col gap-6">
