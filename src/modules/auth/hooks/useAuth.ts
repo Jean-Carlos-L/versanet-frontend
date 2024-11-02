@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useFetch } from "@/common/hooks/useFetch";
 import { Auth } from "../services/auth.service";
-import { Authlogout } from "../services/auth.service";
 
 export const useAuth = () => {
   const { fetchData } = useFetch();
+  const { authenticate, logoutUser } = Auth(fetchData);
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const login = async (email: string, password: string) => {
     try {
       setLoading(true);
-      const response = await Auth(fetchData)(email, password);
+      const response = await authenticate(email, password);
       return response;
     } catch (error) {
       if (error.response?.status === 401) {
@@ -28,7 +29,7 @@ export const useAuth = () => {
   const logout = async () => {
     try {
       setLoading(true);
-      await Authlogout(fetchData)();
+      await logoutUser();
     } catch (error) {
       setErrors({ message: error.message || "Ocurrió un error inesperado" });
     } finally {

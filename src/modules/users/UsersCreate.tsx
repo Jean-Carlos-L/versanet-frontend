@@ -33,7 +33,7 @@ function UsersCreate() {
   };
 
   return (
-    <div>
+    <main>
       <Header title="Crear usuario" />
 
       <FormUser
@@ -42,7 +42,7 @@ function UsersCreate() {
         onSubmit={handleSubmit}
         onChange={handleChange}
       />
-    </div>
+    </main>
   );
 }
 
