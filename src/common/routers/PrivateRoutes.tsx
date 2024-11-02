@@ -10,11 +10,7 @@ import RolesView from "@/modules/roles/RolesView";
 import AuthLogout from "@/modules/auth/AuthLogout";
 import Plans from "@/modules/plans/Plans";
 import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
-import CustomersCreate from "@/modules/customers/CustomersCreate";
-import CustomersEdit from "@/modules/customers/CustomersEdit";
-import CustomersView from "@/modules/customers/CustomersView";
-import CustomersList from "@/modules/customers/CustomersList";
-import CustomerListModal from "@/modules/customers/CustomerListModal";
+import CustomerList from "@/modules/customers/CustomerList";
 
 
 //Helper para verificar si la cookie con el token está presente
@@ -47,11 +43,7 @@ function PrivateRoutes() {
         <Route path={ROUTES.PLANS_LIST} element={<Plans />} />
         <Route path={ROUTES.PLANS_CUSTOMERS_LIST} element={<PlansCustomersList />} />
 
-        <Route path={ROUTES.CUSTOMERS_LIST} element={<CustomersList />} />
-        <Route path={ROUTES.CUSTOMERS_CREATE} element={<CustomersCreate />} />
-        <Route path={ROUTES.CUSTOMERS_EDIT} element={<CustomersEdit />} />
-        <Route path={ROUTES.CUSTOMERS_VIEW} element={<CustomersView />} />
-
+        <Route path={ROUTES.CUSTOMERS_LIST} element={<CustomerList />} />
       </Route>
     </Routes>
   );

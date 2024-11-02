@@ -6,7 +6,7 @@ import { useCustomersCommand } from "./hooks/useCustomersCommand";
 import { useCustomerById } from "./hooks/useCustomerById"; 
 
 
-function CustomerEditModal({ isOpen, onClose, customerId }) {
+function CustomerEditModal({ isOpen, onClose, customerId, onRefresh}) {
     const { customer } = useCustomerById(customerId);
     const { updateCustomer, loadingAction } = useCustomersCommand();
     const [customerUpdate, setCustomerUpdate] = useState<CustomerUpdate>({
@@ -35,13 +35,18 @@ function CustomerEditModal({ isOpen, onClose, customerId }) {
 
     const handleChange = (updatedCustomer: CustomerUpdate) => {
         setCustomerUpdate(updatedCustomer);
+        onRefresh();
+        
     };
 
     const handleSubmit = () => {
         if (!loadingAction) {
             updateCustomer(customerUpdate);
+            onRefresh();
+            onClose();
         }
     };
+    
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>

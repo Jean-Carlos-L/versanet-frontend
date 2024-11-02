@@ -4,7 +4,7 @@ import Modal from "@/common/components/Modal"; // Asegúrate de que este compone
 import { CustomerCreate } from "@/common/models/Customer";
 import { useCustomersCommand } from "./hooks/useCustomersCommand";
 
-function CustomerCreateModal({ isOpen, onClose }) {
+function CustomerCreateModal({ isOpen, onClose, onRefresh }) {
     const [customer, setCustomer] = useState<CustomerCreate>({
         names: "",
         cedula: "",
@@ -19,9 +19,9 @@ function CustomerCreateModal({ isOpen, onClose }) {
         setCustomer(customer);
     };
 
-    const handleSubmit = () => {
-        if (!loadingAction) {
-            createCustomer(customer).then(() => {
+    const handleSubmit = async() => {
+         if (!loadingAction) {
+            await createCustomer(customer).then(() => {
                 setCustomer({
                     names: "",
                     cedula: "",
@@ -30,7 +30,8 @@ function CustomerCreateModal({ isOpen, onClose }) {
                     address: "",
                     status: 1,
                 });
-                onClose(); // Cerrar el modal después de crear
+                onRefresh();
+                onClose();
             });
         }
     };
