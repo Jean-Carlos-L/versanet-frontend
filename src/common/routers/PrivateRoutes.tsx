@@ -1,5 +1,4 @@
 import { Outlet, Route, Routes, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { ROUTES } from "./routes";
 import UsersCreate from "@/modules/users/UsersCreate";
 import UsersList from "@/modules/users/UsersList";
@@ -12,6 +11,7 @@ import AuthLogout from "@/modules/auth/AuthLogout";
 import Plans from "@/modules/plans/Plans";
 import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
 import Configuration from "@/modules/configuration/Configuration";
+import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
 
 function PrivateRoutes() {
   return (
@@ -57,9 +57,7 @@ function PrivateRoutes() {
 }
 
 function RequiredAuth() {
-  const isAuth = useSelector(
-    (state: { auth: { isAuth: boolean } }) => state.auth.isAuth
-  );
+  const { isAuth } = useAuthQuery();
 
   if (!isAuth) {
     return <Navigate to={ROUTES.LOGIN} />;
