@@ -1,4 +1,4 @@
-import Table from "@/common/components/Table";
+import Table, { TableCell, TableRow } from "@/common/components/Table";
 import { TrashIcon, PencilIcon, EyeIcon } from "@heroicons/react/20/solid";
 import { useRolesQuery } from "./hooks/useRolesQuery";
 import Spinner from "@/common/components/Spinner";
@@ -44,12 +44,12 @@ function RolesList() {
             <Table
               headers={HEADERS_TABLE}
               data={roles.map((role, index) => (
-                <tr key={role.id}>
-                  <td>{index + 1}</td>
-                  <td>{role.description}</td>
-                  <td>{role.status}</td>
-                  <td>
-                    <div className="flex gap-2">
+                <TableRow key={role.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{role.description}</TableCell>
+                  <TableCell>{role.status}</TableCell>
+                  <TableCell>
+                    <div className="flex gap-2 justify-center">
                       <button onClick={() => handleView(role.id)}>
                         <EyeIcon className="h-5 w-5" />
                       </button>
@@ -60,8 +60,8 @@ function RolesList() {
                         <TrashIcon className="h-5 w-5" />
                       </button>
                     </div>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
             />
           )}

@@ -1,6 +1,6 @@
 import Spinner from "@/common/components/Spinner";
 import { usePlansQuery } from "./hooks/usePlansQuery";
-import Table from "@/common/components/Table";
+import Table, { TableCell, TableRow } from "@/common/components/Table";
 import Header from "@/common/components/Header";
 
 const HEADERS_TABLE = ["#", "Descripción", "Características", "Precio"];
@@ -19,12 +19,12 @@ function Plans() {
                   <Table
                      headers={HEADERS_TABLE}
                      data={plans.map((plan, index) => (
-                        <tr key={plan.id}>
-                           <td>{index + 1}</td>
-                           <td>{plan.description}</td>
-                           <td>{plan.features}</td>
-                           <td>{plan.price}</td>
-                        </tr>
+                        <TableRow key={index}>
+                           <TableCell>{index + 1}</TableCell>
+                           <TableCell>{plan.description}</TableCell>
+                           <TableCell>{plan.features}</TableCell>
+                           <TableCell>{plan.price}</TableCell>
+                        </TableRow>
                      ))}
                   />
                )}

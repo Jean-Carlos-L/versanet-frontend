@@ -1,4 +1,4 @@
-import Table from "@/common/components/Table";
+import Table, { TableCell, TableRow } from "@/common/components/Table";
 import { TrashIcon, PencilIcon } from "@heroicons/react/20/solid";
 import { useUsersQuery } from "./hooks/useUsersQuery";
 import Spinner from "@/common/components/Spinner";
@@ -54,13 +54,13 @@ function UsersList() {
             <Table
               headers={HEADERS_TABLE}
               data={filteredUsers.map((user, index) => (
-                <tr key={user.id}>
-                  <td>{index + 1}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.role?.description}</td>
-                  <td>
-                    <div className="flex-gap-2">
+                <TableRow>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role?.description}</TableCell>
+                  <TableCell>
+                    <div className="flex justify-center space-x-3">
                       <button onClick={() => handleDelete(user.id)}>
                         <TrashIcon className="h-5 w-5" />
                       </button>
@@ -68,8 +68,8 @@ function UsersList() {
                         <PencilIcon className="h-5 w-5" />
                       </button>
                     </div>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
             />
           )}

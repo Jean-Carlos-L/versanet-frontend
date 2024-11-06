@@ -12,6 +12,7 @@ import Plans from "@/modules/plans/Plans";
 import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
 import Configuration from "@/modules/configuration/Configuration";
 import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
+import CustomerListModal from "@/modules/customers/CustomerList";
 
 function PrivateRoutes() {
   return (
@@ -35,9 +36,9 @@ function PrivateRoutes() {
 
         <Route path={ROUTES.DASHBOARD} element={<div>Dashboard</div>} />
 
-        <Route path={ROUTES.CUSTOMERS} element={<div>Clientes</div>} />
+        <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
 
-        <Route path={ROUTES.CONTRATS} element={<div>Contratos</div>} />
+        <Route path={ROUTES.CONTRATS} element={<PlansCustomersList />} />
 
         <Route path={ROUTES.PLANS} element={<Plans />} />
 
