@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Auth } from "@/common/models/Auth";
 import FormAuth from "./components/FormAuth";
-import { useAuth } from "./hooks/useAuth";
 import Header from "@/common/components/Header";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/common/routers/routes";
+import { useAuthCommand } from "./hooks/useAuthCommand";
 
 function AuthLogin() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function AuthLogin() {
     email: "",
     password: "",
   });
-  const { login, loading, errors } = useAuth();
+  const { login } = useAuthCommand();
 
   const handleChange = (auth: Auth) => {
     setAuth(auth);
@@ -30,21 +31,15 @@ function AuthLogin() {
       password: "",
     });
 
-    navigate("/home"); // Redirigir al home
+    navigate(ROUTES.DASHBOARD);
   };
-
-  useEffect(() => {
-    if (errors.message) {
-      alert(errors.message); // Mostrar alerta cuando haya un error
-    }
-  }, [errors]);
 
   return (
     <div>
       <Header title="Iniciar Sesión" />
       <FormAuth
         auth={auth}
-        loading={loading}
+        loading={false}
         onSubmit={handleSubmit}
         onChange={handleChange}
       />

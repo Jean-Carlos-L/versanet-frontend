@@ -1,14 +1,20 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ROUTES } from "../routers/routes";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/auth.slice";
 
 const defaultHeaders = {
   "Content-Type": "application/json",
 };
 
-// Habilita las cookies en todas las peticiones de Axios
 axios.defaults.withCredentials = true;
 
 export const useFetch = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   const fetchData: FetchData = async <T, R>({
     url,
@@ -24,14 +30,17 @@ export const useFetch = () => {
         headers,
         data: body,
         responseType,
-        // 'withCredentials' para asegurarse de que las cookies se envían en cada solicitud
-        withCredentials: true, // Esta línea garantiza el envío de cookies en cada solicitud
+        withCredentials: true,
       };
 
       const response = await axios(config);
       return response;
     } catch (error) {
       console.error(error);
+      if (error.response.status === 401 && ROUTES.LOGIN !== pathname) {
+        dispatch(logout());
+        navigate("/login");
+      }
       throw error;
     }
   };

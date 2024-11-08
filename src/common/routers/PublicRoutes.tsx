@@ -6,7 +6,6 @@ function PublicRoutes() {
   return (
     <Routes>
       <Route path={ROUTES.LOGIN} element={<AuthLogin />} />
-      <Route index path={ROUTES.HOME} element={<div>Home</div>} />
     </Routes>
   );
 }

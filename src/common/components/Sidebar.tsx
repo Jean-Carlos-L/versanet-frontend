@@ -8,12 +8,15 @@ import {
   Square3Stack3DIcon,
   BellAlertIcon,
   Cog8ToothIcon,
+  ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/react/20/solid";
 import { ROUTES } from "../routers/routes";
 import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
+import { useAuthCommand } from "@/modules/auth/hooks/useAuthCommand";
 
 function Sidebar() {
   const { isAuth } = useAuthQuery();
+  const { logout } = useAuthCommand();
 
   return (
     <aside className="bg-gray-800 min-h-screen w-[20%] p-3">
@@ -81,6 +84,13 @@ function Sidebar() {
             icon={<Cog8ToothIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Configuración"
           />
+
+
+          <button onClick={logout} className="px-4 py-4 text-gray-50 rounded-md text-start cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400">
+            <ArrowLeftStartOnRectangleIcon className="h-6 w-6 inline-block mb-1 mr-1" /> Cerrar
+            sesión
+          </button>
+
         </div>
       )}
     </aside>
