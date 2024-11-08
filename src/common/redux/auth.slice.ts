@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthResponse } from "../models/Auth";
 
-const initialState: AuthResponse = {
-  token: null,
-  permissions: [],
+interface AuthState {
+  user: AuthResponse | null;
+  isAuth: boolean;
+}
+
+const initialState: AuthState = {
+  user: null,
   isAuth: false,
 };
 
@@ -15,7 +19,7 @@ const getSessionFromLocalStorage = () => {
   return initialState;
 };
 
-const saveSessionToLocalStorage = (state: AuthResponse) => {
+const saveSessionToLocalStorage = (state: AuthState) => {
   localStorage.setItem("session_auth", JSON.stringify(state));
 };
 
@@ -28,18 +32,14 @@ const authSlice = createSlice({
   initialState: getSessionFromLocalStorage(),
   reducers: {
     login(state, action: PayloadAction<AuthResponse>) {
-      saveSessionToLocalStorage({ ...action.payload, isAuth: true });
-
-      const { token, permissions } = action.payload;
-      state.token = token;
-      state.permissions = permissions;
+      const user = action.payload;
+      saveSessionToLocalStorage({ user: user, isAuth: true });
+      state.user = user;
       state.isAuth = true;
     },
     logout(state) {
       removeSessionFromLocalStorage();
-
-      state.token = null;
-      state.permissions = [];
+      state.user = null;
       state.isAuth = false;
     },
   },

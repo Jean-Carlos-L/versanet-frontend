@@ -5,7 +5,8 @@ export interface Auth {
 }
 
 export interface AuthResponse {
-  token: string;
+  id: string;
+  name: string;
+  email: string;
   permissions: string[];
-  isAuth?: boolean;
 }

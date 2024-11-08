@@ -1,20 +1,30 @@
 import Button from "@/common/components/Button";
 import Textfield from "@/common/components/Textfield";
-import { useAuth } from "../hooks/useAuth";
 import { Auth } from "@/common/models/Auth";
+import { useState } from "react";
 import { Link } from "react-router-dom"; // Importa Link para navegación
 
 function FormAuth({ auth, loading, onSubmit, onChange }: FormAuthProps) {
   const { email, password } = auth;
-  const { errors } = useAuth();
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     onChange({ ...auth, [name]: value });
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!email) {
+      return setErrors({ ...errors, email: "El correo electrónico es requerido" });
+    }
+
+    if (!password) {
+      return setErrors({ ...errors, password: "La contraseña es requerida" });
+    }
+
     if (!loading) {
       return onSubmit();
     }
