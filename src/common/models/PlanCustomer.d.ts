@@ -21,3 +21,21 @@ export interface PlanCustomer {
       status: number;
    };
 }
+
+export interface PlanCustomerCreate {
+   status: number;
+   staticIp: string;
+   mac: string;
+   startDate: string;
+   endDate: string;
+   plan: {
+      id: string;
+   };
+   customer: {
+      id: string;
+   };
+}
+
+export interface PlanCustomerUpdate extends PlanCustomerCreate {
+   id: string;
+}
