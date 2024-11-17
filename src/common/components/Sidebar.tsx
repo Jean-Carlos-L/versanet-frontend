@@ -6,13 +6,14 @@ import {
   ClipboardDocumentCheckIcon,
   DocumentCurrencyDollarIcon,
   Square3Stack3DIcon,
-  BellAlertIcon,
   Cog8ToothIcon,
   ArrowLeftStartOnRectangleIcon,
+  ClockIcon,
 } from "@heroicons/react/20/solid";
 import { ROUTES } from "../routers/routes";
 import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
 import { useAuthCommand } from "@/modules/auth/hooks/useAuthCommand";
+import { PERMISSIONS } from "../constants/permissions";
 
 function Sidebar() {
   const { isAuth } = useAuthQuery();
@@ -34,6 +35,7 @@ function Sidebar() {
         <div className="flex flex-col text-start space-y-3">
           <LinkComponent
             to={ROUTES.DASHBOARD}
+            code={PERMISSIONS.DASHBOARD}
             icon={
               <PresentationChartLineIcon className="h-6 w-6 inline-block mb-1 mr-1" />
             }
@@ -41,11 +43,13 @@ function Sidebar() {
           />
           <LinkComponent
             to={ROUTES.CUSTOMERS}
+            code={PERMISSIONS.CUSTOMERS}
             icon={<UserGroupIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Clientes"
           />
           <LinkComponent
             to={ROUTES.CONTRATS}
+            code={PERMISSIONS.CONTRATS}
             icon={
               <ClipboardDocumentCheckIcon className="h-6 w-6 inline-block mb-1 mr-1" />
             }
@@ -54,12 +58,14 @@ function Sidebar() {
 
           <LinkComponent
             to={ROUTES.PLANS}
+            code={PERMISSIONS.PLANS}
             icon={<ListBulletIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Planes"
           />
 
           <LinkComponent
             to={ROUTES.FACTURATION}
+            code={PERMISSIONS.FACTURATION}
             icon={
               <DocumentCurrencyDollarIcon className="h-6 w-6 inline-block mb-1 mr-1" />
             }
@@ -68,6 +74,7 @@ function Sidebar() {
 
           <LinkComponent
             to={ROUTES.INVENTORY}
+            code={PERMISSIONS.INVENTORY}
             icon={
               <Square3Stack3DIcon className="h-6 w-6 inline-block mb-1 mr-1" />
             }
@@ -75,12 +82,14 @@ function Sidebar() {
           />
 
           <LinkComponent
-            to={ROUTES.NOTIFICATIONS}
-            icon={<BellAlertIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
-            label="Notificaciones"
+            to={ROUTES.HISTORY}
+            code={PERMISSIONS.HISTORY}
+            icon={<ClockIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
+            label="Historial"
           />
           <LinkComponent
             to={ROUTES.CONFIGURATION}
+            code={PERMISSIONS.CONFIGURATION}
             icon={<Cog8ToothIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Configuración"
           />
@@ -97,10 +106,17 @@ function Sidebar() {
   );
 }
 
-function LinkComponent({ to, icon, label }) {
+function LinkComponent({ to, code, icon, label }) {
+  const { hasPermission } = useAuthQuery();
+
+  if (code && !hasPermission(code)) {
+    return null;
+  }
+
   return (
     <NavLink
       to={to}
+      state={{ code }}
       className={({ isActive }) => {
         return `px-4 py-4 text-gray-50 rounded-md cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400 ${isActive ? "bg-gray-300 text-gray-800 shadow-md" : ""
           }`;

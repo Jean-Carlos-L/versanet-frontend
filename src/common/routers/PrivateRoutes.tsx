@@ -1,4 +1,4 @@
-import { Outlet, Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, Outlet, useLocation } from "react-router-dom";
 import { ROUTES } from "./routes";
 // import UsersCreate from "@/modules/users/UsersCreate";
 // import UsersList from "@/modules/users/UsersList";
@@ -13,12 +13,19 @@ import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
 import Configuration from "@/modules/configuration/Configuration";
 import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
 import CustomerListModal from "@/modules/customers/CustomerList";
+import UsersList from "@/modules/users/UsersList";
+import UsersCreate from "@/modules/users/UsersCreate";
+import RolesList from "@/modules/roles/RolesList";
+import RolesCreate from "@/modules/roles/RolesCreate";
+import RolesEdit from "@/modules/roles/RolesEdit";
+import RolesView from "@/modules/roles/RolesView";
+import { PERMISSIONS } from "../constants/permissions";
 
 function PrivateRoutes() {
   return (
     <Routes>
       <Route path="/" element={<RequiredAuth />}>
-        <Route path={ROUTES.DASHBOARD} element={<div>Dashboard</div>} />
+        <Route index path={ROUTES.DASHBOARD} element={<div>Dashboard</div>} />
 
         <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
 
@@ -31,24 +38,39 @@ function PrivateRoutes() {
         <Route path={ROUTES.INVENTORY} element={<div>Inventario</div>} />
 
         <Route
-          path={ROUTES.NOTIFICATIONS}
-          element={<div>Notificaciones</div>}
+          path={ROUTES.HISTORY}
+          element={<div>Historial de operaciones</div>}
         />
 
         <Route path={ROUTES.CONFIGURATION} element={<Configuration />} />
+
+        <Route path={ROUTES.USERS_LIST} element={<UsersList />} />\
+        <Route path={ROUTES.USERS_CREATE} element={<UsersCreate />} />
+        <Route path={ROUTES.USERS_EDIT} element={<div>Editar Usuario</div>} />
+
+        <Route path={ROUTES.ROLES_LIST} element={<RolesList />} />
+        <Route path={ROUTES.ROLES_CREATE} element={<RolesCreate />} />
+        <Route path={ROUTES.ROLES_EDIT} element={<RolesEdit />} />
+        <Route path={ROUTES.ROLES_VIEW} element={<RolesView />} />
       </Route>
     </Routes>
   );
 }
 
 function RequiredAuth() {
-  const { isAuth } = useAuthQuery();
+  const { isAuth, hasPermission } = useAuthQuery();
+  const { state } = useLocation();
 
   if (!isAuth) {
     return <Navigate to={ROUTES.LOGIN} />;
   }
 
+  if (state?.code && PERMISSIONS.DASHBOARD !== state.code && !hasPermission(state.code)) {
+    return <Navigate to={ROUTES.DASHBOARD} />;
+  }
+
   return <Outlet />;
+
 }
 
 export default PrivateRoutes;
