@@ -14,8 +14,19 @@ export const ROUTES = {
   ROLES_DELETE: "/configuration/roles/delete/:id",
   ROLES_VIEW: "/configuration/roles/view/:id",
 
-  PLANS_LIST: '/plans/list',
-  PLANS_CUSTOMERS_LIST: '/plans/customers/list',
+  PLANS_LIST: "/plans/list",
+  PLANS_CUSTOMERS_LIST: "/plans/customers/list",
+
+  NOTIFICATIONS_CLIENTS: "/notifications/clients",
+  NOTIFICATION_CLIENTS_PLANS: "/notifications/clients-plans",
+  NOTIFICATIONS_PLANS: "/notifications/plans",
+  NOTIFICATIONS_INVOICES: "/notifications/invoices",
+  NOTIFICATIONS_PAYMENTS: "/notifications/payments",
+  NOTIFICATIONS_USERS: "/notifications/users",
+  NOTIFICATIONS_PERMISSIONS: "/notifications/permissions",
+  NOTIFICATIONS_ROLES: "/notifications/roles",
+  NOTIFICATIONS_ROLES_PERMISSIONS: "/notifications/roles-permissions",
+  NOTIFICATIONS_INVOICES_PAYMENTS: "/notifications/invoices-payments",
 
   DASHBOARD: "/control-panel",
   CUSTOMERS: "/customers",
@@ -25,4 +36,4 @@ export const ROUTES = {
   INVENTORY: "/inventory",
   NOTIFICATIONS: "/notifications",
   CONFIGURATION: "/configuration",
-}
+};
