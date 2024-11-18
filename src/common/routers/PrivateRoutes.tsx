@@ -1,7 +1,7 @@
 import { Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { ROUTES } from "./routes";
 // import UsersCreate from "@/modules/users/UsersCreate";
-// import UsersList from "@/modules/users/UsersList";
+//import UsersList from "@/modules/users/UsersList";
 // import UsersEdit from "@/modules/users/UsersEdit";
 // import RolesList from "@/modules/roles/RolesList";
 // import RolesCreate from "@/modules/roles/RolesCreate";
@@ -13,6 +13,7 @@ import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
 import Configuration from "@/modules/configuration/Configuration";
 import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
 import CustomerListModal from "@/modules/customers/CustomerList";
+import Notifications from "@/modules/notifications/notifications";
 
 function PrivateRoutes() {
   return (
@@ -30,10 +31,7 @@ function PrivateRoutes() {
 
         <Route path={ROUTES.INVENTORY} element={<div>Inventario</div>} />
 
-        <Route
-          path={ROUTES.NOTIFICATIONS}
-          element={<div>Notificaciones</div>}
-        />
+        <Route path={ROUTES.NOTIFICATIONS} element={<Notifications />} />
 
         <Route path={ROUTES.CONFIGURATION} element={<Configuration />} />
       </Route>
