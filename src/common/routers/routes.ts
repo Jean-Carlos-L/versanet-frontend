@@ -34,6 +34,6 @@ export const ROUTES = {
   PLANS: "/plans",
   FACTURATION: "/facturation",
   INVENTORY: "/inventory",
-  NOTIFICATIONS: "/notifications",
+  HISTORY: "/history",
   CONFIGURATION: "/configuration",
 };
