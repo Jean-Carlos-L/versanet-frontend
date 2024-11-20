@@ -13,12 +13,14 @@ import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
 import Configuration from "@/modules/configuration/Configuration";
 import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
 import CustomerListModal from "@/modules/customers/CustomerList";
+import StatsList from "@/modules/stats/stats";
 
 function PrivateRoutes() {
   return (
     <Routes>
       <Route path="/" element={<RequiredAuth />}>
-        <Route path={ROUTES.DASHBOARD} element={<div>Dashboard</div>} />
+
+        <Route path={ROUTES.DASHBOARD} element={<StatsList />} />
 
         <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
 
