@@ -72,7 +72,7 @@ function HistoryList({ entities }: { entities: string }) {
               <Table
                 headers={HEADERS_TABLE}
                 data={historial.map((notification, index) => (
-                  <TableRow key={notification.id_notificacion}>
+                  <TableRow key={notification.id_historial}>
                     <TableCell>
                       {index + 1 + (filters.page - 1) * filters.pageSize}
                     </TableCell>
@@ -81,7 +81,7 @@ function HistoryList({ entities }: { entities: string }) {
                     <TableCell>{notification.mensaje}</TableCell>
                     <TableCell>
                       {new Date(
-                        notification.fecha_notificacion
+                        notification.fecha_historial
                       ).toLocaleString()}
                     </TableCell>
                   </TableRow>
