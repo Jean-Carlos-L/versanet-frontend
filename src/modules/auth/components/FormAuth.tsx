@@ -1,6 +1,7 @@
 import Button from "@/common/components/Button";
 import Textfield from "@/common/components/Textfield";
 import { Auth } from "@/common/models/Auth";
+import { ROUTES } from "@/common/routers/routes";
 import { useState } from "react";
 import { Link } from "react-router-dom"; // Importa Link para navegación
 
@@ -57,7 +58,7 @@ function FormAuth({ auth, loading, onSubmit, onChange }: FormAuthProps) {
         <Button type="submit" disabled={loading}>
           {loading ? "Cargando..." : "Iniciar Sesión"}
         </Button>
-        <Link to="/recover-password" className="text-blue-500 text-center mt-4">
+        <Link to={ROUTES.RESET_PASSWORD} className="text-blue-500 text-center mt-4">
           ¿Olvidaste tu contraseña?
         </Link>
       </div>

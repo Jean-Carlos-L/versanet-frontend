@@ -5,6 +5,6 @@ export const HistoryAdapter = (history: History) => {
     id: history.id_historial,
     entity: history.entidad,
     message: history.mensaje,
-    date: history.fecha_notificacion,
+    date: history.fecha_historial,
   };
 };
