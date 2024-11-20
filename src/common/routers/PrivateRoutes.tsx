@@ -20,7 +20,8 @@ import RolesCreate from "@/modules/roles/RolesCreate";
 import RolesEdit from "@/modules/roles/RolesEdit";
 import RolesView from "@/modules/roles/RolesView";
 import { PERMISSIONS } from "../constants/permissions";
-import Notifications from "@/modules/notifications/notifications";
+import History from "@/modules/history/History";
+import HistoryList from "@/modules/history/HistoryList";
 
 function PrivateRoutes() {
   return (
@@ -32,7 +33,47 @@ function PrivateRoutes() {
         <Route path={ROUTES.PLANS} element={<Plans />} />
         <Route path={ROUTES.FACTURATION} element={<div>Facturación</div>} />
         <Route path={ROUTES.INVENTORY} element={<div>Inventario</div>} />
-        <Route path={ROUTES.NOTIFICATIONS} element={<Notifications />} />
+        <Route path={ROUTES.HISTORY} element={<History />} />
+        <Route
+          path={ROUTES.HISTORY_USERS}
+          element={<HistoryList entities="usuarios" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_PERMISSIONS}
+          element={<HistoryList entities="permisos" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_ROLES}
+          element={<HistoryList entities="roles" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_ROLES_PERMISSIONS}
+          element={<HistoryList entities="roles_permisos" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_INVOICES_PAYMENTS}
+          element={<HistoryList entities="facturas_pagos" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_CLIENTS}
+          element={<HistoryList entities="clientes" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_CLIENTS_PLANS}
+          element={<HistoryList entities="clientes_planes" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_PLANS}
+          element={<HistoryList entities="planes" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_INVOICES}
+          element={<HistoryList entities="facturas" />}
+        />
+        <Route
+          path={ROUTES.HISTORY_PAYMENTS}
+          element={<HistoryList entities="pagos" />}
+        />
         <Route path={ROUTES.CONFIGURATION} element={<Configuration />} />
         <Route path={ROUTES.USERS_LIST} element={<UsersList />} />\
         <Route path={ROUTES.USERS_CREATE} element={<UsersCreate />} />
