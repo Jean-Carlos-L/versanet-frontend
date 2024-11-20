@@ -14,8 +14,19 @@ export const ROUTES = {
   ROLES_DELETE: "/configuration/roles/delete/:id",
   ROLES_VIEW: "/configuration/roles/view/:id",
 
-  PLANS_LIST: '/plans/list',
-  PLANS_CUSTOMERS_LIST: '/plans/customers/list',
+  PLANS_LIST: "/plans/list",
+  PLANS_CUSTOMERS_LIST: "/plans/customers/list",
+
+  HISTORY_CLIENTS: "/history/clients",
+  HISTORY_CLIENTS_PLANS: "/history/clients-plans",
+  HISTORY_PLANS: "/history/plans",
+  HISTORY_INVOICES: "/history/invoices",
+  HISTORY_PAYMENTS: "/history/payments",
+  HISTORY_USERS: "/history/users",
+  HISTORY_PERMISSIONS: "/history/permissions",
+  HISTORY_ROLES: "/history/roles",
+  HISTORY_ROLES_PERMISSIONS: "/history/roles-permissions",
+  HISTORY_INVOICES_PAYMENTS: "/history/invoices-payments",
 
   DASHBOARD: "/control-panel",
   CUSTOMERS: "/customers",
@@ -25,4 +36,4 @@ export const ROUTES = {
   INVENTORY: "/inventory",
   HISTORY: "/history",
   CONFIGURATION: "/configuration",
-}
+};
