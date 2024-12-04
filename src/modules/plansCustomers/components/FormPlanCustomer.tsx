@@ -1,15 +1,18 @@
 import Button from "@/common/components/Button";
-import Textfield from "@/common/components/Textfield";
 import Select from "@/common/components/Select";
 import { PlanCustomerCreate, PlanCustomerUpdate } from "@/common/models/PlanCustomer";
 import { usePlansCustomersCommand } from "../hooks/usePlansCustomersCommand";
 import { useCustomersQuery } from "@/modules/customers/hooks/useCustomersQuery";
 import { usePlansQuery } from "@/modules/plans/hooks/usePlansQuery";
+import { useInventoryQuery } from "@/modules/inventory/hooks/useInventoryQuery";
 
 function FormPlanCustomer ({ planCustomer, loading, onSubmit, onChange }: FormPlanCustomerProps) {
     const { customers } = useCustomersQuery();
     const { plans } = usePlansQuery();
+    const {inventories} = useInventoryQuery();
     const { validations, errors } = usePlansCustomersCommand();
+    inventories.map((inventory) => console.log(inventory.typeInventory.id));
+
 
     const handleChangeText = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -45,21 +48,24 @@ function FormPlanCustomer ({ planCustomer, loading, onSubmit, onChange }: FormPl
                 onChange={ (e) => onChange({ ...planCustomer, plan: { id: e.target.value } })}
                 error={errors.plan}
                 />
-                 <Textfield
-                    label="IP estatica"
-                    name="staticIp"
-                    value={planCustomer?.staticIp}
-                    placeholder="IP estatica del cliente"
-                    onChange={handleChangeText}
-                    error={errors.description}
+                <Select
+                label="Inventario MAC"
+                name="inventoryMac"
+                options={inventories.map((inventory) => ({ value: inventory.id, label: inventory.reference }))}
+                value={planCustomer?.inventoryMac?.id}
+                onChange={ (e) => onChange({ ...planCustomer, inventoryMac: { id: e.target.value } })}
+                error={errors.inventoryMac}
                 />
-                <Textfield
-                    label="MAC"
-                    name="mac"
-                    value={planCustomer?.mac}
-                    placeholder="MAC del cliente"
-                    onChange={handleChangeText}
-                    error={errors.description}
+                <Select
+                label="Inventario IP"
+                name="inventoryIp"
+                options={inventories
+                    .filter (inventory => inventory.typeInventory.id === "2")
+                    .map((inventory) => ({ value: inventory.id, label: inventory.reference }))
+                }
+                value={planCustomer.inventoryRouter?.id}
+                onChange={ (e) => onChange({ ...planCustomer, inventoryRouter: { id: e.target.value } })}
+                error={errors.inventoryIp}
                 />
                 <div className="flex gap-5 items-center flex-col">
                      <label htmlFor="startDate" className="font-semibold text-start w-full">

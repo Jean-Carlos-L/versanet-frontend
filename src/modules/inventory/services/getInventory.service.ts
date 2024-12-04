@@ -12,8 +12,6 @@ export const getInventoryService = (fetch: FetchData) => async (filters: Filters
             message: string;
         }
         const response = await fetch<void, Response>({ url: `/api/inventario?${searchParams}` });
-        //ver que trae
-        console.log(response.data.data);
         return response.data.data.map(inventoryAdapter)
     } catch (error) {
         console.error("Error al obtener el inventario:", error);
