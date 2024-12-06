@@ -8,8 +8,9 @@ export const useFilters = () => {
       reference: "",
       mac: "",
       ip: "",
+      typeInventory: "",
       status: 1,
-      typeInventory: ""
+
    });
 
    const handleChange = (key: string, value: string | number) => {
@@ -29,6 +30,7 @@ export interface FiltersInventory {
    reference: string;
    mac: string;
    ip: string;
-   status: number;
    typeInventory: string;
+   status: number;
+
 }

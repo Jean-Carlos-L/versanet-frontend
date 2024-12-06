@@ -59,6 +59,10 @@ export const usePlansCustomersCommand = (refresh?: () => void) => {
    const createPlanCustomer = async (planCustomer: PlanCustomerCreate) => {
       try {
          setLoadingAction(true)
+
+         //esto es lo que llega del form
+         console.log("planCustomer hooks")
+         console.log(planCustomer)
          const response = await createPlanCustomerService(fetchData)(planCustomer)
          if (refresh) {
             refresh();
@@ -95,14 +99,6 @@ export const usePlansCustomersCommand = (refresh?: () => void) => {
 
       if (!planCustomer.plan) {
          errors.planId = "El plan es requerido"
-      }
-
-      if (!planCustomer.mac) {
-         errors.mac = "La dirección MAC es requerida"
-      }
-
-      if (!planCustomer.staticIp) {
-         errors.staticIp = "La IP estática es requerida"
       }
 
       if (!planCustomer.startDate) {

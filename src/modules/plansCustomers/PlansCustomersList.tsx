@@ -266,6 +266,14 @@ function PlansCustomersList() {
                               <label className="text-sm font-medium text-gray-700">Teléfono</label>
                               <p className="text-sm text-gray-600">{selectPlanCustomer.customer.phone}</p>
                            </div>
+                           <div className="div mb-6">
+                           <label className="text-sm font-medium text-gray-700">Referencia Mac</label>
+                           <p className="text-sm text-gray-600">{selectPlanCustomer.inventoryMac.reference}</p>
+                           </div>
+                           <div className="div mb-6">
+                           <label className="text-sm font-medium text-gray-700">Referencia Router</label>
+                           <p className="text-sm text-gray-600">{selectPlanCustomer.inventoryRouter.reference}</p>
+                           </div>
                            <div className="mb-6">
                               <label className="text-sm font-medium text-gray-700">Estado</label>
                               <p className="text-sm text-gray-600">

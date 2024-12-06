@@ -11,7 +11,7 @@ function CreatePlanCustomer({ isOpen, onClose, onRefresh }) {
         plan: {id: ""},
         status: 1,
         inventoryMac: {id: ""},
-        inventoryIp: {id: ""},
+        inventoryRouter: {id: ""},
         startDate: "",
         endDate: "",
     });
@@ -29,7 +29,7 @@ function CreatePlanCustomer({ isOpen, onClose, onRefresh }) {
                     plan: {id: ""},
                     status: 1,
                     inventoryMac: {id: ""},
-                    inventoryIp: {id: ""},
+                    inventoryRouter: {id: ""},
                     startDate: "",
                     endDate: "",
                 });

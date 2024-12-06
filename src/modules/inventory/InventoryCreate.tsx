@@ -23,7 +23,7 @@ function CreateInventory ({ isOpen, onClose, onRefresh }) {
     const handleSubmit = async () => {
         if (!loadingAction) {
             if (inventory.typeInventory.id !== "1" && !inventory.ip) {
-                inventory.ip = "no aplica";
+                inventory.ip = null;
             }
             await createInventory(inventory).then(() => {
                 setInventory({

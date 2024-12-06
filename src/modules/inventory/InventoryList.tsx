@@ -196,7 +196,8 @@ function InventoryList() {
                                                 <TableCell>{item.reference}</TableCell>
                                                 <TableCell>{item.typeInventory.description}</TableCell>
                                                 <TableCell>{item.mac}</TableCell>
-                                                <TableCell>{item.ip}</TableCell>
+                                                <TableCell>{item.ip === null? "No aplica" : item.ip}
+                                                </TableCell>
                                                 <TableCell>
                                                     {item.status === 0 ? <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-red-100 font-medium">
                                                         Disponible

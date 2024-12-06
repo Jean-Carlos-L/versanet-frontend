@@ -23,7 +23,7 @@ export const planCustomerAdapter = (planCustomer): PlanCustomer => {
          reference: planCustomer.inventoryMac.reference,
          mac: planCustomer.inventoryMac.mac,
          ip: planCustomer.inventoryMac.ip,
-         type: planCustomer.inventoryMac.typeInventory,
+         type: planCustomer.inventoryMac.type,
          status: planCustomer.inventoryMac.status,
       },
       inventoryRouter: {
@@ -31,7 +31,7 @@ export const planCustomerAdapter = (planCustomer): PlanCustomer => {
          reference: planCustomer.inventoryRouter.reference,
          mac: planCustomer.inventoryRouter.mac,
          ip: planCustomer.inventoryRouter.ip,
-         type: planCustomer.inventoryRouter.typeInventory,
+         type: planCustomer.inventoryRouter.type,
          status: planCustomer.inventoryRouter.status,
       },
       status: planCustomer.status,
