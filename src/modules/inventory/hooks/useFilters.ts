@@ -10,7 +10,6 @@ export const useFilters = () => {
       ip: "",
       typeInventory: "",
       status: 1,
-
    });
 
    const handleChange = (key: string, value: string | number) => {

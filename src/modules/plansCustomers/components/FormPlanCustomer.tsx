@@ -51,14 +51,15 @@ function FormPlanCustomer({ planCustomer, loading, onSubmit, onChange }: FormPla
                 <Select
                     label="Antena mac"
                     name="inventoryMac"
-                    options={inventories.filter((inventory) => inventory.typeInventory.id === "2").map((inventory) => ({ value: inventory.id, label: inventory.reference }))}
+                    //ahora debe filtrar por tipo y si el estado en el inventario es 0
+                    options={inventories.filter((inventory) => inventory.typeInventory.id === "2" && inventory.status === 0).map((inventory) => ({ value: inventory.id, label: inventory.mac }))}
                     value={planCustomer?.inventoryMac?.id}
                     onChange={(e) => onChange({ ...planCustomer, inventoryMac: { id: e.target.value } })}
                 />
                 <Select
                     label="Router"
                     name="inventoryRouter"
-                    options={inventories.filter((inventory) => inventory.typeInventory.id === "1").map((inventory) => ({ value: inventory.id, label: inventory.reference }))}
+                    options={inventories.filter((inventory) => inventory.typeInventory.id === "1" && inventory.status === 0).map((inventory) => ({ value: inventory.id, label: inventory.reference }))}
                     value={planCustomer?.inventoryRouter?.id}
                     onChange={(e) => onChange({ ...planCustomer, inventoryRouter: { id: e.target.value } })}
                 />
