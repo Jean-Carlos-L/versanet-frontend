@@ -1,18 +1,12 @@
+import { useState } from "react";
 import { useHistory } from "@/modules/history/hooks/useHistory";
-import Spinner from "@/common/components/Spinner";
-import Table, { TableCell, TableRow } from "@/common/components/Table";
-import Pagination from "@/common/components/Pagination";
-import Header from "@/common/components/Header";
 import { useFiltersHistory } from "./hooks/useFiltersHistory";
 import { useNumberHistory } from "./hooks/useNumberHistory";
+import Spinner from "@/common/components/Spinner";
+import Header from "@/common/components/Header";
+import Pagination from "@/common/components/Pagination";
 
-const HEADERS_TABLE = [
-  "#",
-  "Entidad",
-  "Acción",
-  "Mensaje",
-  "Fecha de Notificación",
-];
+const HEADERS_TABLE = ["#", "Entidad", "Acción"];
 
 function HistoryList({ entities }: { entities: string }) {
   const { filters, handleChange } = useFiltersHistory();
@@ -21,6 +15,13 @@ function HistoryList({ entities }: { entities: string }) {
 
   const handleChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleChange("pageSize", Number(e.target.value));
+  };
+
+  // Estado para manejar qué fila está expandida
+  const [expandedRow, setExpandedRow] = useState<number | null>(null);
+
+  const handleToggleRow = (index: number) => {
+    setExpandedRow(expandedRow === index ? null : index); // Alternar expansión
   };
 
   return (
@@ -51,16 +52,16 @@ function HistoryList({ entities }: { entities: string }) {
             <Spinner />
           ) : (
             <div>
-              <div className="flex items-center space-x-10 mb-5">
+              <div className="flex items-center justify-between mb-4">
                 <Pagination
                   currentPage={filters.page}
                   pageSize={filters.pageSize}
-                  totalItems={numberHistory} // Basado en historial.length
+                  totalItems={numberHistory}
                   onPageChange={(page) => handleChange("page", page)}
                 />
                 <select
                   onChange={handleChangePageSize}
-                  className="p-2 mb-0 rounded-md"
+                  className="select select-bordered"
                   value={filters.pageSize}
                 >
                   <option value="10">10</option>
@@ -69,24 +70,80 @@ function HistoryList({ entities }: { entities: string }) {
                   <option value="100">100</option>
                 </select>
               </div>
-              <Table
-                headers={HEADERS_TABLE}
-                data={historial.map((notification, index) => (
-                  <TableRow key={notification.id_historial}>
-                    <TableCell>
-                      {index + 1 + (filters.page - 1) * filters.pageSize}
-                    </TableCell>
-                    <TableCell>{notification.entidad}</TableCell>
-                    <TableCell>{notification.accion}</TableCell>
-                    <TableCell>{notification.mensaje}</TableCell>
-                    <TableCell>
-                      {new Date(
-                        notification.fecha_historial
-                      ).toLocaleString()}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              />
+
+              <div className="overflow-x-auto">
+                <table className="table w-full border border-gray-300 rounded-lg shadow-md">
+                  <thead>
+                    <tr className="bg-gray-200 text-gray-700">
+                      {HEADERS_TABLE.map((header) => (
+                        <th
+                          key={header}
+                          className="py-3 px-4 text-left font-semibold"
+                        >
+                          {header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {historial.map((notification, index) => (
+                      <>
+                        {/* Fila principal */}
+                        <tr
+                          key={notification.id_historial}
+                          onClick={() => handleToggleRow(index)}
+                          className={`cursor-pointer ${
+                            index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                          } hover:bg-gray-500 hover:text-white transition duration-150`}
+                        >
+                          <td className="py-3 px-4 border-t text-gray-800">
+                            {index + 1 + (filters.page - 1) * filters.pageSize}
+                          </td>
+                          <td className="py-3 px-4 border-t text-gray-800">
+                            {notification.entidad}
+                          </td>
+                          <td className="py-3 px-4 border-t text-gray-800">
+                            {notification.accion}
+                          </td>
+                        </tr>
+
+                        {/* Fila expandible */}
+                        {expandedRow === index && (
+                          <tr className="bg-gray-200">
+                            <td
+                              colSpan={HEADERS_TABLE.length}
+                              className="p-4 border-t"
+                            >
+                              <div className="text-sm text-gray-700">
+                                <p>
+                                  <strong className="text-gray-900">
+                                    ID Registro:
+                                  </strong>{" "}
+                                  {notification.id_entidad}
+                                </p>
+                                <p>
+                                  <strong className="text-gray-900">
+                                    Mensaje Completo:
+                                  </strong>{" "}
+                                  {notification.mensaje}
+                                </p>
+                                <p>
+                                  <strong className="text-gray-900">
+                                    Fecha de Notificación:
+                                  </strong>{" "}
+                                  {new Date(
+                                    notification.fecha_historial
+                                  ).toLocaleString()}
+                                </p>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </section>
