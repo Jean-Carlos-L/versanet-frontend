@@ -23,6 +23,5 @@ export const useCustomerById = (id: string) => {
 
       fetchCustomer()
    }, [id])
-
    return { customer, loading }
 }

@@ -13,8 +13,8 @@ function EditPlanCustomer({ isOpen, onClose,planCustomerId, onRefresh }) {
         customer: { id: "" },
         plan: { id: "" },
         status: 0,
-        staticIp: "",
-        mac: "",
+        inventoryMac: { id: "" },
+        inventoryRouter: { id: "" },
         startDate: "",
         endDate: ""
     });
@@ -26,8 +26,8 @@ function EditPlanCustomer({ isOpen, onClose,planCustomerId, onRefresh }) {
                 customer: { id: planCustomer.customer.id },
                 plan: { id: planCustomer.plan.id },
                 status: planCustomer.status,
-                staticIp: planCustomer.staticIp,
-                mac: planCustomer.mac,
+                inventoryMac: { id: planCustomer.inventoryMac.id },
+                inventoryRouter: { id: planCustomer.inventoryRouter.id },
                 startDate: planCustomer.startDate,
                 endDate: planCustomer.endDate
             });
