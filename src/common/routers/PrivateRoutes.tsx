@@ -23,6 +23,7 @@ import RolesView from "@/modules/roles/RolesView";
 import { PERMISSIONS } from "../constants/permissions";
 import History from "@/modules/history/History";
 import HistoryList from "@/modules/history/HistoryList";
+import InventoryList from "@/modules/inventory/InventoryList";
 
 function PrivateRoutes() {
   return (
@@ -34,7 +35,7 @@ function PrivateRoutes() {
         <Route path={ROUTES.CONTRATS} element={<PlansCustomersList />} />
         <Route path={ROUTES.PLANS} element={<Plans />} />
         <Route path={ROUTES.FACTURATION} element={<div>Facturación</div>} />
-        <Route path={ROUTES.INVENTORY} element={<div>Inventario</div>} />
+        <Route path={ROUTES.INVENTORY} element={<InventoryList/>} />
         <Route path={ROUTES.HISTORY} element={<History />} />
         <Route
           path={ROUTES.HISTORY_USERS}

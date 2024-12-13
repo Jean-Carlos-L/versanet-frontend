@@ -131,6 +131,7 @@ function CustomerListModal() {
                         )}
 
                         {isEditModalOpen && currentCustomerId && (
+                            console.log("currentCustomerId", currentCustomerId),
                             <CustomerEditModal isOpen={isEditModalOpen} onClose={closeEditModal} customerId={currentCustomerId} onRefresh={refresh} />
                         )}
                     </div>
@@ -212,7 +213,7 @@ function CustomerListModal() {
                             </div>
                         </div>
                     ) : null}
-
+                    
                 </section>
             </div>
         </main>

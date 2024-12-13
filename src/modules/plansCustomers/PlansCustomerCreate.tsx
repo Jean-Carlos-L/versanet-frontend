@@ -10,8 +10,8 @@ function CreatePlanCustomer({ isOpen, onClose, onRefresh }) {
         customer: { id: "" },
         plan: {id: ""},
         status: 1,
-        staticIp: "",
-        mac: "",
+        inventoryMac: {id: ""},
+        inventoryRouter: {id: ""},
         startDate: "",
         endDate: "",
     });
@@ -28,8 +28,8 @@ function CreatePlanCustomer({ isOpen, onClose, onRefresh }) {
                     customer: { id: "" },
                     plan: {id: ""},
                     status: 1,
-                    staticIp: "",
-                    mac: "",
+                    inventoryMac: {id: ""},
+                    inventoryRouter: {id: ""},
                     startDate: "",
                     endDate: "",
                 });

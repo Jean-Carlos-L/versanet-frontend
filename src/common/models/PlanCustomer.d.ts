@@ -1,8 +1,6 @@
 export interface PlanCustomer {
    id: string;
    status: number;
-   staticIp: string;
-   mac: string;
    startDate: string;
    endDate: string;
    plan: {
@@ -20,12 +18,26 @@ export interface PlanCustomer {
       address: string;
       status: number;
    };
+   inventoryMac: {
+      id: string;
+      reference: string;
+      mac: string;
+      ip: string;
+      type: string;
+      status: number;
+   }
+   inventoryRouter: {
+      id: string;
+      reference: string;
+      mac: string;
+      ip: string;
+      type: string;
+      status: number;
+   }
 }
 
 export interface PlanCustomerCreate {
    status: number;
-   staticIp: string;
-   mac: string;
    startDate: string;
    endDate: string;
    plan: {
@@ -34,6 +46,12 @@ export interface PlanCustomerCreate {
    customer: {
       id: string;
    };
+   inventoryMac:{
+      id: string;
+   }
+   inventoryRouter:{
+      id: string;
+   }
 }
 
 export interface PlanCustomerUpdate extends PlanCustomerCreate {
