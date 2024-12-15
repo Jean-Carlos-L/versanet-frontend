@@ -1,16 +1,31 @@
 export interface Invoice {
   id: string;
-  idCliente: string;
-  fecha_facturacion: Date;
-  monto_total: number;
-  estado: number;
-  fecha_creacion?: Date;
-  fecha_actualizacion?: Date;
+  plan: {
+    id: string;
+    description: string;
+    price: number;
+    features: string;
+  };
+  customer: {
+    id: string;
+    name: string;
+    document: string;
+    email: string;
+    phone: string;
+    address: string;
+    status: number;
+  };
+  dateInvoice: string;
+  mount: number;
+  status: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface InvoiceCreate {
-  idCliente: string;
-  fecha_facturacion: Date;
-  monto_total: number;
-  estado: number;
+  planId: string;
+  customerId: string;
+  dateInvoice: string;
+  mount: number;
+  status: number;
 }

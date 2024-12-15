@@ -1,31 +1,30 @@
 import { FetchData } from "@/common/hooks/useFetch";
 import { FiltersInvoice } from "../hooks/useFilters";
-import { InvoiceAdapter } from "../adapters/invoice.adapter";
-import { Invoice } from "@/common/models/Invoice";
 
-export const getInvoiceAllService =
+export const getNumberInvoice =
   (fetch: FetchData) =>
-  async (filters: FiltersInvoice): Promise<Invoice[]> => {
+  async (filters: FiltersInvoice): Promise<number> => {
     try {
       const searchParams = new URLSearchParams(
         Object.entries(filters)
       ).toString();
       interface Response {
-        data: Invoice[];
+        data: number;
         message: string;
       }
 
       const response = await fetch<void, Response>({
-        url: `/api/invoices?${searchParams}`,
-        method: "get",
+        url: `/api/invoices/count?${searchParams}`,
       });
-
-      return response.data.data.map(InvoiceAdapter);
+      return response.data.data;
     } catch (error) {
-      console.error("Error al obtener las facturas:", error);
+      console.error(
+        "Error al obtener el número de historial de facturas:",
+        error
+      );
       throw new Error(
         error.response?.data?.message ||
-          "Ocurrió un error al obtener las facturas"
+          "Ocurrió un error al obtener el número de historial de facturas"
       );
     }
   };

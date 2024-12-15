@@ -54,9 +54,9 @@ function History() {
       icon: <ClipboardIcon className="h-6 w-6 text-teal-500" />,
     },
     {
-      name: "Facturas_Pagos",
-      route: ROUTES.HISTORY_INVOICES_PAYMENTS,
-      icon: <CreditCardIcon className="h-6 w-6 text-red-500" />,
+      name: "Inventario",
+      route: ROUTES.HISTORY_INVENTORY,
+      icon: <DocumentTextIcon className="h-6 w-6 text-red-500" />,
     },
     {
       name: "Contratos",

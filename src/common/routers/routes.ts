@@ -27,7 +27,7 @@ export const ROUTES = {
   HISTORY_PERMISSIONS: "/history/permissions",
   HISTORY_ROLES: "/history/roles",
   HISTORY_ROLES_PERMISSIONS: "/history/roles-permissions",
-  HISTORY_INVOICES_PAYMENTS: "/history/invoices-payments",
+  HISTORY_INVENTORY: "/history/inventory",
 
   DASHBOARD: "/control-panel",
   CUSTOMERS: "/customers",

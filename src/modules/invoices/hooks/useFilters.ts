@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
 export const useFilters = () => {
-  const [filters, setFilters] = useState<filtersInvoice>({
+  const [filters, setFilters] = useState<FiltersInvoice>({
     page: 1,
     pageSize: 10,
-    status: 1,
+    status: null,
     plan: "",
     customer: "",
-    startDate: "",
+    dateInvoice: "",
   });
 
   const handleChange = (key: string, value: string | number) => {
@@ -21,11 +21,11 @@ export const useFilters = () => {
   return { filters, handleChange };
 };
 
-export interface filtersInvoice {
+export interface FiltersInvoice {
   page: number;
   pageSize: number;
-  status: number;
   plan: string;
   customer: string;
-  startDate: string;
+  dateInvoice: string;
+  status: number;
 }
