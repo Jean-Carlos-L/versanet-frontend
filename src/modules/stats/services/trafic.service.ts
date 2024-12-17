@@ -10,8 +10,7 @@ export const getTraficoService =
                 const response = await fetch<void, typeResponse>({
                 url: `/api/mikrotik/interface-traffic`,
                 });
-    
-                return traficoAdapter(response.data.data);
+                return traficoAdapter(response.data);
             } catch (error) {
                 console.error("Error en getTraficoService:", error);
                 throw new Error(
