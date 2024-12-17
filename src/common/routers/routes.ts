@@ -37,4 +37,5 @@ export const ROUTES = {
   INVENTORY: "/inventory",
   HISTORY: "/history",
   CONFIGURATION: "/configuration",
+  TRAFICO: "/trafico",
 };
