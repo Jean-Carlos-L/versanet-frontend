@@ -2,6 +2,7 @@ import { useStats } from "./hooks/useStats";
 import Spinner from "@/common/components/Spinner";
 import Header from "@/common/components/Header";
 import DoughnutChart from "./components/DoughnutChart";
+import { Link } from "react-router-dom";
 import {
   WifiIcon,
   BoltSlashIcon,
@@ -50,15 +51,32 @@ function StatsList() {
       icon: <UserIcon className="h-6 w-6 text-purple-500" />,
     },
     {
-        name: "Total Clientes",
-        value: stats.totalClients,
-        icon: <UserGroupIcon className="h-6 w-6 text-pink-500" />,
-    }
+      name: "Total Clientes",
+      value: stats.totalClients,
+      icon: <UserGroupIcon className="h-6 w-6 text-pink-500" />,
+    },
   ];
 
   return (
     <main>
       <Header title="Estadísticas" />
+
+      {/* Botones de Navegación */}
+      <div className="flex justify-center gap-4 p-6">
+        <Link
+          to="/control-panel"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+        >
+          Ver Estadísticas
+        </Link>
+        <Link
+          to="/trafico"
+          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+        >
+          Ir a Tráfico
+        </Link>
+      </div>
+
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
         {entities.map((entity) => (
           <div
@@ -72,7 +90,11 @@ function StatsList() {
               </h2>
             </div>
             <p className="text-gray-600">Cantidad: {entity.value}</p>
-            <DoughnutChart entity={entity.name} total={stats.totalClients} value={entity.value} />
+            <DoughnutChart
+              entity={entity.name}
+              total={stats.totalClients}
+              value={entity.value}
+            />
           </div>
         ))}
       </section>

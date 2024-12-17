@@ -25,6 +25,7 @@ import History from "@/modules/history/History";
 import HistoryList from "@/modules/history/HistoryList";
 import InventoryList from "@/modules/inventory/InventoryList";
 import InvoicesList from "@/modules/invoices/InvoiceList";
+import TraficoList from "@/modules/stats/trafico";
 
 function PrivateRoutes() {
   return (
@@ -37,6 +38,8 @@ function PrivateRoutes() {
         <Route path={ROUTES.FACTURATION} element={<InvoicesList />} />
         <Route path={ROUTES.INVENTORY} element={<InventoryList />} />
         <Route path={ROUTES.HISTORY} element={<History />} />
+        <Route path={ROUTES.TRAFICO} element={<TraficoList />} />
+
         <Route
           path={ROUTES.HISTORY_USERS}
           element={<HistoryList entities="usuarios" />}
