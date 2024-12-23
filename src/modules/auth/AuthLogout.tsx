@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useAuth } from "@/modules/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useAuthCommand } from "./hooks/useAuthCommand";
 
 function AuthLogout() {
-  const { logout } = useAuth();
+  const { logout } = useAuthCommand();
   const navigate = useNavigate();
 
   useEffect(() => {

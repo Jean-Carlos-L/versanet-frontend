@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        VITE_BASE_URL: http://172.203.112.167:5000/
+    ports:
+      "80:80"
+    restart: unless-stopped
