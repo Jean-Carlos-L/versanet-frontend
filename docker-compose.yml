@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        VITE_BASE_URL: http://172.203.112.167:5000/
+        VITE_BASE_URL: http://172.203.112.167:5000
     ports:
-      "80:80"
+       - "80:80"
     restart: unless-stopped
