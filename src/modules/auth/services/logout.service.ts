@@ -3,7 +3,7 @@ import { FetchData } from "@/common/hooks/useFetch";
 export const logoutService = (fetch: FetchData) => async () => {
    try {
       await fetch({
-         url: "/api/logout",
+         url: "/api/auth/logout",
          method: "post",
       });
    } catch (error) {

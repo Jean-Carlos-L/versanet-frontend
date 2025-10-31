@@ -26,6 +26,7 @@ import HistoryList from "@/modules/history/HistoryList";
 import InventoryList from "@/modules/inventory/InventoryList";
 import InvoicesList from "@/modules/invoices/InvoiceList";
 import TraficoList from "@/modules/stats/trafico";
+import UsersEdit from "@/modules/users/UsersEdit";
 
 function PrivateRoutes() {
   return (
@@ -83,7 +84,7 @@ function PrivateRoutes() {
         <Route path={ROUTES.CONFIGURATION} element={<Configuration />} />
         <Route path={ROUTES.USERS_LIST} element={<UsersList />} />\
         <Route path={ROUTES.USERS_CREATE} element={<UsersCreate />} />
-        <Route path={ROUTES.USERS_EDIT} element={<div>Editar Usuario</div>} />
+        <Route path={ROUTES.USERS_EDIT} element={<UsersEdit />} />
         <Route path={ROUTES.ROLES_LIST} element={<RolesList />} />
         <Route path={ROUTES.ROLES_CREATE} element={<RolesCreate />} />
         <Route path={ROUTES.ROLES_EDIT} element={<RolesEdit />} />

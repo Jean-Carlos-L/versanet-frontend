@@ -1,23 +1,23 @@
 export interface Customer {
 
     id: string;
-    names: string;
-    cedula: string;
+    name: string;
+    document: string;
     email: string;
     phone: string;
     address: string;
-    status: number;
+    status: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
 
 export interface CustomerCreate {
-    names: string;
-    cedula: string;
+    name: string;
+    document: string;
     email: string;
     phone: string;
     address: string;
-    status?: number;
+    status?: string;
 }
 
 export interface CustomerUpdate extends CustomerCreate {

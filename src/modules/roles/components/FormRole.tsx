@@ -1,6 +1,6 @@
 import Button from "@/common/components/Button";
 import Checkbox from "@/common/components/Checkbox";
-import Radio from "@/common/components/Radio";
+// import Radio from "@/common/components/Radio";
 import Textfield from "@/common/components/Textfield";
 import { RoleCreate, RoleUpdate } from "@/common/models/Role";
 import { useRolesCommand } from "../hooks/useRolesCommand";
@@ -15,10 +15,10 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
       onChange({ ...role, [name]: value });
    }
 
-   const handleChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      onChange({ ...role, [name]: Number(value) });
-   }
+   // const handleChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+   //    const { name, value } = e.target;
+   //    onChange({ ...role, [name]: value });
+   // }
 
    const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { checked, value } = e.target;
@@ -52,22 +52,22 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
                />
             </div>
 
-            <div className="flex gap-6 items-center">
+            {/* <div className="flex gap-6 items-center">
                <Radio
                   label="Activo"
                   name="status"
-                  value={1}
-                  checked={role.status === 1}
+                  value="activo"
+                  checked={role.status === "activo"}
                   onChange={handleChangeRadio}
                />
                <Radio
-                  label="Eliminado"
+                  label="Inactivo"
                   name="status"
-                  value={0}
-                  checked={role.status === 0}
+                  value="inactivo"
+                  checked={role.status === "inactivo"}
                   onChange={handleChangeRadio}
                />
-            </div>
+            </div> */}
 
             <div className="border-t border-gray-200 pt-4">
                <h3 className="text-lg font-semibold text-gray-100 mb-2">Permisos</h3>

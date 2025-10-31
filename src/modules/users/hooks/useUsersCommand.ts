@@ -93,12 +93,6 @@ export const useUsersCommand = (refresh?: () => void) => {
       errors.email = "El correo no es válido";
     }
 
-    //validar el nombre de usuario que no tenga caracteres especiales
-    const nameRegex = /^[A-Z]+$/i;
-    if (!nameRegex.test(user.name)) {
-      errors.name = "El nombre no es válido";
-    }
-
     const hasErrors = Object.keys(errors).length > 0;
     setErrors(errors);
     return { hasErrors };

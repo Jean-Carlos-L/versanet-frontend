@@ -47,7 +47,7 @@ function Sidebar() {
             icon={<UserGroupIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Clientes"
           />
-          <LinkComponent
+          {/*  <LinkComponent
             to={ROUTES.CONTRATS}
             code={PERMISSIONS.CONTRATS}
             icon={
@@ -86,7 +86,7 @@ function Sidebar() {
             code={PERMISSIONS.HISTORY}
             icon={<ClockIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Historial"
-          />
+          /> */}
           <LinkComponent
             to={ROUTES.CONFIGURATION}
             code={PERMISSIONS.CONFIGURATION}
@@ -94,12 +94,13 @@ function Sidebar() {
             label="Configuración"
           />
 
-
-          <button onClick={logout} className="px-4 py-4 text-gray-50 rounded-md text-start cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400">
-            <ArrowLeftStartOnRectangleIcon className="h-6 w-6 inline-block mb-1 mr-1" /> Cerrar
-            sesión
+          <button
+            onClick={logout}
+            className="px-4 py-4 text-gray-50 rounded-md text-start cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            <ArrowLeftStartOnRectangleIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
+            Cerrar sesión
           </button>
-
         </div>
       )}
     </aside>
@@ -118,8 +119,9 @@ function LinkComponent({ to, code, icon, label }) {
       to={to}
       state={{ code }}
       className={({ isActive }) => {
-        return `px-4 py-4 text-gray-50 rounded-md cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400 ${isActive ? "bg-gray-300 text-gray-800 shadow-md" : ""
-          }`;
+        return `px-4 py-4 text-gray-50 rounded-md cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400 ${
+          isActive ? "bg-gray-300 text-gray-800 shadow-md" : ""
+        }`;
       }}
     >
       {icon} {label}

@@ -6,14 +6,14 @@ import { useCustomersCommand } from "./hooks/useCustomersCommand";
 
 function CustomerCreateModal({ isOpen, onClose, onRefresh }) {
     const [customer, setCustomer] = useState<CustomerCreate>({
-        names: "",
-        cedula: "",
+        name: "",
+        document: "",
         email: "",
         phone: "",
         address: "",
-        status: 1,
+        status: "activo",
     });
-    const { createCustomer, loadingAction } = useCustomersCommand();
+    const { createCustomer, loadingAction } = useCustomersCommand(onRefresh);
 
     const handleChange = (customer: CustomerCreate) => {
         setCustomer(customer);
@@ -23,14 +23,13 @@ function CustomerCreateModal({ isOpen, onClose, onRefresh }) {
          if (!loadingAction) {
             await createCustomer(customer).then(() => {
                 setCustomer({
-                    names: "",
-                    cedula: "",
+                    name: "",
+                    document: "",
                     email: "",
                     phone: "",
                     address: "",
-                    status: 1,
+                    status: "activo",
                 });
-                onRefresh();
                 onClose();
             });
         }

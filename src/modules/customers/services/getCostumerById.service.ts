@@ -9,7 +9,7 @@ export const getCustomerByIdService = (fetch: FetchData) => async (id: string): 
          url: `/api/customers/${id}`,
          method: "get"
       })
-      return customerAdapter(response.data.data);
+      return customerAdapter(response.data);
    } catch (error) {
       console.error(error);
       throw new Error(

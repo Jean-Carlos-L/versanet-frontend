@@ -1,12 +1,12 @@
-import { RootState } from "@/common/redux/store.slice"
-import { useSelector } from "react-redux"
+import { RootState } from "@/common/redux/store.slice";
+import { useSelector } from "react-redux";
 
 export const useAuthQuery = () => {
-   const { isAuth, user } = useSelector((state: RootState) => state.auth)
+  const { isAuth, user } = useSelector((state: RootState) => state.auth);
 
-   const hasPermission = (permission: string) => {
-      return user.permissions.includes(permission)
-   }
+  const hasPermission = (permission: string) => {
+    return user?.role?.permissions?.map((per) => per.code).includes(permission);
+  };
 
-   return { isAuth, hasPermission }
-}
+  return { isAuth, hasPermission };
+};

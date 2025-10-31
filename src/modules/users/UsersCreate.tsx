@@ -10,7 +10,7 @@ function UsersCreate() {
     email: "",
     password: "",
     confirmPassword: "",
-    status: 1,
+    status: "activo",
   });
 
   const { createUser, loadingAction } = useUsersCommand();
@@ -26,7 +26,7 @@ function UsersCreate() {
         email: "",
         password: "",
         confirmPassword: "",
-        status: 1,
+        status: "activo",
         role: "",
       });
     });

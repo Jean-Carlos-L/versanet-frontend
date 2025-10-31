@@ -25,21 +25,21 @@ function FormCustomer({ customer, loading, onSubmit, onChange }: FormCustomerPro
         <form onSubmit={handleSubmit} className="p-4 rounded-lg shadow-md max-w-lg mx-auto" aria-label="Formulario de Cliente">
             <div>
                 <Textfield
-                    label="Nombres"
-                    name="names"
-                    value={customer?.names}
-                    placeholder="Nombres del cliente"
+                    label="Nombre"
+                    name="name"
+                    value={customer?.name}
+                    placeholder="Nombre del cliente"
                     onChange={handleChangeText}
-                    error={errors.names}
+                    error={errors.name}
                 />
 
                 <Textfield
                     label="Cédula"
-                    name="cedula"
-                    value={customer?.cedula}
+                    name="document"
+                    value={customer?.document}
                     placeholder="Cédula del cliente"
                     onChange={handleChangeText}
-                    error={errors.cedula}
+                    error={errors.document}
                 />
 
                 <Textfield

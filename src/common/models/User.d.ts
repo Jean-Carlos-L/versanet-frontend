@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   password: string;
-  status: number;
+  status: string;
   role: Role;
   createdAt?: Date;
   updatedAt?: Date;
@@ -14,7 +14,7 @@ export interface UserCreate {
   email?: string;
   password: string;
   confirmPassword: string;
-  status?: number;
+  status?: string;
   role?: string;
 }
 

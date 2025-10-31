@@ -49,6 +49,7 @@ export const useCustomersCommand = (refresh?: () => void) => {
             setLoadingAction(true)
             const response = await updateCustomerService(fetchData)(customer)
             if (refresh) {
+                console.log("Refreshing after update")
                 refresh();
             }
             alert("Cliente actualizado correctamente")
@@ -62,11 +63,11 @@ export const useCustomersCommand = (refresh?: () => void) => {
 
     const validations = (customer: CustomerCreate | CustomerUpdate) => {
         const errors: { [key: string]: string } = {}
-        if (!customer.names) {
+        if (!customer.name) {
             errors.names = "El nombre es requerido";
         }
-        if (!customer.cedula) {
-            errors.cedula = "La cédula es requerida";
+        if (!customer.document) {
+            errors.document = "El documento es requerido";
         }
         if (!customer.email) {
             errors.email = "El email es requerido";

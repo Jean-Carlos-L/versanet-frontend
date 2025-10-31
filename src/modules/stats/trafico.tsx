@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Trafico: React.FC = () => {
   const { traficoData, loading } = useTrafico();
 
-  if (loading || traficoData.length === 0) {
+  if (!loading || traficoData.length === 0) {
     return (
       <main>
         <Header title="Tráfico de Red" />
@@ -30,7 +30,7 @@ const Trafico: React.FC = () => {
       <Header title="Tráfico de Red" />
 
       {/* Botones de Navegación */}
-      <div className="flex justify-center gap-4 p-6">
+      {/* <div className="flex justify-center gap-4 p-6">
         <Link
           to="/control-panel"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
@@ -54,7 +54,7 @@ const Trafico: React.FC = () => {
           txPackets={txPackets}
           txBits={txBits}
         />
-      </div>
+      </div> */}
     </main>
   );
 };

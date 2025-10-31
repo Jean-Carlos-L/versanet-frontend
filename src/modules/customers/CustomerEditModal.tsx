@@ -8,23 +8,23 @@ import { useCustomerById } from "./hooks/useCustomerById";
 
 function CustomerEditModal({ isOpen, onClose, customerId, onRefresh}) {
     const { customer } = useCustomerById(customerId);
-    const { updateCustomer, loadingAction } = useCustomersCommand();
+    const { updateCustomer, loadingAction } = useCustomersCommand(onRefresh);
     const [customerUpdate, setCustomerUpdate] = useState<CustomerUpdate>({
         id: "",
-        names: "",
-        cedula: "",
+        name: "",
+        document: "",
         email: "",
         phone: "",
         address: "",
-        status: 0,
+        status: "activo",
     });
 
     useEffect(() => {
         if (customer) {
             setCustomerUpdate({
                 id: customer.id,
-                names: customer.names,
-                cedula: customer.cedula,
+                name: customer.name,
+                document: customer.document,
                 email: customer.email,
                 phone: customer.phone,
                 address: customer.address,
@@ -35,14 +35,11 @@ function CustomerEditModal({ isOpen, onClose, customerId, onRefresh}) {
 
     const handleChange = (updatedCustomer: CustomerUpdate) => {
         setCustomerUpdate(updatedCustomer);
-        onRefresh();
-        
     };
 
     const handleSubmit = () => {
         if (!loadingAction) {
-            updateCustomer(customerUpdate);
-            onRefresh();
+            updateCustomer(customerUpdate)
             onClose();
         }
     };
