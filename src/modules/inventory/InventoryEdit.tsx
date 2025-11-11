@@ -10,22 +10,23 @@ function EditInventory({ isOpen, onClose, inventoryId, onRefresh }) {
     const { updateInventory, loadingAction } = useInventoryCommand();
     const [inventoryUpdate, setInventoryUpdate] = useState<InventoryUpdate>({
         id: "",
-        reference: "",
+        referencia: "",
         mac: "",
-        ip: "",
-        typeInventory: { id: "" },
-        status: 0,
+        direccion_red: "",
+        tipo_equipo: "",
+        cantidad: 0,
+        estado: "inactivo",
     });
-
     useEffect(() => {
         if (inventory) {
             setInventoryUpdate({
                 id: inventory.id,
-                reference: inventory.reference,
+                referencia: inventory.referencia,
                 mac: inventory.mac,
-                ip: inventory.ip,
-                typeInventory: { id: inventory.typeInventory.id },
-                status: inventory.status,
+                direccion_red: inventory.direccion_red,
+                tipo_equipo: inventory.tipo_equipo,
+                cantidad: inventory.cantidad,
+                estado: inventory.estado === "activo" ? "activo" : "inactivo",
             });
         }
     }, [inventory]);

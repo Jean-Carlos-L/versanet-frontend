@@ -78,10 +78,10 @@ function InventoryList() {
                                 </label>
                                 <input
                                     type="text"
-                                    id="reference"
-                                    name="reference"
-                                    value={filters.reference}
-                                    onChange={(e) => handleChange("reference", e.target.value)}
+                                    id="referencia"
+                                    name="referencia"
+                                    value={filters.referencia}
+                                    onChange={(e) => handleChange("referencia", e.target.value)}
                                     className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="Buscar por referencia"
                                 />
@@ -95,10 +95,10 @@ function InventoryList() {
                                 </label>
                                 <input
                                     type="text"
-                                    id="typeInventory"
-                                    name="typeInventory"
-                                    value={filters.typeInventory}
-                                    onChange={(e) => handleChange("typeInventory", e.target.value)}
+                                    id="tipo_equipo"
+                                    name="tipo_equipo"
+                                    value={filters.tipo_equipo}
+                                    onChange={(e) => handleChange("tipo_equipo", e.target.value)}
                                     className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="Buscar por tipo"
                                 />
@@ -132,8 +132,8 @@ function InventoryList() {
                                     type="text"
                                     id="ip"
                                     name="ip"
-                                    value={filters.ip}
-                                    onChange={(e) => handleChange("ip", e.target.value)}
+                                    value={filters.direccion_red}
+                                    onChange={(e) => handleChange("direccion_red", e.target.value)}
                                     className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="Buscar por ip"
                                 />
@@ -193,13 +193,13 @@ function InventoryList() {
                                             <TableRow key={item.id}
                                                 onClick={() => handleSelectInventory(item)}>
                                                 <TableCell>{index + 1}</TableCell>
-                                                <TableCell>{item.reference}</TableCell>
-                                                <TableCell>{item.typeInventory.description}</TableCell>
+                                                <TableCell>{item.referencia}</TableCell>
+                                                <TableCell>{item.tipo_equipo}</TableCell>
                                                 <TableCell>{item.mac}</TableCell>
-                                                <TableCell>{item.ip === null? "No aplica" : item.ip}
+                                                <TableCell>{item.direccion_red === null? "No aplica" : item.direccion_red}
                                                 </TableCell>
                                                 <TableCell>
-                                                    {item.status === 0 ? <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-red-100 font-medium">
+                                                    {item.estado === "activo" ? <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-red-100 font-medium">
                                                         Disponible
                                                     </span> : <span className="inline-block px-3 py-1 rounded-full bg-red-500 text-red-100 font-medium">
                                                         No disponible
@@ -218,32 +218,33 @@ function InventoryList() {
                                 <div className="w-full">
                                     <div className="mb-6">
                                         <label className="text-sm font-medium text-gray-700">Referencia</label>
-                                        <p className="text-sm font-medium text-gray-700">{selectInventory.reference}</p>
+                                        <p className="text-sm font-medium text-gray-700">{selectInventory?.referencia ?? selectInventory?.reference ?? "-"}</p>
                                     </div>
                                     <div className="mb-6">
                                         <label className="text-sm font-medium text-gray-700">Tipo</label>
-                                        <p className="text-sm font-medium text-gray-700">{selectInventory.typeInventory.description}</p>
+                                        <p className="text-sm font-medium text-gray-700">{selectInventory?.tipo_equipo ?? selectInventory?.typeInventory?.description ?? "-"}</p>
                                     </div>
                                     <div className="mb-6">
                                         <label className="text-sm font-medium text-gray-700">MAC</label>
-                                        <p className="text-sm font-medium text-gray-700">{selectInventory.mac}</p>
+                                        <p className="text-sm font-medium text-gray-700">{selectInventory?.mac ?? "-"}</p>
                                     </div>
                                     <div className="mb-6">
                                         <label className="text-sm font-medium text-gray-700">IP</label>
-                                        <p className="text-sm font-medium text-gray-700">{selectInventory.ip}</p>
+                                        <p className="text-sm font-medium text-gray-700">{selectInventory?.direccion_red ?? selectInventory?.ip ?? "No aplica"}</p>
                                     </div>
                                     <div className="mb-6">
                                         <label className="text-sm font-medium text-gray-700">Estado</label>
                                         <p className="text-sm font-medium text-gray-700">
-                                            {selectInventory.status === 0 ? (
+                                            {((selectInventory?.estado === "activo") || selectInventory?.status === 0) ? (
                                                 <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-red-100 font-medium">
                                                     Disponible
                                                 </span>
-                                            ) :
+                                            ) : (
                                                 <span className="inline-block px-3 py-1 rounded-full bg-red-500 text-red-100 font-medium">
                                                     No disponible
                                                 </span>
-                                            }</p>
+                                            )}
+                                        </p>
                                     </div>
                            <div className="flex justify-end">
                            <button

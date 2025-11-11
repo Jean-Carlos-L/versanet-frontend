@@ -4,7 +4,7 @@ import { InventoryUpdate } from "@/common/models/Inventory";
 export const updateInventoryService = (fetch: FetchData) => async (inventory: InventoryUpdate) => {
     try{
         const response = await fetch({
-            url: `/api/inventario/${inventory.id}`,
+            url: `/api/inventory/${inventory.id}`,
             method: "put",
             body: inventory
         });

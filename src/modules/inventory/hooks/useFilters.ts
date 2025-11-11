@@ -5,11 +5,11 @@ export const useFilters = () => {
    const [filters, setFilters] = useState<FiltersInventory>({
       page: 1,
       pageSize: 10,
-      reference: "",
+      referencia: "",
       mac: "",
-      ip: "",
-      typeInventory: "",
-      status: 1,
+      direccion_red: "",
+      tipo_equipo: "",
+      estado: "activo",
    });
 
    const handleChange = (key: string, value: string | number) => {
@@ -18,18 +18,18 @@ export const useFilters = () => {
 
    useEffect(() => {
       setFilters((prev) => ({ ...prev, page: 1 }));
-   }, [filters.status, filters.pageSize]);
+   }, [filters.estado, filters.pageSize]);
 
    return { filters, handleChange }
 }
 
 export interface FiltersInventory {
-   page: number
-   pageSize: number;
-   reference: string;
-   mac: string;
-   ip: string;
-   typeInventory: string;
-   status: number;
-
+    page: number;
+    pageSize: number;
+    referencia: string;
+    mac: string;
+    direccion_red: string;
+    tipo_equipo: string;
+    cantidad?: number;
+    estado: string;  // "activo" | "inactivo"
 }

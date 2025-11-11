@@ -1,3 +1,4 @@
+// En FormInventory.tsx
 import Button from "@/common/components/Button";
 import Textfield from "@/common/components/Textfield";
 import Select from "@/common/components/Select";
@@ -11,6 +12,18 @@ function FormInventory({ inventory, loading, onSubmit, onChange }: FormInventory
         const { name, value } = e.target;
         onChange({ ...inventory, [name]: value });
     };
+
+    const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        onChange({ 
+            ...inventory, 
+            tipo_equipo: value,
+            // Reset campos condicionales al cambiar tipo
+            direccion_red: value === "router" ? inventory.direccion_red : undefined
+        });
+    };
+
+    const isRouter = inventory?.tipo_equipo === "router";
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,23 +39,24 @@ function FormInventory({ inventory, loading, onSubmit, onChange }: FormInventory
         <form onSubmit={handleSubmit} className="p-4 rounded-lg shadow-md max-w-lg mx-auto" aria-label="Formulario de Inventario">
             <div>
                 <Select
-                    label="Tipo de Inventario"
-                    name="type"
+                    label="Tipo de Equipo"
+                    name="tipo_equipo"
                     options={[
-                        { value: "1", label: "Router" },
-                        { value: "2", label: "Antena MAC" },
+                        { value: "router", label: "Router" },
+                        { value: "antena", label: "Antena" },
+                        { value: "otros", label: "Otros" },
                     ]}
-                    value={inventory?.typeInventory?.id}
-                    onChange={(e) => onChange({ ...inventory, typeInventory: { id: e.target.value } })}
-                    error={errors.typeInventory}
+                    value={inventory?.tipo_equipo}
+                    onChange={handleTypeChange}
+                    error={errors.tipo_equipo}
                 />
                 <Textfield
                     label="Referencia"
-                    name="reference"
-                    value={inventory?.reference}
+                    name="referencia"
+                    value={inventory?.referencia}
                     placeholder="Referencia del producto"
                     onChange={handleChangeText}
-                    error={errors.reference}
+                    error={errors.referencia}
                 />
                 <Textfield
                     label="MAC"
@@ -52,34 +66,41 @@ function FormInventory({ inventory, loading, onSubmit, onChange }: FormInventory
                     onChange={handleChangeText}
                     error={errors.mac}
                 />
-                {
-                    inventory?.typeInventory?.id === "1" ?
-                        <Textfield
-                            label="IP"
-                            name="ip"
-                            value={inventory?.ip}
-                            placeholder="IP del producto"
-                            onChange={handleChangeText}
-                            error={errors.ip}
-                        />
-                        :
-                        <Textfield
-                            label="IP"
-                            name="ip"
-                            value="no aplica"
-                            placeholder="IP del producto"
-                            onChange={handleChangeText}
-                            error={errors.ip}
-                            disabled
-                        />
-                }
+                <Textfield
+                    label="Dirección Red (IP)"
+                    name="direccion_red"
+                    value={isRouter ? (inventory?.direccion_red || '') : "no aplica"}
+                    placeholder={isRouter ? "IP del producto" : ""}
+                    onChange={handleChangeText}
+                    error={errors.direccion_red}
+                    disabled={!isRouter}
+                />
+                <Textfield
+                    label="Cantidad"
+                    name="cantidad"
+                    type="number"
+                    value={String(Math.max(Number(inventory?.cantidad ?? 1), 1))}
+                    placeholder="Cantidad de items"
+                    onChange={handleChangeText}
+                    error={errors.cantidad}
+                />
+                <Select
+                    label="Estado"
+                    name="estado"
+                    options={[
+                        { value: "activo", label: "Activo" },
+                        { value: "inactivo", label: "Inactivo" },
+                    ]}
+                    value={inventory?.estado}
+                    onChange={handleChangeText}
+                    error={errors.estado}
+                />
                 <div className="flex justify-end gap-4 mt-4">
                     <Button type="submit">{loading ? "Guardando..." : "Guardar"}</Button>
                 </div>
             </div>
         </form>
-    )
-
+    );
 }
 
 interface FormInventoryProps {
