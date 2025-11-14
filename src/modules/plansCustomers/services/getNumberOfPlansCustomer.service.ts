@@ -9,8 +9,8 @@ export const getNumberOfPlansCustomerService = (fetch: FetchData) => async (filt
          message: string;
       }
 
-      const response = await fetch<void, Response>({ url: `/api/plans-customers/count?${searchParams}` });
-      return response.data.data;
+   const response = await fetch<void, Response>({ url: `/api/plans-customers/count?${searchParams}` });
+   return response.data.data;
    } catch (error) {
       console.error("Error al obtener el número de planes de los clientes:", error);
       throw new Error(

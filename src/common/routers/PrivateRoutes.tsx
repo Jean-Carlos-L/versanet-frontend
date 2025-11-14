@@ -10,6 +10,7 @@ import { ROUTES } from "./routes";
 // import AuthLogout from "@/modules/auth/AuthLogout";
 import Plans from "@/modules/plans/Plans";
 import PlansCustomersList from "@/modules/plansCustomers/PlansCustomersList";
+import ContractList from "@/modules/contracts/ContractList";
 import Configuration from "@/modules/configuration/Configuration";
 import { useAuthQuery } from "@/modules/auth/hooks/useAuthQuery";
 import CustomerListModal from "@/modules/customers/CustomerList";
@@ -34,7 +35,7 @@ function PrivateRoutes() {
       <Route path="/" element={<RequiredAuth />}>
         <Route path={ROUTES.DASHBOARD} element={<StatsList />} />
         <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
-        <Route path={ROUTES.CONTRATS} element={<PlansCustomersList />} />
+        <Route path={ROUTES.CONTRACTS} element={<ContractList />} />
         <Route path={ROUTES.PLANS} element={<Plans />} />
         <Route path={ROUTES.FACTURATION} element={<InvoicesList />} />
         <Route path={ROUTES.INVENTORY} element={<InventoryList />} />

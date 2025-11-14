@@ -193,13 +193,13 @@ function InventoryList() {
                                             <TableRow key={item.id}
                                                 onClick={() => handleSelectInventory(item)}>
                                                 <TableCell>{index + 1}</TableCell>
-                                                <TableCell>{item.referencia}</TableCell>
-                                                <TableCell>{item.tipo_equipo}</TableCell>
+                                                <TableCell>{item.reference}</TableCell>
+                                                <TableCell>{item.type}</TableCell>
                                                 <TableCell>{item.mac}</TableCell>
-                                                <TableCell>{item.direccion_red === null? "No aplica" : item.direccion_red}
+                                                <TableCell>{item.network_address === null? "No aplica" : item.network_address}
                                                 </TableCell>
                                                 <TableCell>
-                                                    {item.estado === "activo" ? <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-red-100 font-medium">
+                                                    {item.status === "activo" ? <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-red-100 font-medium">
                                                         Disponible
                                                     </span> : <span className="inline-block px-3 py-1 rounded-full bg-red-500 text-red-100 font-medium">
                                                         No disponible
