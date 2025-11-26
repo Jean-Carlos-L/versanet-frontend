@@ -1,31 +1,27 @@
+import { Customer } from "./Customer";
+
 export interface Invoice {
   id: string;
-  plan: {
-    id: string;
-    description: string;
-    price: number;
-    features: string;
-  };
-  customer: {
-    id: string;
-    name: string;
-    document: string;
-    email: string;
-    phone: string;
-    address: string;
-    status: number;
-  };
-  dateInvoice: string;
-  mount: number;
+  customerId: string;
+  contractId: string;
+  invoiceDate: string;
+  amount: number;
   status: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  customer: Customer;
+  contract: any;
 }
 
 export interface InvoiceCreate {
-  planId: string;
+  invoiceDate: string;
   customerId: string;
-  dateInvoice: string;
-  mount: number;
-  status: number;
+  contractId: string;
+  amount: number;
+}
+
+export interface InvoiceUpdate {
+  invoiceDate?: string;
+  customerId?: string;
+  contractId?: string;
+  amount?: number;
+  status?: number;
 }

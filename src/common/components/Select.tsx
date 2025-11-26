@@ -1,7 +1,7 @@
-function Select({ options, value, onChange, name, label, error }: SelectProps) {
+function Select({ options, value, onChange, name, label, error, disabled }: SelectProps) {
    return (
-      <div className="flex gap-5 items-center flex-col">
-         <label htmlFor={name} className="font-semibold w-full text-start">
+      <div className="flex items-center flex-col mb-4">
+         <label htmlFor={name} className="font-semibold w-full text-start mb-2">
             {label}
          </label>
          <div className="flex flex-col w-full">
@@ -10,6 +10,8 @@ function Select({ options, value, onChange, name, label, error }: SelectProps) {
                onChange={onChange}
                className={`select select-bordered w-full max-w-full ${error ? "select-error" : ""}`}
                name={name}
+               id={name}
+               disabled={disabled}
             >
                <option value="">Selecciona una opción</option>
                {options.map((option) => (
@@ -35,6 +37,7 @@ interface SelectProps {
    name: string;
    label: string;
    error?: string;
+   disabled?: boolean;
    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 

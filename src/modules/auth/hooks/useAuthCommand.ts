@@ -4,7 +4,8 @@ import { useFetch } from "@/common/hooks/useFetch"
 import { loginService } from "../services/login.service"
 import { toast } from "react-toastify"
 import { logoutService } from "../services/logout.service"
-import { resetPasswordService } from "../services/resetPassword.service"
+import { recoverPasswordService } from "../services/recoverPassword.service"
+import { getCodeToRecoverPasswordService } from "../services/getCodeToRecoverPassword.service"
 
 export const useAuthCommand = () => {
    const { fetchData } = useFetch()
@@ -33,12 +34,22 @@ export const useAuthCommand = () => {
       }
    }
 
-   const resetPassword = async (email: string, password: string) => {
+   const recoverPassword = async (email: string, password: string, code: string) => {
       try {
-         await resetPasswordService(fetchData)(email, password);
+         await recoverPasswordService(fetchData)(email, password, code);
          toast.success("Contraseña cambiada correctamente");
       } catch (error) {
-         console.error("Error while trying to reset password", error);
+         console.error("Error while trying to recover password", error);
+         toast.error(error.message);
+         throw new Error(error.message)
+      }
+   }
+
+   const getCodeToRecoverPassword = async (email: string) => {
+      try {
+         await getCodeToRecoverPasswordService(fetchData)(email);
+         toast.success("Código de recuperación enviado a tu email");
+      } catch (error) {
          toast.error(error.message);
          throw new Error(error.message)
       }
@@ -47,6 +58,7 @@ export const useAuthCommand = () => {
    return {
       logout,
       login,
-      resetPassword
+      recoverPassword,
+      getCodeToRecoverPassword
    }
 }

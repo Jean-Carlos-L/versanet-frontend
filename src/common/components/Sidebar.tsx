@@ -47,6 +47,14 @@ function Sidebar() {
             icon={<UserGroupIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Clientes"
           />
+          <LinkComponent
+            to={ROUTES.INVOICES}
+            code={PERMISSIONS.INVOICES}
+            icon={
+              <DocumentCurrencyDollarIcon className="h-6 w-6 inline-block mb-1 mr-1" />
+            }
+            label="Facturación"
+          />
           {/*  <LinkComponent
             to={ROUTES.CONTRATS}
             code={PERMISSIONS.CONTRATS}
