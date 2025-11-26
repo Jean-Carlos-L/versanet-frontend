@@ -9,7 +9,7 @@ export const useInventoryCommand = (refresh?: () => void) => {
     const { fetchData } = useFetch();
     const [loadingAction, setLoadingAction] = useState(false);
     const [errors, setErrors] = useState<{ [key: string]: string }>({})
-    
+
     const deleteInventory = async (id: string) => {
         try {
             setLoadingAction(true)
@@ -43,7 +43,7 @@ export const useInventoryCommand = (refresh?: () => void) => {
             setLoadingAction(false)
         }
     }
-    
+
     const updateInventory = async (inventory: InventoryUpdate) => {
         try {
             setLoadingAction(true)
@@ -62,24 +62,29 @@ export const useInventoryCommand = (refresh?: () => void) => {
 
 
     const validations = (inventory: InventoryCreate | InventoryUpdate) => {
-        const errors: { [key: string]: string } = {}
-        if(!inventory.reference){
-            errors.reference = "El campo referencia es requerido"
+        const errors: { [key: string]: string } = {};
+        if (!inventory.referencia) {
+            errors.referencia = "El campo referencia es requerido";
         }
-        if(!inventory.typeInventory){
-            errors.typeInventory = "El campo tipo de inventario es requerido"
+        if (!inventory.tipo_equipo) {
+            errors.tipo_equipo = "El campo tipo de equipo es requerido";
         }
-        if (!inventory.ip && inventory.typeInventory.id === "1") {
-            errors.ip = "El campo IP es requerido"
+        if (inventory.tipo_equipo === "router" && !inventory.direccion_red) {
+            errors.direccion_red = "El campo dirección red es requerido para routers";
         }
-        if(!inventory.mac){
-            errors.mac = "El campo MAC es requerido"
+        if (!inventory.mac) {
+            errors.mac = "El campo MAC es requerido";
         }
-        const hasErrors = Object.keys(errors).length > 0
-        setErrors(errors)
-
-        return {hasErrors, errors}
-    }
+        if (!inventory.cantidad || inventory.cantidad < 1) {
+            errors.cantidad = "La cantidad debe ser al menos 1";
+        }
+        if (!inventory.estado) {
+            errors.estado = "El campo estado es requerido";
+        }
+        const hasErrors = Object.keys(errors).length > 0;
+        setErrors(errors);
+        return { hasErrors, errors };
+    };
     return {
         createInventory,
         updateInventory,

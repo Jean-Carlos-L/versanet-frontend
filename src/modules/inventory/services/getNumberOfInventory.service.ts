@@ -9,7 +9,7 @@ export const getNumberOfInventoryService = (fetch: FetchData) => async (filters:
             message: string;
         }
 
-        const response = await fetch<void, Response>({ url: `/api/inventario/count?${searchParams}` });
+        const response = await fetch<void, Response>({ url: `/api/inventory/count?${searchParams}` });
         return response.data.data;
     } catch (error) {
         console.error("Error al obtener el número de inventario:", error);

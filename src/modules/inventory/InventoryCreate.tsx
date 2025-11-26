@@ -7,11 +7,13 @@ import { useInventoryCommand } from "./hooks/useInventoryCommand";
 function CreateInventory ({ isOpen, onClose, onRefresh }) {
 
     const [inventory, setInventory] = useState<InventoryCreate>({
-        reference: "",
+        // los campos iniciales del inventario
+        referencia: "",
         mac: "",
-        ip: "",
-        typeInventory: { id: "" },
-        status: 0,
+        direccion_red: "",
+        tipo_equipo: "",
+        cantidad: 1,
+        estado: "activo",
     });
 
     const { createInventory, loadingAction } = useInventoryCommand();
@@ -22,16 +24,17 @@ function CreateInventory ({ isOpen, onClose, onRefresh }) {
 
     const handleSubmit = async () => {
         if (!loadingAction) {
-            if (inventory.typeInventory.id !== "1" && !inventory.ip) {
-                inventory.ip = null;
+            if (inventory.tipo_equipo !== "1" && !inventory.direccion_red) {
+                inventory.direccion_red = null;
             }
             await createInventory(inventory).then(() => {
                 setInventory({
-                    reference: "",
+                    referencia: "",
                     mac: "",
-                    ip: "",
-                    typeInventory: { id: "" },
-                    status: 0,
+                    direccion_red: "",
+                    tipo_equipo: "",
+                    cantidad: 1,
+                    estado: "activo",
                 });
                 onRefresh();
                 onClose();
