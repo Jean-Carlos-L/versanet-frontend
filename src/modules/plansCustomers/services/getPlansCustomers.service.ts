@@ -11,8 +11,8 @@ export const getPlansCustomersService = (fetch: FetchData) => async (filters: Fi
          message: string;
       }
 
-      const response = await fetch<void, Response>({ url: `/api/plans-customers?${searchParams}` });
-      return response.data.data.map(planCustomerAdapter)
+   const response = await fetch<void, Response>({ url: `/api/plans-customers?${searchParams}` });
+   return response.data.data.map(planCustomerAdapter)
    } catch (error) {
       console.error("Error al obtener los planes de los clientes:", error);
       throw new Error(

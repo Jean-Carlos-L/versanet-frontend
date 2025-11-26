@@ -1,23 +1,23 @@
 
 export interface Inventory {
     id: string;
-    referencia: string; 
-    mac?: string;        
-    direccion_red?: string;  
-    tipo_equipo: string;     
-    cantidad: number;        
-    estado: string;          
-    createdAt?: string;      
-    updatedAt?: string;      
+    reference: string;
+    mac?: string;
+    network_address?: string;
+    type: string;
+    quantity: number;
+    status: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface InventoryCreate {
-    referencia: string;
+    reference: string;
     mac?: string;
-    direccion_red?: string;
-    tipo_equipo: string;
-    cantidad: number;
-    estado: "activo" | "inactivo";  
+    network_address?: string;
+    type: string;
+    quantity: number;
+    status: "active" | "inactive";
 }
 
 export interface InventoryUpdate extends InventoryCreate {

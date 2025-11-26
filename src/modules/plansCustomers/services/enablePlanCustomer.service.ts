@@ -6,6 +6,7 @@ export const enablePlanCustomerService =
          interface Response {
             message: string;
          }
+         // Use contracts endpoint to update status
          const response = await fetch<void, Response>({
             url: `/api/plans-customers/enable/${id}`,
             method: "put",

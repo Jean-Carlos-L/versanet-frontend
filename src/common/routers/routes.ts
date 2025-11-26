@@ -31,6 +31,7 @@ export const ROUTES = {
 
   DASHBOARD: "/control-panel",
   CUSTOMERS: "/customers",
+  CONTRACTS: "/contracts",
   CONTRATS: "/contrats",
   PLANS: "/plans",
   FACTURATION: "/facturation",
