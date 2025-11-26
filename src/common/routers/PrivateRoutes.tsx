@@ -24,9 +24,13 @@ import { PERMISSIONS } from "../constants/permissions";
 import History from "@/modules/history/History";
 import HistoryList from "@/modules/history/HistoryList";
 import InventoryList from "@/modules/inventory/InventoryList";
-import InvoicesList from "@/modules/invoices/InvoiceList";
 import TraficoList from "@/modules/stats/trafico";
 import UsersEdit from "@/modules/users/UsersEdit";
+import PlanCreate from "@/modules/plans/PlanCreate";
+import PlanEdit from "@/modules/plans/PlanEdit";
+import Invoices from "@/modules/invoices/Invoices";
+import InvoiceCreate from "@/modules/invoices/InvoiceCreate";
+import InvoiceEdit from "@/modules/invoices/InvoiceEdit";
 
 function PrivateRoutes() {
   return (
@@ -36,11 +40,9 @@ function PrivateRoutes() {
         <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
         <Route path={ROUTES.CONTRATS} element={<PlansCustomersList />} />
         <Route path={ROUTES.PLANS} element={<Plans />} />
-        <Route path={ROUTES.FACTURATION} element={<InvoicesList />} />
         <Route path={ROUTES.INVENTORY} element={<InventoryList />} />
         <Route path={ROUTES.HISTORY} element={<History />} />
         <Route path={ROUTES.TRAFICO} element={<TraficoList />} />
-
         <Route
           path={ROUTES.HISTORY_USERS}
           element={<HistoryList entities="usuarios" />}
@@ -89,6 +91,11 @@ function PrivateRoutes() {
         <Route path={ROUTES.ROLES_CREATE} element={<RolesCreate />} />
         <Route path={ROUTES.ROLES_EDIT} element={<RolesEdit />} />
         <Route path={ROUTES.ROLES_VIEW} element={<RolesView />} />
+        <Route path={ROUTES.PLANS_CREATE} element={<PlanCreate />} />
+        <Route path={ROUTES.PLANS_EDIT} element={<PlanEdit />} />
+        <Route path={ROUTES.INVOICES} element={<Invoices />} />
+        <Route path={ROUTES.INVOICES_CREATE} element={<InvoiceCreate />} />
+        <Route path={ROUTES.INVOICES_EDIT} element={<InvoiceEdit />} />
       </Route>
     </Routes>
   );

@@ -1,37 +1,121 @@
-import Spinner from "@/common/components/Spinner";
+import { useState } from "react";
 import { usePlansQuery } from "./hooks/usePlansQuery";
+import { formatCurrency } from "@/common/utils/formatCurrency";
 import Table, { TableCell, TableRow } from "@/common/components/Table";
 import Header from "@/common/components/Header";
+import Textfield from "@/common/components/Textfield";
+import Pagination from "@/common/components/Pagination";
+import Spinner from "@/common/components/Spinner";
+import Button from "@/common/components/Button";
+import { usePlanCommand } from "./hooks/usePlanCommand";
+import { generatePath } from "@/common/utils/generatePath.util";
+import { ROUTES } from "@/common/routers/routes";
+import { useNavigate } from "react-router-dom";
 
-const HEADERS_TABLE = ["#", "Descripción", "Características", "Precio"];
+const HEADERS_TABLE = [
+  "#",
+  "Descripción",
+  "Características",
+  "Precio",
+  "Acciones",
+];
 
 function Plans() {
-   const { plans, loading } = usePlansQuery()
+  const navigate = useNavigate();
+  const [filters, setFilters] = useState<Record<string, any>>({});
+  const { plans, loading, page, pageSize, onPage, total, refresh } =
+    usePlansQuery(filters);
+  const { deletePlan } = usePlanCommand(refresh);
 
-   return (
-      <main>
-         <Header title="Planes" />
-         <div className="flex flex-col items-center w-full">
-            <section className="w-11/12">
-               {loading ? (
-                  <Spinner />
-               ) : (
-                  <Table
-                     headers={HEADERS_TABLE}
-                     data={plans.map((plan, index) => (
-                        <TableRow key={index}>
-                           <TableCell>{index + 1}</TableCell>
-                           <TableCell>{plan.description}</TableCell>
-                           <TableCell>{plan.features}</TableCell>
-                           <TableCell>{plan.price}</TableCell>
-                        </TableRow>
-                     ))}
-                  />
-               )}
-            </section>
-         </div>
-      </main>
-   )
+  const handleChangeFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
+  const goToEditPlan = (planId: string) => {
+    const path = generatePath(ROUTES.PLANS_EDIT, { id: planId });
+    navigate(path);
+  };
+
+  return (
+    <main>
+      <Header title="Planes" />
+      <div className="flex flex-col items-center w-full">
+        <section className="w-11/12 bg-white p-4 rounded-lg shadow-md">
+          <div className="flex gap-4 mb-4">
+            <div className="flex-grow">
+              <Textfield
+                label=""
+                name="description"
+                placeholder="Buscar planes"
+                value={filters.description || ""}
+                onChange={handleChangeFilters}
+              />
+            </div>
+            <Textfield
+              label=""
+              name="minPrice"
+              type="number"
+              placeholder="Precio mínimo"
+              value={filters.minPrice || ""}
+              onChange={handleChangeFilters}
+            />
+            <Textfield
+              label=""
+              name="maxPrice"
+              type="number"
+              placeholder="Precio máximo"
+              value={filters.maxPrice || ""}
+              onChange={handleChangeFilters}
+            />
+          </div>
+
+          <div className="mb-4">
+            {loading ? (
+              <Spinner />
+            ) : (
+              <Table
+                headers={HEADERS_TABLE}
+                data={plans.map((plan, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{plan.description}</TableCell>
+                    <TableCell>{plan.features}</TableCell>
+                    <TableCell>
+                      {formatCurrency({ amount: plan.price })}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-2 flex-wrap max-w-[150px] mx-auto">
+                        <Button
+                          type="button"
+                          onClick={() => goToEditPlan(plan.id)}
+                        >
+                          Editar
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => deletePlan(plan.id)}
+                        >
+                          Eliminar
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              />
+            )}
+          </div>
+
+          <Pagination
+            currentPage={page}
+            onPageChange={onPage}
+            pageSize={pageSize}
+            totalItems={total}
+            itemsPerPage={20}
+          />
+        </section>
+      </div>
+    </main>
+  );
 }
 
 export default Plans;

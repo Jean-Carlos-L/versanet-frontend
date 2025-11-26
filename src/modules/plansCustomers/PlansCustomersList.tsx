@@ -15,7 +15,6 @@ import Pagination from "@/common/components/Pagination";
 import Header from "@/common/components/Header";
 import PlansCustomersCreate from "./PlansCustomerCreate";
 import PlansCustomerEdit from "./PlansCustomerEdit";
-import { useInvoiceCommands } from "../invoices/hooks/useInvoiceCommands";
 
 const HEADERS_TABLE = [
   "#",
@@ -37,7 +36,6 @@ function PlansCustomersList() {
     null
   );
   const [selectPlanCustomer, setSelectPlanCustomer] = useState(null);
-  const { handleCreateInvoice } = useInvoiceCommands();
 
   const { deletePlanCustomer, loadingAction } =
     usePlansCustomersCommand(refresh);
@@ -84,7 +82,6 @@ function PlansCustomersList() {
   };
 
   const confirmInvoiceCreation = () => {
-    handleCreateInvoice(invoiceCustomerId);
     closeConfirmModal();
   };
 

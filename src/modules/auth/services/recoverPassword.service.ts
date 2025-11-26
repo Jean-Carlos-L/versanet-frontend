@@ -1,12 +1,12 @@
 import { FetchData } from "@/common/hooks/useFetch";
 
-export const resetPasswordService = (fetch: FetchData) => async (email: string, password: string) => {
+export const recoverPasswordService = (fetch: FetchData) => async (email: string, password: string, code: string) => {
    try {
-      interface RequestBody { email: string, password: string };
+      interface RequestBody { email: string, password: string, code: string };
       const response = await fetch<RequestBody, void>({
-         url: "/api/reset-password",
+         url: "/api/auth/recover-password",
          method: "post",
-         body: { email, password }
+         body: { email, password, code }
       })
 
       return response.data

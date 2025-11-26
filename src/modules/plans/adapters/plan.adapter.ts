@@ -5,6 +5,7 @@ export const planAdapter = (plan): Plan => {
       id: plan.id,
       description: plan.description,
       features: plan.features,
+      duration: plan.duration,
       price: plan.price,
       status: plan.status,
       createdAt: plan.createdAt,

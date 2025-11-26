@@ -10,8 +10,8 @@ function Textfield(props: TextfieldProps) {
     type = "text",
   } = props;
   return (
-    <div className="flex gap-5 items-center flex-col">
-      <label htmlFor={name} className="font-semibold text-start w-full">
+    <div className="flex items-center flex-col mb-4">
+      <label htmlFor={name} className="font-semibold text-start w-full mb-2">
         {label}
       </label>
       <div className="flex flex-col w-full">
