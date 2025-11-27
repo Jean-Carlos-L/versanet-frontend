@@ -14,7 +14,7 @@ function RolesEdit() {
     id: "",
     description: "",
     permissions: [],
-    status: 0,
+    status: "0",
   });
 
   useEffect(() => {
@@ -43,11 +43,13 @@ function RolesEdit() {
   return (
     <div>
       <Header title="Editar rol" />
-      <FormRole
-        role={roleUpdate}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
+      <section className="p-5">
+        <FormRole
+          role={roleUpdate}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      </section>
     </div>
   );
 }

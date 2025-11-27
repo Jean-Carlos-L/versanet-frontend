@@ -4,24 +4,35 @@ import { UserCreate, UserUpdate } from "@/common/models/User";
 import { deleteUserService } from "../services/deleteUsers.service";
 import { createUserService } from "../services/createUsers.service";
 import { updateUserService } from "../services/updateUsers.service";
+import { useConfirmation } from "@/common/hooks/useConfirmation";
+import { toast } from "react-toastify";
 
 export const useUsersCommand = (refresh?: () => void) => {
   const { fetchData } = useFetch();
+  const confirmation = useConfirmation();
   const [loadingAction, setLoadingAction] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const deleteUser = async (id: string) => {
     try {
       setLoadingAction(true);
+      const confirmed = await confirmation({
+        title: "Eliminar usuario",
+        message: "¿Estás seguro de que deseas eliminar este usuario?",
+      });
+      if (!confirmed.isConfirmed) {
+        return;
+      }
+
       const response = await deleteUserService(fetchData)(id);
       if (refresh) {
         refresh();
       }
 
-      alert("Usuario eliminado correctamente");
+      toast.success("Usuario eliminado correctamente");
       return response;
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setLoadingAction(false);
     }
@@ -34,10 +45,10 @@ export const useUsersCommand = (refresh?: () => void) => {
       if (refresh) {
         refresh();
       }
-      alert("Usuario creado correctamente");
+      toast.success("Usuario creado correctamente");
       return response;
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setLoadingAction(false);
     }
@@ -46,13 +57,21 @@ export const useUsersCommand = (refresh?: () => void) => {
   const updateUser = async (user: UserUpdate) => {
     try {
       setLoadingAction(true);
+      const confirmed = await confirmation({
+        title: "Actualizar usuario",
+        message: "¿Estás seguro de que deseas actualizar este usuario?",
+      });
+      if (!confirmed.isConfirmed) {
+        return;
+      }
       const response = await updateUserService(fetchData)(user);
       if (refresh) {
         refresh();
       }
+      toast.success("Usuario actualizado correctamente");
       return response;
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setLoadingAction(false);
     }

@@ -10,11 +10,11 @@ function RolesView() {
     <div>
       <Header title="Ver rol" />
 
-      <div className="flex items-center justify-center">
-        <div className="bg-gray-800 p-6 rounded-lg shadow-inner w-full max-w-3xl">
+      <div className="flex items-center justify-center p-5">
+        <div className="bg-white p-6 rounded-lg shadow-inner w-full max-w-3xl">
           <div className="mb-6">
-            <p className="text-xl text-gray-300">
-              <span className="font-semibold text-indigo-400">
+            <p className="text-xl text-gray-800">
+              <span className="font-semibold">
                 Descripción:{" "}
               </span>
               {role?.description || (
@@ -24,8 +24,8 @@ function RolesView() {
           </div>
 
           <div className="mb-6">
-            <p className="text-xl text-gray-300">
-              <span className="font-semibold text-indigo-400">Estado: </span>
+            <p className="text-xl text-gray-800">
+              <span className="font-semibold">Estado: </span>
               {role?.status === "activo" ? (
                 <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-green-100 font-medium">
                   Activo
@@ -39,15 +39,15 @@ function RolesView() {
           </div>
 
           <div>
-            <p className="text-xl font-semibold text-indigo-400 mb-3">
+            <p className="text-xl font-semibold  text-gray-800 mb-3">
               Permisos:
             </p>
             {role?.permissions.length > 0 ? (
               <ul className="space-y-2">
                 {role.permissions.map((permission) => (
                   <li key={permission.id} className="flex items-center">
-                    <span className="flex-shrink-0 inline-block w-4 h-4 bg-indigo-500 rounded-full mr-3"></span>
-                    <span className="text-gray-300">
+                    <span className="flex-shrink-0 inline-block w-4 h-4 bg-gray-500 rounded-full mr-3"></span>
+                    <span className="text-gray-800">
                       {permission.description}
                     </span>
                   </li>

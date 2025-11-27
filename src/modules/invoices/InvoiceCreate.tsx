@@ -3,7 +3,7 @@ import FormInvoice from "./components/FormInvoice";
 import { useInvoiceCommand } from "./hooks/useInvoiceCommand";
 
 function InvoiceCreate() {
-  const { invoice, handleChange, createInvoice, loading, errors } =
+  const { invoice, handleChange, createInvoice, errors } =
     useInvoiceCommand();
 
   const handleCreate = () => {

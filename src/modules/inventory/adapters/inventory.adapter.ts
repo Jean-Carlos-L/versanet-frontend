@@ -4,12 +4,12 @@ import { Inventory } from "@/common/models/Inventory";
 export const inventoryAdapter = (inventory: any): Inventory => {
     return {
         id: inventory.id,
-        referencia: inventory.referencia || inventory.reference || '',  
+        reference: inventory.referencia || inventory.reference || '',  
         mac: inventory.mac || '',  
-        direccion_red: inventory.direccion_red || inventory.ip || '', 
-        tipo_equipo: inventory.tipo_equipo || 'otros',  
-        cantidad: inventory.cantidad || 1,
-        estado: inventory.estado || 'activo', 
+        network_address: inventory.direccion_red || inventory.ip || '', 
+        type: inventory.tipo_equipo || 'otros',  
+        quantity: inventory.cantidad || 1,
+        status: inventory.estado || 'activo', 
         createdAt: inventory.createdAt,
         updatedAt: inventory.updatedAt,
     };

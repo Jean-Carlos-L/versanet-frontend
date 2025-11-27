@@ -8,7 +8,7 @@ function RolesCreate() {
   const [role, setRole] = useState<RoleCreate>({
     permissions: [],
     description: "",
-    status: 1,
+    status: "1"
   });
   const { createRole, loadingAction } = useRolesCommand();
 
@@ -22,7 +22,7 @@ function RolesCreate() {
         setRole({
           permissions: [],
           description: "",
-          status: 1,
+          status: "1",
         });
       });
     }
@@ -31,7 +31,9 @@ function RolesCreate() {
   return (
     <main>
       <Header title="Crear rol" />
-      <FormRole role={role} onChange={handleChange} onSubmit={handleSubmit} />
+      <section className="p-5">
+        <FormRole role={role} onChange={handleChange} onSubmit={handleSubmit} />
+      </section>
     </main>
   );
 }

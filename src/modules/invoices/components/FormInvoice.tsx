@@ -2,14 +2,13 @@ import Button from "@/common/components/Button";
 import Select from "@/common/components/Select";
 import Textfield from "@/common/components/Textfield";
 import { InvoiceCreate, InvoiceUpdate } from "@/common/models/Invoice";
+import { useContractsQuery } from "@/modules/contracts/hooks/useContractsQuery";
 import { useCustomersQuery } from "@/modules/customers/hooks/useCustomersQuery";
 import { useEffect } from "react";
 
 function FormInvoice({ data, onChange, errors, onSubmit }: FormInvoiceProps) {
   const { customers } = useCustomersQuery();
-  const { contracts } = {
-    contracts: [{ id: "CTR001", customerId: "CUST001" }],
-  };
+  const { contracts } = useContractsQuery();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,10 +16,10 @@ function FormInvoice({ data, onChange, errors, onSubmit }: FormInvoiceProps) {
   };
 
   useEffect(() => {
-    if (contracts.length > 0 && !data?.contractId) {
-      console.log("Setting default contractId");
+    if (contracts.length > 0) {
       const contract = contracts.find((c) => c.id === data?.contractId);
-      onChange("customerId", contract?.customerId);
+      onChange("customerId", contract?.customer_id);
+      onChange("amount", contract ? Number(contract.plan.price) : 0);
     }
   }, [contracts, data?.contractId]);
 

@@ -104,7 +104,7 @@ export const useInvoiceCommand = (refresh?: () => void) => {
       const confirmed = await confirmation({
         message: "¿Estás seguro de que deseas eliminar esta factura?",
       });
-      if (!confirmed) return;
+      if (!confirmed.isConfirmed) return;
 
       await deleteInvoiceService(fetchData)(id);
       toast.success("Factura eliminada correctamente");

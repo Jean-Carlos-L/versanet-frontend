@@ -7,6 +7,9 @@ import { useCustomersCommand } from "./hooks/useCustomersCommand";
 import CustomerCreateModal from "./CustomerCreateModal";
 import CustomerEditModal from "./CustomerEditModal";
 import Header from "@/common/components/Header";
+import Textfield from "@/common/components/Textfield";
+import Button from "@/common/components/Button";
+import { Customer } from "@/common/models/Customer";
 
 const HEADERS_TABLE = ["#", "Cédula", "Nombres y apellidos"];
 const ITEMS_PER_PAGE = 10;
@@ -40,14 +43,9 @@ function CustomerListModal() {
   };
 
   const handleDelete = (id: string) => {
-    if (
-      window.confirm("¿Estás seguro de eliminar este cliente?") &&
-      !loadingAction
-    ) {
-      deleteCustomer(id).then(() => {
-        setSelectedCustomer(null);
-      });
-    }
+    deleteCustomer(id).then(() => {
+      setSelectedCustomer(null);
+    });
   };
 
   const filteredCustomers = customers.filter((customer) => {
@@ -66,202 +64,200 @@ function CustomerListModal() {
     indexOfLastItem
   );
 
-  const nextPage = () => {
-    if (currentPage < Math.ceil(filteredCustomers.length / ITEMS_PER_PAGE)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  return (
+    <main>
+      <Header title="Clientes" />
+      <div className="flex flex-col items-center w-full p-5">
+        <section className="w-11/12 flex gap-3">
+          <div className="flex flex-grow flex-col items-center bg-white p-4 rounded-lg shadow-md">
+            <section className="mb-10 w-full">
+              <div className="mb-4 justify-center">
+                <Textfield
+                  label=""
+                  name="search"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  placeholder="Cédula, nombre o correo"
+                />
+              </div>
 
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+              <div className="flex flex-col space-y-2 mb-4">
+                <div className="w-fit">
+                  <Button onClick={openCreateModal} type="button">
+                    Agregar cliente
+                  </Button>
+                </div>
+                {loading && customers.length === 0 ? (
+                  <Spinner />
+                ) : (
+                  <Table
+                    headers={HEADERS_TABLE}
+                    data={currentCustomers.map((customer, index) => (
+                      <TableRow
+                        key={customer.id}
+                        onClick={() => handleSelectCustomer(customer)}
+                      >
+                        <TableCell>{indexOfFirstItem + index + 1}</TableCell>
+                        <TableCell>{customer.document}</TableCell>
+                        <TableCell>{customer.name}</TableCell>
+                      </TableRow>
+                    ))}
+                  />
+                )}
+              </div>
+            </section>
+          </div>
+
+          {selectedCustomer && (
+            <DetailCustomer
+              customer={selectedCustomer}
+              onClose={() => setSelectedCustomer(null)}
+              onEdit={openEditModal}
+              onDelete={handleDelete}
+            />
+          )}
+        </section>
+      </div>
+
+      {isCreateModalOpen && (
+        <CustomerCreateModal
+          isOpen={isCreateModalOpen}
+          onClose={closeCreateModal}
+          onRefresh={refresh}
+        />
+      )}
+
+      {isEditModalOpen && currentCustomerId && (
+        <CustomerEditModal
+          isOpen={isEditModalOpen}
+          onClose={closeEditModal}
+          customerId={currentCustomerId}
+          onRefresh={refresh}
+        />
+      )}
+    </main>
+  );
+}
+
+function DetailCustomer({
+  customer,
+  onClose,
+  onEdit,
+  onDelete,
+}: {
+  customer: Customer;
+  onClose: () => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
+}) {
+  if (!customer) return null;
+
+  const getStatusColor = (status: string) => {
+    switch (status?.toLowerCase()) {
+      case 'activo':
+      case 'active':
+        return 'bg-green-100 text-green-800';
+      case 'inactivo':
+      case 'inactive':
+        return 'bg-gray-100 text-gray-700';
+      case 'suspendido':
+      case 'suspended':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'eliminado':
+      case 'deleted':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-600';
     }
   };
 
   return (
-    <main className="flex w-full h-full flex-col">
-      <Header title="Clientes" />
-      <div className="p-3">
-        <div className="flex justify-between mb-3">
-          <div className="flex-1 flex justify-center mb-3">
-            <input
-              type="text"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              placeholder="Buscar por cédula, nombre o correo"
-              className="border rounded-md px-4 py-2 w-3/4"
-            />
-          </div>
-        </div>
-
-        <div className="flex justify-end mb-5">
-          <div className="flex-shrink-0">
-            <button
-              onClick={openCreateModal}
-              className="bg-green-500 text-white px-4 py-2 rounded-md shadow-md w-40"
-            >
-              Agregar cliente
-            </button>
-          </div>
-        </div>
-
-        <section className="flex w-full h-full space-x-5">
-          <div className="w-full flex flex-col">
-            <div className="flex flex-col w-full text-gray-800">
-              {loading && customers.length === 0 ? (
-                <Spinner />
-              ) : (
-                <Table
-                  headers={HEADERS_TABLE}
-                  data={currentCustomers.map((customer, index) => (
-                    <TableRow
-                      key={customer.id}
-                      onClick={() => handleSelectCustomer(customer)}
-                    >
-                      <TableCell>{indexOfFirstItem + index + 1}</TableCell>
-                      <TableCell>{customer.document}</TableCell>
-                      <TableCell>{customer.name}</TableCell>
-                    </TableRow>
-                  ))}
-                />
-              )}
-            </div>
-
-            <div className="flex justify-center gap-2 my-4">
-              <button onClick={prevPage} disabled={currentPage === 1}>
-                Anterior
-              </button>
-              <span>Página {currentPage}</span>
-              <button
-                onClick={nextPage}
-                disabled={
-                  currentPage >=
-                  Math.ceil(filteredCustomers.length / ITEMS_PER_PAGE)
-                }
-              >
-                Siguiente
-              </button>
-            </div>
-
-            {isCreateModalOpen && (
-              <CustomerCreateModal
-                isOpen={isCreateModalOpen}
-                onClose={closeCreateModal}
-                onRefresh={refresh}
-              />
-            )}
-
-            {isEditModalOpen && currentCustomerId && (
-              <CustomerEditModal
-                isOpen={isEditModalOpen}
-                onClose={closeEditModal}
-                customerId={currentCustomerId}
-                onRefresh={refresh}
-              />
-            )}
-          </div>
-
-          {selectedCustomer ? (
-            <div className="flex-shrin w-1/3">
-              <div className="flex items-center p-4 bg-gray-50 border rounded-md shadow-lg overflow-y-auto">
-                <div className="w-full">
-                  <div className="mb-6">
-                    <p className="text-xl font-semibold text-gray-800">
-                      Cédula:
-                    </p>
-                    <p className="text-gray-800">
-                      {selectedCustomer.document || (
-                        <span className="italic text-gray-500">Sin cédula</span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="mb-6">
-                    <p className="text-xl font-semibold text-gray-800">
-                      Nombres y apellidos:
-                    </p>
-                    <p className="text-gray-800">
-                      {selectedCustomer.name || (
-                        <span className="italic text-gray-500">
-                          Sin nombres y apellidos
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="mb-6">
-                    <p className="text-xl font-semibold text-gray-800">
-                      Correo electrónico:
-                    </p>
-                    <p className="text-gray-800">
-                      {selectedCustomer.email || (
-                        <span className="italic text-gray-500">Sin correo</span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="mb-6">
-                    <p className="text-xl font-semibold text-gray-800">
-                      Teléfono:
-                    </p>
-                    <p className="text-gray-800">
-                      {selectedCustomer.phone || (
-                        <span className="italic text-gray-500">
-                          Sin teléfono
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="mb-6">
-                    <p className="text-xl font-semibold text-gray-800">
-                      Dirección:
-                    </p>
-                    <p className="text-gray-800">
-                      {selectedCustomer.address || (
-                        <span className="italic text-gray-500">
-                          Sin dirección
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="mb-6">
-                    <p className="text-xl font-semibold text-gray-800">
-                      Estado:
-                    </p>
-                    <p className="text-gray-800">
-                      {selectedCustomer.status === "activo" ? (
-                        <span className="inline-block px-3 py-1 rounded-full bg-green-500 text-green-100 font-medium">
-                          Activo
-                        </span>
-                      ) : (
-                        <span className="inline-block px-3 py-1 rounded-full bg-red-500 text-red-100 font-medium">
-                          Inactivo
-                        </span>
-                      )}
-                    </p>
-                  </div>
-
-                  <footer className="flex justify-center gap-2 mt-6 w-full">
-                    <button
-                      onClick={() => {
-                        openEditModal(selectedCustomer.id);
-                        setSelectedCustomer(null);
-                      }}
-                      className="bg-yellow-500 text-white px-4 py-2 rounded-md w-full"
-                    >
-                      <PencilIcon className="h-5 w-5 mx-auto" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(selectedCustomer.id)}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md w-full text-center"
-                    >
-                      <TrashIcon className="h-5 w-5 mx-auto" />
-                    </button>
-                  </footer>
-                </div>
-              </div>
-            </div>
-          ) : null}
-        </section>
+    <aside className="w-1/4 bg-white border-l border-gray-200 shadow-xl z-40 flex flex-col">
+      {/* Header */}
+      <div className="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-gray-900">
+          Detalles del Cliente
+        </h2>
+        <button
+          onClick={onClose}
+          className="text-gray-400 hover:text-gray-600 transition-colors"
+          aria-label="Cerrar panel"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
-    </main>
+
+      {/* Contenido con scroll */}
+      <div className="flex-1 overflow-y-auto px-6 py-6">
+        <dl className="space-y-6 text-sm">
+          <div>
+            <dt className="text-gray-500 font-medium">ID</dt>
+            <dd className="mt-1 text-gray-900 font-mono text-xs sm:text-sm">
+              {customer.id}
+            </dd>
+          </div>
+
+          <div>
+            <dt className="text-gray-500 font-medium">Nombre completo</dt>
+            <dd className="mt-1 text-gray-900 font-semibold text-base">
+              {customer.name || "Sin nombre"}
+            </dd>
+          </div>
+
+          <div>
+            <dt className="text-gray-500 font-medium">Email</dt>
+            <dd className="mt-1 text-gray-900 break-words">
+              {customer.email || "No registrado"}
+            </dd>
+          </div>
+
+          <div>
+            <dt className="text-gray-500 font-medium">Teléfono</dt>
+            <dd className="mt-1 text-gray-900">
+              {customer.phone || "No registrado"}
+            </dd>
+          </div>
+
+          <div>
+            <dt className="text-gray-500 font-medium">Dirección</dt>
+            <dd className="mt-1 text-gray-900">
+              {customer.address || "No registrada"}
+            </dd>
+          </div>
+
+          <div>
+            <dt className="text-gray-500 font-medium">Estado</dt>
+            <dd className="mt-2">
+              <span
+                className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${getStatusColor(
+                  customer.status
+                )}`}
+              >
+                {customer.status || "Desconocido"}
+              </span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      {/* Footer con acciones */}
+         <div className="border-t border-gray-200 px-6 py-4 flex gap-3 justify-end bg-gray-50">
+        <button
+          onClick={() => onEdit(customer.id)}
+          className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+        >
+          <PencilIcon className="h-5 w-5" />
+        </button>
+        <button
+          onClick={() => onDelete(customer.id)}
+          className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+        >
+          <TrashIcon className="h-5 w-5" />
+        </button>
+      </div>
+    </aside>
   );
 }
 

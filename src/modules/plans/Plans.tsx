@@ -11,6 +11,7 @@ import { usePlanCommand } from "./hooks/usePlanCommand";
 import { generatePath } from "@/common/utils/generatePath.util";
 import { ROUTES } from "@/common/routers/routes";
 import { useNavigate } from "react-router-dom";
+import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 const HEADERS_TABLE = [
   "#",
@@ -84,19 +85,19 @@ function Plans() {
                       {formatCurrency({ amount: plan.price })}
                     </TableCell>
                     <TableCell>
-                      <div className="flex gap-2 flex-wrap max-w-[150px] mx-auto">
-                        <Button
-                          type="button"
+                      <div className="flex gap-3 justify-center">
+                        <button
+                          className="hover:shadow-lg hover:bg-gray-100 hover:translate-x-0 hover:rounded-lg p-1"
                           onClick={() => goToEditPlan(plan.id)}
                         >
-                          Editar
-                        </Button>
-                        <Button
-                          type="button"
+                          <PencilIcon className="h-5 w-5" />
+                        </button>
+                        <button
+                          className="hover:shadow-lg hover:bg-gray-100 hover:translate-x-0 hover:rounded-lg p-1"
                           onClick={() => deletePlan(plan.id)}
                         >
-                          Eliminar
-                        </Button>
+                          <TrashIcon className="h-5 w-5" />
+                        </button>
                       </div>
                     </TableCell>
                   </TableRow>
