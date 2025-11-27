@@ -39,7 +39,7 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
    }
 
    return (
-      <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md max-w-xl mx-auto bg-gray-800">
+      <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-md max-w-xl mx-auto bg-white">
          <div className="flex flex-col gap-6">
             <div>
                <Textfield
@@ -69,8 +69,8 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
                />
             </div> */}
 
-            <div className="border-t border-gray-200 pt-4">
-               <h3 className="text-lg font-semibold text-gray-100 mb-2">Permisos</h3>
+            <div className="border-t border-gray-200 pt-4 text-gray-800">
+               <h3 className="text-lg font-semibold text-gray-800 mb-2">Permisos</h3>
                {permissions.map((permission) => (
                   <div key={permission.id} className="flex items-center gap-3 mb-2">
                      <Checkbox
@@ -84,7 +84,7 @@ function FormRole({ role, loading, onSubmit, onChange }: FormRoleProps) {
             </div>
 
             <div className="mt-4">
-               <Button type="submit" theme="light">
+               <Button type="submit">
                   Guardar
                </Button>
             </div>

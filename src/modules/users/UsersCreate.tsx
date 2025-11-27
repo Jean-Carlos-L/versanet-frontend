@@ -36,12 +36,14 @@ function UsersCreate() {
     <main>
       <Header title="Crear usuario" />
 
-      <FormUser
-        user={user}
-        loading={loadingAction}
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-      />
+      <section className="p-5">
+        <FormUser
+          user={user}
+          loading={loadingAction}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+      </section>
     </main>
   );
 }

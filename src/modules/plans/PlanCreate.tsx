@@ -17,7 +17,7 @@ function PlanCreate() {
     <main>
       <Header title="Crear Plan" />
 
-      <form className="w-6/12 bg-white p-4 rounded-lg shadow-md mx-auto" onSubmit={handleSubmit}>
+      <form className="w-6/12 bg-white p-4 mt-5 rounded-lg shadow-md mx-auto" onSubmit={handleSubmit}>
         <Textfield
           label="Descripción"
           name="description"

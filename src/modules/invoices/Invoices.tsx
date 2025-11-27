@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/common/routers/routes";
 import { useInvoiceCommand } from "./hooks/useInvoiceCommand";
 import { generatePath } from "@/common/utils/generatePath.util";
+import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 const HEADERS_TABLE = [
   "#",
@@ -46,7 +47,7 @@ function Invoices() {
   return (
     <main>
       <Header title="Facturación" />
-      <div className="flex flex-col items-center w-full">
+      <div className="flex flex-col items-center w-full p-5">
         <section className="w-11/12 bg-white p-4 rounded-lg shadow-md">
           <div className="flex gap-4 mb-4 justify-center">
             <Textfield
@@ -109,19 +110,19 @@ function Invoices() {
 
                     <TableCell>{invoice.status}</TableCell>
                     <TableCell>
-                      <div className="flex gap-2 flex-wrap max-w-[150px] mx-auto">
-                        <Button
-                          type="button"
+                      <div className="flex gap-3 justify-center">
+                        <button
+                          className="hover:shadow-lg hover:bg-gray-100 hover:translate-x-0 hover:rounded-lg p-1"
                           onClick={() => redirectToEditInvoice(invoice.id)}
                         >
-                          Editar
-                        </Button>
-                        <Button
-                          type="button"
+                          <PencilIcon className="h-5 w-5" />
+                        </button>
+                        <button
+                          className="hover:shadow-lg hover:bg-gray-100 hover:translate-x-0 hover:rounded-lg p-1"
                           onClick={() => deleteInvoice(invoice.id)}
                         >
-                          Eliminar
-                        </Button>
+                          <TrashIcon className="h-5 w-5" />
+                        </button>
                       </div>
                     </TableCell>
                   </TableRow>

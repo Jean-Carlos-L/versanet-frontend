@@ -1,60 +1,37 @@
-import { useEffect, useState } from "react";
-import Modal from "@/common/components/Modal";
+import { useEffect } from "react";
 import FormInventory from "./components/FormInventory";
-import { InventoryUpdate } from "@/common/models/Inventory";
 import { useInventoryCommand } from "./hooks/useInventoryCommand";
-import { useInventoryById } from "./hooks/useInventoryById";
+import { useParams } from "react-router-dom";
+import Header from "@/common/components/Header";
 
-function EditInventory({ isOpen, onClose, inventoryId, onRefresh }) {
-    const { inventory} = useInventoryById(inventoryId);
-    const { updateInventory, loadingAction } = useInventoryCommand();
-    const [inventoryUpdate, setInventoryUpdate] = useState<InventoryUpdate>({
-        id: "",
-        reference: "",
-        mac: "",
-        network_address: "",
-        type: "",
-        quantity: 0,
-        status: "inactive",
-    });
-    useEffect(() => {
-        if (inventory) {
-            setInventoryUpdate({
-                id: inventory.id,
-                reference: inventory.reference,
-                mac: inventory.mac,
-                network_address: inventory.network_address,
-                type: inventory.type,
-                quantity: inventory.quantity,
-                status: inventory.status === "active" ? "active" : "inactive",
-            });
-        }
-    }, [inventory]);
+function InventoryUpdate() {
+  const { id } = useParams<{ id: string }>();
+  const { inventory, updateInventory, getInventory, handleChange, errors } =
+    useInventoryCommand();
 
-    const handleChange = (updatedInventory: InventoryUpdate) => {
-        setInventoryUpdate(updatedInventory);
-        onRefresh();
-    };
+  const handleSubmit = () => {
+    updateInventory();
+  };
 
-    const handleSubmit = () => {
-        if (!loadingAction) {
-            updateInventory(inventoryUpdate);
-            onRefresh();
-            onClose();
-        }
-    };
+  useEffect(() => {
+    if (id) {
+      getInventory(id);
+    }
+  }, [id]);
 
-    return (
-        <Modal isOpen={isOpen} onClose={onClose}>
-            <h2>Editar Inventario</h2>
-            <FormInventory
-                inventory={inventoryUpdate}
-                onChange={handleChange}
-                onSubmit={handleSubmit}
-            />
-        </Modal>
-    );
-    
+  return (
+    <main>
+      <Header title="Editar Inventario" />
+      <section>
+        <FormInventory
+          data={inventory}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          errors={errors}
+        />
+      </section>
+    </main>
+  );
 }
 
-export default EditInventory;
+export default InventoryUpdate;

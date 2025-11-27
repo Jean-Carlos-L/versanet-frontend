@@ -27,7 +27,7 @@ function PlanEdit() {
       <Header title="Editar Plan" />
 
       <form
-        className="w-6/12 bg-white p-4 rounded-lg shadow-md mx-auto"
+        className="w-6/12 bg-white p-4 mt-5 rounded-lg shadow-md mx-auto"
         onSubmit={handleSubmit}
       >
         <Textfield

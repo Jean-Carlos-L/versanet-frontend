@@ -15,7 +15,7 @@ export const useFiltersContracts = () => {
   const [filters, setFilters] = useState<FiltersContracts>({
     page: 1,
     pageSize: 10,
-    estado: 'activo', // Default
+    estado: '', // Default
     plan: "",
     customer: "",
     customer_document: "",

@@ -48,39 +48,6 @@ function Sidebar() {
             label="Clientes"
           />
           <LinkComponent
-            to={ROUTES.INVOICES}
-            code={PERMISSIONS.INVOICES}
-            icon={
-              <DocumentCurrencyDollarIcon className="h-6 w-6 inline-block mb-1 mr-1" />
-            }
-            label="Facturación"
-          />
-          {/*  <LinkComponent
-            to={ROUTES.CONTRATS}
-            code={PERMISSIONS.CONTRATS}
-            icon={
-              <ClipboardDocumentCheckIcon className="h-6 w-6 inline-block mb-1 mr-1" />
-            }
-            label="Contratos"
-          />
-
-          <LinkComponent
-            to={ROUTES.PLANS}
-            code={PERMISSIONS.PLANS}
-            icon={<ListBulletIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
-            label="Planes"
-          />
-
-          <LinkComponent
-            to={ROUTES.FACTURATION}
-            code={PERMISSIONS.FACTURATION}
-            icon={
-              <DocumentCurrencyDollarIcon className="h-6 w-6 inline-block mb-1 mr-1" />
-            }
-            label="Facturación"
-          />
-
-          <LinkComponent
             to={ROUTES.INVENTORY}
             code={PERMISSIONS.INVENTORY}
             icon={
@@ -88,8 +55,24 @@ function Sidebar() {
             }
             label="Inventario"
           />
-
           <LinkComponent
+            to={ROUTES.CONTRACTS}
+            code={PERMISSIONS.CONTRACTS}
+            icon={
+              <ClipboardDocumentCheckIcon className="h-6 w-6 inline-block mb-1 mr-1" />
+            }
+            label="Contratos"
+          />
+          <LinkComponent
+            to={ROUTES.INVOICES}
+            code={PERMISSIONS.INVOICES}
+            icon={
+              <DocumentCurrencyDollarIcon className="h-6 w-6 inline-block mb-1 mr-1" />
+            }
+            label="Facturación"
+          />
+
+          {/* <LinkComponent
             to={ROUTES.HISTORY}
             code={PERMISSIONS.HISTORY}
             icon={<ClockIcon className="h-6 w-6 inline-block mb-1 mr-1" />}

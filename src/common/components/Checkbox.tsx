@@ -4,7 +4,7 @@ function Checkbox(props: CheckboxProps) {
    return (
       <div className="form-control">
          <label className="label cursor-pointer">
-            <span className="label-text mr-2">{label}</span>
+            <span className="label-text mr-2 text-gray-800">{label}</span>
             <input type="checkbox" checked={checked} className="checkbox" onChange={onChange} value={value} />
          </label>
       </div>
