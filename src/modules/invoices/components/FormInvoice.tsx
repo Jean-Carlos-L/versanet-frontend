@@ -73,6 +73,21 @@ function FormInvoice({ data, onChange, errors, onSubmit }: FormInvoiceProps) {
         placeholder="Monto de la factura"
       />
 
+      {data && "id" in data && (
+        <Select
+          label="Estado"
+          value={data?.status || ""}
+          onChange={(e) => onChange("status", e.target.value)}
+          error={errors.status}
+          name="status"
+          options={[
+            { label: "Pendiente", value: "pendiente" },
+            { label: "Pagada", value: "pagada" },
+            { label: "Cancelada", value: "cancelada" },
+          ]}
+        />
+      )}
+
       <div className="mt-10">
         <Button type="submit">Guardar</Button>
       </div>

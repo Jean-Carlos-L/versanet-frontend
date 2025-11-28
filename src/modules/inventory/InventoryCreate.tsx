@@ -11,7 +11,7 @@ function InventoryCreate() {
   return (
     <main>
       <Header title="Crear Inventario" />
-      <section>
+      <section className="p-5">
         <FormInventory
           data={inventory}
           onChange={handleChange}

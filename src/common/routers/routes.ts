@@ -37,7 +37,6 @@ export const ROUTES = {
 
   DASHBOARD: "/control-panel",
   CUSTOMERS: "/customers",
-  FACTURATION: "/facturation",
 
   CONTRACTS: "/contracts",
   CONTRACTS_CREATE: "/contracts/create",
@@ -48,6 +47,8 @@ export const ROUTES = {
   TRAFICO: "/trafico",
 
 
+
+
   INVENTORY: "/inventory",
   INVENTORY_CREATE: "/inventory/create",
   INVENTORY_EDIT: "/inventory/edit/:id",
@@ -55,4 +56,8 @@ export const ROUTES = {
   INVOICES: "/invoices",
   INVOICES_CREATE: "/invoices/create",
   INVOICES_EDIT: "/invoices/edit/:id",
+
+  PAYMENTS: "/payments/:invoiceId",
+  PAYMENTS_CREATE: "/payments/:invoiceId/create",
+  PAYMENTS_EDIT: "/payments/:invoiceId/edit/:id",
 };

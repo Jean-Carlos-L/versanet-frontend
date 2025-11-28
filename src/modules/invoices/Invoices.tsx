@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/common/routers/routes";
 import { useInvoiceCommand } from "./hooks/useInvoiceCommand";
 import { generatePath } from "@/common/utils/generatePath.util";
-import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { CurrencyDollarIcon, PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 const HEADERS_TABLE = [
   "#",
@@ -43,6 +43,11 @@ function Invoices() {
     const path = generatePath(ROUTES.INVOICES_EDIT, { id });
     navigate(path);
   };
+
+  const redirectToPayments = (id: string) => {
+    const path = generatePath(ROUTES.PAYMENTS, { invoiceId: id });
+    navigate(path);
+  }
 
   return (
     <main>
@@ -116,6 +121,12 @@ function Invoices() {
                           onClick={() => redirectToEditInvoice(invoice.id)}
                         >
                           <PencilIcon className="h-5 w-5" />
+                        </button>
+                           <button
+                          className="hover:shadow-lg hover:bg-gray-100 hover:translate-x-0 hover:rounded-lg p-1"
+                          onClick={() => redirectToPayments(invoice.id)}
+                        >
+                          <CurrencyDollarIcon className="h-5 w-5" />
                         </button>
                         <button
                           className="hover:shadow-lg hover:bg-gray-100 hover:translate-x-0 hover:rounded-lg p-1"

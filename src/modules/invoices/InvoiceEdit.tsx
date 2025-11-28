@@ -22,7 +22,7 @@ function InvoiceEdit() {
   return (
     <main>
       <Header title="Editar Factura" />
-      <section>
+      <section className="p-5">
         <FormInvoice
           data={invoice}
           onChange={handleChange}

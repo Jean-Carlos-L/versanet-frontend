@@ -22,7 +22,7 @@ function InventoryUpdate() {
   return (
     <main>
       <Header title="Editar Inventario" />
-      <section>
+      <section className="p-5">
         <FormInventory
           data={inventory}
           onChange={handleChange}
