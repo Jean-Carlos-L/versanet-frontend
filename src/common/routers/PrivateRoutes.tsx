@@ -7,7 +7,6 @@ import Plans from "@/modules/plans/Plans";
 import ContractList from "@/modules/contracts/ContractList";
 import Configuration from "@/modules/configuration/Configuration";
 import CustomerListModal from "@/modules/customers/CustomerList";
-import StatsList from "@/modules/stats/stats";
 import UsersList from "@/modules/users/UsersList";
 import UsersCreate from "@/modules/users/UsersCreate";
 import RolesList from "@/modules/roles/RolesList";
@@ -30,12 +29,13 @@ import ContractCreate from "@/modules/contracts/ContractCreate";
 import Payments from "@/modules/payments/Payments";
 import PaymentCreate from "@/modules/payments/PaymentCreate";
 import PaymentUpdate from "@/modules/payments/PaymentEdit";
+import Dashboard from "@/modules/dashboard/Dashboard";
 
 function PrivateRoutes() {
   return (
     <Routes>
       <Route path="/" element={<RequiredAuth />}>
-        <Route path={ROUTES.DASHBOARD} element={<StatsList />} />
+        <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
         <Route path={ROUTES.INVENTORY} element={<InventoryList />} />
         <Route path={ROUTES.INVENTORY_CREATE} element={<InventoryCreate />} />
