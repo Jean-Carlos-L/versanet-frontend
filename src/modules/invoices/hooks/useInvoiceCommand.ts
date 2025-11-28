@@ -86,6 +86,7 @@ export const useInvoiceCommand = (refresh?: () => void) => {
         customerId: invoice.customerId,
         contractId: invoice.contractId,
         amount: invoice.amount,
+        status: invoice.status,
       };
 
       await updateInvoiceService(fetchData)(invoice.id, payload);

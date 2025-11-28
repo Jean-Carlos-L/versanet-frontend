@@ -27,6 +27,9 @@ import InventoryCreate from "@/modules/inventory/InventoryCreate";
 import InventoryUpdate from "@/modules/inventory/InventoryEdit";
 import ContractUpdate from "@/modules/contracts/ContractEdit";
 import ContractCreate from "@/modules/contracts/ContractCreate";
+import Payments from "@/modules/payments/Payments";
+import PaymentCreate from "@/modules/payments/PaymentCreate";
+import PaymentUpdate from "@/modules/payments/PaymentEdit";
 
 function PrivateRoutes() {
   return (
@@ -43,6 +46,9 @@ function PrivateRoutes() {
         <Route path={ROUTES.INVOICES} element={<Invoices />} />
         <Route path={ROUTES.INVOICES_CREATE} element={<InvoiceCreate />} />
         <Route path={ROUTES.INVOICES_EDIT} element={<InvoiceEdit />} />
+        <Route path={ROUTES.PAYMENTS} element={<Payments />} />
+        <Route path={ROUTES.PAYMENTS_CREATE} element={<PaymentCreate />} />
+        <Route path={ROUTES.PAYMENTS_EDIT} element={<PaymentUpdate />} />
         <Route path={ROUTES.TRAFICO} element={<TraficoList />} />
         <Route path={ROUTES.CONFIGURATION} element={<Configuration />} />
         <Route path={ROUTES.PLANS} element={<Plans />} />

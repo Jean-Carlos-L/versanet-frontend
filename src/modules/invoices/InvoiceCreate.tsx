@@ -13,7 +13,7 @@ function InvoiceCreate() {
   return (
     <main>
       <Header title="Crear Factura" />
-      <section>
+      <section className="p-5">
         <FormInvoice
           data={invoice}
           onChange={handleChange}

@@ -1,7 +1,33 @@
+export interface Payment {
+  id: string;
+  invoiceId: string;
+  amount: number;
+  paymentDate: string;
+  method: string;
+  status: string;
+  invoice?: {
+    id: string;
+    customerId: string;
+    contractId: string;
+    totalAmount: number;
+    dueDate: string;
+    status: string;
+  }
+}
+
 export interface PaymentCreate {
-  invoice_id: string;
-  customer_id: string;
-  methodPaid: string;
-  date: string;
-  amountPaid: number;
+  invoiceId: string;
+  amount: number;
+  paymentDate: string;
+  method: string;
+  status: string;
+}
+
+export interface PaymentUpdate {
+  id?: string;
+  invoiceId?: string;
+  amount?: number;
+  paymentDate?: string;
+  method?: string;
+  status?: string;
 }
