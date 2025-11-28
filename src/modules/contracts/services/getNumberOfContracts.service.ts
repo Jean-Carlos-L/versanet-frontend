@@ -1,7 +1,6 @@
 import { FetchData } from "@/common/hooks/useFetch";
-import { FiltersPlansCustomers } from "@/modules/plansCustomers/hooks/useFilters";
-
-export const getNumberOfContractsService = (fetch: FetchData) => async (filters: FiltersPlansCustomers): Promise<number> => {
+import { FiltersContracts } from "../hooks/useFiltersContracts";
+export const getNumberOfContractsService = (fetch: FetchData) => async (filters: FiltersContracts): Promise<number> => {
    try {
       const searchParams = new URLSearchParams(Object.entries(filters)).toString();
       const response = await fetch<void, any>({ url: `/api/contracts/count?${searchParams}` });

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFilters } from "./hooks/useFilters";
 import Spinner from "@/common/components/Spinner";
 import { TrashIcon, PencilIcon, EyeIcon } from "@heroicons/react/20/solid";
@@ -7,7 +7,9 @@ import Pagination from "@/common/components/Pagination";
 import Header from "@/common/components/Header";
 import { useInventoryQuery } from "./hooks/useInventoryQuery";
 import { useInventoryCommand } from "./hooks/useInventoryCommand";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useMatch, useParams } from "react-router-dom";
+import InventoryCreateModal from "./InventoryCreateModal";
+import InventoryEditModal from "./InventoryEditModal";
 import { ROUTES } from "@/common/routers/routes";
 import { generatePath } from "@/common/utils/generatePath.util";
 import Button from "@/common/components/Button";
@@ -32,14 +34,39 @@ function InventoryList() {
 
   const [selectInventory, setSelectInventory] = useState(null);
 
-  const redirectToCreate = () => {
-    navigate(ROUTES.INVENTORY_CREATE);
+  const matchCreate = useMatch(ROUTES.INVENTORY_CREATE);
+  const matchEdit = useMatch(ROUTES.INVENTORY_EDIT);
+  const params = useParams<{ id?: string }>();
+
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const openCreateModal = () => setIsCreateModalOpen(true);
+  const closeCreateModal = () => {
+    setIsCreateModalOpen(false);
+    if (matchCreate) navigate(ROUTES.INVENTORY);
   };
 
-  const redirectToEdit = (id: string) => {
-    const path = generatePath(ROUTES.INVENTORY_EDIT, { id });
-    navigate(path);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingInventoryId, setEditingInventoryId] = useState<string | null>(null);
+  const openEditModal = (id: string) => {
+    setEditingInventoryId(id);
+    setIsEditModalOpen(true);
   };
+  const closeEditModal = () => {
+    setEditingInventoryId(null);
+    setIsEditModalOpen(false);
+    if (matchEdit) navigate(ROUTES.INVENTORY);
+  };
+
+  // Open modals when route matches direct URL (modal-first route compatibility)
+  useEffect(() => {
+    if (matchCreate) openCreateModal();
+    if (matchEdit && params.id) openEditModal(params.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matchCreate, matchEdit, params.id]);
+
+  const redirectToCreate = () => openCreateModal();
+
+  const redirectToEdit = (id: string) => openEditModal(id);
 
   return (
     <main>
@@ -143,6 +170,8 @@ function InventoryList() {
             isOpen={!!selectInventory}
             onClose={() => setSelectInventory(null)}
           />
+          <InventoryCreateModal isOpen={isCreateModalOpen} onClose={closeCreateModal} onRefresh={refresh} />
+          <InventoryEditModal isOpen={isEditModalOpen} onClose={closeEditModal} inventoryId={editingInventoryId || undefined} onRefresh={refresh} />
         </section>
       </div>
     </main>

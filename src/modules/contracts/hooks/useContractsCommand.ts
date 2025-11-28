@@ -69,16 +69,18 @@ export const useContractsCommand = (refresh?: () => void) => {
     }
   };
 
-  const createContract = async () => {
+  const createContract = async (payloadParam?: ContractCreate) => {
     try {
       setLoadingAction(true);
-      const payload: ContractCreate = {
-        customer_id: (contract as ContractCreate).customer_id,
-        plan_id: (contract as ContractCreate).plan_id,
-        start_date: (contract as ContractCreate).start_date,
-        end_date: (contract as ContractCreate).end_date,
-        inventory_id: (contract as ContractCreate).inventory_id,
-      };
+      const payload: ContractCreate = payloadParam
+        ? payloadParam
+        : {
+            customer_id: (contract as ContractCreate).customer_id,
+            plan_id: (contract as ContractCreate).plan_id,
+            start_date: (contract as ContractCreate).start_date,
+            end_date: (contract as ContractCreate).end_date,
+            inventory_id: (contract as ContractCreate).inventory_id,
+          };
 
       const response = await createContractService(fetchData)(payload);
       if (refresh) refresh();
@@ -93,17 +95,19 @@ export const useContractsCommand = (refresh?: () => void) => {
     }
   };
 
-  const updateContract = async () => {
+  const updateContract = async (payloadParam?: ContractUpdate) => {
     try {
       setLoadingAction(true);
-      const payload: ContractUpdate = {
-        id: (contract as ContractUpdate).id,
-        customer_id: (contract as ContractUpdate).customer_id,
-        plan_id: (contract as ContractUpdate).plan_id,
-        start_date: (contract as ContractUpdate).start_date,
-        end_date: (contract as ContractUpdate).end_date,
-        inventory_id: (contract as ContractUpdate).inventory_id,
-      };
+      const payload: ContractUpdate = payloadParam
+        ? payloadParam
+        : {
+            id: (contract as ContractUpdate).id,
+            customer_id: (contract as ContractUpdate).customer_id,
+            plan_id: (contract as ContractUpdate).plan_id,
+            start_date: (contract as ContractUpdate).start_date,
+            end_date: (contract as ContractUpdate).end_date,
+            inventory_id: (contract as ContractUpdate).inventory_id,
+          };
       const response = await updateContractService(fetchData)(payload);
       if (refresh) refresh();
       toast.success("Contrato actualizado exitosamente");

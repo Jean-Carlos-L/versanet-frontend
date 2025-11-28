@@ -37,7 +37,7 @@ function FormInventory({
           value={data?.reference}
           placeholder="Referencia del producto"
           onChange={handleChangeText}
-          error={errors.reference}
+          error={errors?.reference}
         />
 
         <Select
@@ -46,7 +46,7 @@ function FormInventory({
           options={TYPES_DEVICES}
           value={data?.type}
           onChange={handleChangeText}
-          error={errors.type}
+          error={errors?.type}
         />
 
         <Textfield
@@ -55,7 +55,7 @@ function FormInventory({
           value={data?.network_address || ""}
           placeholder="Dirección de red del producto"
           onChange={handleChangeText}
-          error={errors.network_address}
+          error={errors?.network_address}
         />
         <Textfield
           label="Cantidad"
@@ -64,7 +64,7 @@ function FormInventory({
           value={data?.quantity?.toString() || ""}
           placeholder="Cantidad de items"
           onChange={handleChangeText}
-          error={errors.quantity}
+          error={errors?.quantity}
         />
         <Select
           label="Estado"
@@ -76,7 +76,7 @@ function FormInventory({
           ]}
           value={data?.status}
           onChange={handleChangeText}
-          error={errors.status}
+          error={errors?.status}
         />
 
         <div className="flex justify-end mt-10">

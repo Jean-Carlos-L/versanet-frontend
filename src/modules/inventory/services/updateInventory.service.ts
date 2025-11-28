@@ -1,10 +1,10 @@
 import { FetchData } from "@/common/hooks/useFetch";
 import { InventoryUpdate } from "@/common/models/Inventory";
 
-export const updateInventoryService = (fetch: FetchData) => async (id: string, inventory: InventoryUpdate) => {
+export const updateInventoryService = (fetch: FetchData) => async (inventory: InventoryUpdate) => {
     try{
         const response = await fetch({
-            url: `/api/inventory/${id}`,
+            url: `/api/inventory/${inventory.id}`,
             method: "put",
             body: inventory
         });

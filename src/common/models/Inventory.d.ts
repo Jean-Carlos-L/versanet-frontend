@@ -19,11 +19,6 @@ export interface InventoryCreate {
   status: "activo" | "inactivo" | "mantenimiento";
 }
 
-export interface InventoryUpdate {
-  reference?: string;
-  mac?: string;
-  network_address?: string;
-  type?: string;
-  quantity?: number;
-  status?: "activo" | "inactivo" | "mantenimiento";
+export interface InventoryUpdate extends InventoryCreate {
+    id: string;
 }

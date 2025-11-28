@@ -55,4 +55,6 @@ export const ROUTES = {
   INVOICES: "/invoices",
   INVOICES_CREATE: "/invoices/create",
   INVOICES_EDIT: "/invoices/edit/:id",
+
+  LOGS: "/logs"
 };

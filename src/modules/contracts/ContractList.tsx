@@ -19,6 +19,8 @@ import { generatePath } from "@/common/utils/generatePath.util";
 import { ROUTES } from "@/common/routers/routes";
 import { useNavigate } from "react-router-dom";
 import Select from "@/common/components/Select";
+import ContractCreateModal from "./ContractCreateModal";
+import ContractEditModal from "./ContractEditModal";
 
 const HEADERS_TABLE = [
   "#",
@@ -31,20 +33,35 @@ const HEADERS_TABLE = [
 ];
 
 function ContractList() {
-  const navigate = useNavigate();
   const { filters, handleChange } = useFiltersContracts();
   const { contracts, loading, total, refresh } = useContractsQuery(filters);
   const { toggleContractStatus, deleteContract } = useContractsCommand(refresh);
   const [selectedContract, setSelectedContract] = useState<Contract | null>(
     null
   );
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const openCreateModal = () => setIsCreateModalOpen(true);
+  const closeCreateModal = () => setIsCreateModalOpen(false);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingContractId, setEditingContractId] = useState<string | null>(null);
+  const openEditModal = (id: string) => {
+    setEditingContractId(id);
+    setIsEditModalOpen(true);
+  };
+  const closeEditModal = () => {
+    setEditingContractId(null);
+    setIsEditModalOpen(false);
+  };
 
   const debouncedFilterChange = (key: keyof typeof filters, value: string) => {
     handleChange(key, value);
   };
 
   const redirectToCreate = () => {
-    navigate(ROUTES.CONTRACTS_CREATE);
+    // keep route available but prefer modal
+    // navigate(ROUTES.CONTRACTS_CREATE);
+    openCreateModal();
   };
 
   return (
@@ -193,8 +210,11 @@ function ContractList() {
               contract={selectedContract}
               onClose={() => setSelectedContract(null)}
               onDelete={deleteContract}
+              onEdit={(id: string) => openEditModal(id)}
             />
           )}
+          <ContractCreateModal isOpen={isCreateModalOpen} onClose={closeCreateModal} onRefresh={refresh} />
+          <ContractEditModal isOpen={isEditModalOpen} onClose={closeEditModal} contractId={editingContractId} onRefresh={refresh} />
         </section>
       </div>
     </main>
@@ -205,10 +225,12 @@ function DetailContract({
   contract,
   onClose,
   onDelete,
+  onEdit,
 }: {
   contract: Contract;
   onClose: () => void;
   onDelete: (id: string) => any;
+  onEdit?: (id: string) => void;
 }) {
   if (!contract) return null;
   const navigate = useNavigate();
@@ -220,6 +242,7 @@ function DetailContract({
   };
 
   const redirectToEdit = () => {
+    if (onEdit) return onEdit(contract.id);
     const path = generatePath(ROUTES.CONTRACTS_EDIT, { id: contract.id });
     navigate(path);
   };

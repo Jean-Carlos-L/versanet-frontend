@@ -23,10 +23,7 @@ import PlanEdit from "@/modules/plans/PlanEdit";
 import Invoices from "@/modules/invoices/Invoices";
 import InvoiceCreate from "@/modules/invoices/InvoiceCreate";
 import InvoiceEdit from "@/modules/invoices/InvoiceEdit";
-import InventoryCreate from "@/modules/inventory/InventoryCreate";
-import InventoryUpdate from "@/modules/inventory/InventoryEdit";
-import ContractUpdate from "@/modules/contracts/ContractEdit";
-import ContractCreate from "@/modules/contracts/ContractCreate";
+import ActivityLogList from "@/modules/activityLog/components/ActivityLogList";
 
 function PrivateRoutes() {
   return (
@@ -35,11 +32,9 @@ function PrivateRoutes() {
         <Route path={ROUTES.DASHBOARD} element={<StatsList />} />
         <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
         <Route path={ROUTES.INVENTORY} element={<InventoryList />} />
-        <Route path={ROUTES.INVENTORY_CREATE} element={<InventoryCreate />} />
-        <Route path={ROUTES.INVENTORY_EDIT} element={<InventoryUpdate />} />
+        <Route path={ROUTES.INVENTORY_CREATE} element={<InventoryList />} />
+        <Route path={ROUTES.INVENTORY_EDIT} element={<InventoryList />} />
         <Route path={ROUTES.CONTRACTS} element={<ContractList />} />
-        <Route path={ROUTES.CONTRACTS_CREATE} element={<ContractCreate />} />
-        <Route path={ROUTES.CONTRACTS_EDIT} element={<ContractUpdate />} />
         <Route path={ROUTES.INVOICES} element={<Invoices />} />
         <Route path={ROUTES.INVOICES_CREATE} element={<InvoiceCreate />} />
         <Route path={ROUTES.INVOICES_EDIT} element={<InvoiceEdit />} />
@@ -56,6 +51,7 @@ function PrivateRoutes() {
         <Route path={ROUTES.PLANS_CREATE} element={<PlanCreate />} />
         <Route path={ROUTES.PLANS_EDIT} element={<PlanEdit />} />
         <Route path={ROUTES.HISTORY} element={<History />} />
+        <Route path={ROUTES.LOGS} element={<ActivityLogList />} />
       </Route>
     </Routes>
   );

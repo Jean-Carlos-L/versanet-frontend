@@ -80,51 +80,47 @@ export const useInventoryCommand = (refresh?: () => void) => {
     }
   };
 
-  const createInventory = async () => {
+  const createInventory = async (payloadParam?: InventoryCreate) => {
     try {
       setLoading(true);
-      if (!validations()) return;
+      const payload: InventoryCreate = payloadParam
+        ? payloadParam
+        : {
+            reference: (inventory as InventoryCreate).reference,
+            mac: (inventory as InventoryCreate).mac,
+            network_address: (inventory as InventoryCreate).network_address,
+            type: (inventory as InventoryCreate).type,
+            quantity: Number((inventory as InventoryCreate).quantity),
+            status: (inventory as InventoryCreate).status,
+          };
 
-      const payload: InventoryCreate = {
-        reference: (inventory as InventoryCreate).reference,
-        mac: (inventory as InventoryCreate).mac,
-        network_address: (inventory as InventoryCreate).network_address,
-        type: (inventory as InventoryCreate).type,
-        quantity: Number((inventory as InventoryCreate).quantity),
-        status: (inventory as InventoryCreate).status,
-      };
+      if (!validations(payload)) return;
 
       await createInventoryService(fetchData)(payload);
       if (refresh) refresh();
       toast.success("Inventario creado correctamente");
       resetForm();
       return true;
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  const updateInventory = async () => {
+  const updateInventory = async (inventory: InventoryUpdate) => {
     try {
       setLoading(true);
-      if (!validations() || !inventory || !("id" in inventory)) return;
-
-      const payload: InventoryUpdate = {
-        reference: (inventory as InventoryUpdate).reference,
-        mac: (inventory as InventoryUpdate).mac,
-        network_address: (inventory as InventoryUpdate).network_address,
-        type: (inventory as InventoryUpdate).type,
-        quantity: (inventory as InventoryUpdate).quantity,
-        status: (inventory as InventoryUpdate).status,
-      };
-
-      await updateInventoryService(fetchData)(inventory.id, payload);
+      const confirmed = await confirmation({
+        title: "Actualizar inventario",
+        message: "¿Estás seguro de que deseas actualizar este inventario?",
+      });
+      if (!confirmed.isConfirmed) return;
+      await updateInventoryService(fetchData)(inventory);
       if (refresh) refresh();
       toast.success("Inventario actualizado correctamente");
       return true;
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -143,30 +139,31 @@ export const useInventoryCommand = (refresh?: () => void) => {
     }
   };
 
-  const validations = () => {
+  const validations = (inv?: InventoryCreate | InventoryUpdate) => {
+    const target = inv ? inv : inventory;
     const errors: { [key: string]: string } = {};
     const typeDeviceValues = TYPES_DEVICES.map((type) => type.value);
 
-    if (!inventory.reference) {
+    if (!target || !("reference" in target) || !target.reference) {
       errors.reference = "El campo referencia es requerido";
     }
 
-    if (inventory?.type && !typeDeviceValues.includes(inventory.type)) {
+    if (target && "type" in target && target.type && !typeDeviceValues.includes(target.type)) {
       errors.type = "El tipo de equipo no es válido";
     }
 
-    if (!inventory.type) {
+    if (!target || !("type" in target) || !target.type) {
       errors.type = "El campo tipo de equipo es requerido";
     }
 
-    if (!inventory.network_address) {
+    if (!target || !("network_address" in target) || !target.network_address) {
       errors.network_address = "El campo dirección de red es requerido";
     }
 
-    if (!inventory.quantity || inventory.quantity < 1) {
+    if (!target || !("quantity" in target) || !target.quantity || target.quantity < 1) {
       errors.quantity = "La cantidad debe ser al menos 1";
     }
-    if (!inventory.status) {
+    if (!target || !("status" in target) || !target.status) {
       errors.status = "El campo estado es requerido";
     }
 
