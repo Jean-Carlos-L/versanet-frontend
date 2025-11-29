@@ -15,6 +15,7 @@ import RolesEdit from "@/modules/roles/RolesEdit";
 import RolesView from "@/modules/roles/RolesView";
 import History from "@/modules/history/History";
 import InventoryList from "@/modules/inventory/InventoryList";
+import ActivityLogList from "@/modules/activityLog/components/ActivityLogList";
 import TraficoList from "@/modules/stats/trafico";
 import UsersEdit from "@/modules/users/UsersEdit";
 import PlanCreate from "@/modules/plans/PlanCreate";
@@ -38,6 +39,7 @@ function PrivateRoutes() {
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.CUSTOMERS} element={<CustomerListModal />} />
         <Route path={ROUTES.INVENTORY} element={<InventoryList />} />
+        <Route path={ROUTES.ACTIVITY_LOGS} element={<ActivityLogList />} />
         <Route path={ROUTES.INVENTORY_CREATE} element={<InventoryCreate />} />
         <Route path={ROUTES.INVENTORY_EDIT} element={<InventoryUpdate />} />
         <Route path={ROUTES.CONTRACTS} element={<ContractList />} />
