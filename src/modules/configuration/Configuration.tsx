@@ -81,6 +81,24 @@ function Configuration() {
             </Link>
           </div>
         </article>
+
+         <article className="p-6 border border-gray-200 rounded-lg shadow-md bg-white hover:shadow-lg transition duration-300">
+          <div className="flex items-center mb-4">
+            <ClipboardDocumentListIcon className="h-6 w-6 text-indigo-500 mr-3" />
+            <h2 className="text-xl font-bold text-gray-800">Actividad</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Administra la actividad de la plataforma.
+          </p>
+          <div className="flex space-x-2">
+            <Link
+              to={ROUTES.ACTIVITY_LOGS}
+              className="px-4 py-2 text-sm font-semibold text-white bg-gray-800 rounded hover:bg-gray-600 transition"
+            >
+              Ver Actividad 
+            </Link>
+          </div>
+        </article>
       </section>
     </main>
   );

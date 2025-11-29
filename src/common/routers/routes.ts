@@ -53,6 +53,8 @@ export const ROUTES = {
   INVENTORY_CREATE: "/inventory/create",
   INVENTORY_EDIT: "/inventory/edit/:id",
 
+  ACTIVITY_LOGS: "/activity-logs",
+
   INVOICES: "/invoices",
   INVOICES_CREATE: "/invoices/create",
   INVOICES_EDIT: "/invoices/edit/:id",
