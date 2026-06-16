@@ -3,7 +3,7 @@ import { FetchData } from "@/common/hooks/useFetch";
 export const deleteUserService = (fetch: FetchData) => async (id: string) => {
   try {
     const response = await fetch({
-      url: `/api/users/delete/${id}`,
+      url: `/api/users/${id}`,
       method: "delete",
     });
 

@@ -1,53 +1,26 @@
-import { useState } from "react";
-import Modal from "@/common/components/Modal";
 import FormInventory from "./components/FormInventory";
-import { InventoryCreate } from "@/common/models/Inventory";
 import { useInventoryCommand } from "./hooks/useInventoryCommand";
+import Header from "@/common/components/Header";
 
-function CreateInventory ({ isOpen, onClose, onRefresh }) {
+function InventoryCreate() {
+  const { inventory, errors, handleChange, createInventory } = useInventoryCommand();
 
-    const [inventory, setInventory] = useState<InventoryCreate>({
-        reference: "",
-        mac: "",
-        ip: "",
-        typeInventory: { id: "" },
-        status: 0,
-    });
-
-    const { createInventory, loadingAction } = useInventoryCommand();
-
-    const handleChange = (inventory: InventoryCreate) => {
-        setInventory(inventory);
-    }
-
-    const handleSubmit = async () => {
-        if (!loadingAction) {
-            if (inventory.typeInventory.id !== "1" && !inventory.ip) {
-                inventory.ip = null;
-            }
-            await createInventory(inventory).then(() => {
-                setInventory({
-                    reference: "",
-                    mac: "",
-                    ip: "",
-                    typeInventory: { id: "" },
-                    status: 0,
-                });
-                onRefresh();
-                onClose();
-            });
-        }
-    }
-    return (
-        <Modal isOpen={isOpen} onClose={onClose}>
-            <h2>Crear Inventario</h2>
-            <FormInventory
-                inventory={inventory}
-                onChange={handleChange}
-                onSubmit={handleSubmit}
-            />
-        </Modal>
-    )
+  const handleSubmit = async () => {
+    createInventory();
+  };
+  return (
+    <main>
+      <Header title="Crear Inventario" />
+      <section className="p-5">
+        <FormInventory
+          data={inventory}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          errors={errors}
+        />
+      </section>
+    </main>
+  );
 }
 
-export default CreateInventory;
+export default InventoryCreate;

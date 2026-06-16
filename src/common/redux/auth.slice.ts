@@ -33,6 +33,7 @@ const authSlice = createSlice({
   reducers: {
     login(state, action: PayloadAction<AuthResponse>) {
       const user = action.payload;
+      console.log("user:",user);
       saveSessionToLocalStorage({ user: user, isAuth: true });
       state.user = user;
       state.isAuth = true;

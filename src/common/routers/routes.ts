@@ -1,8 +1,14 @@
 export const ROUTES = {
   LOGIN: "/login",
   LOGOUT: "/logout",
-  RESET_PASSWORD: "/reset-password",
+  GET_CODE_RECOVER_PASS: "/recover-password/code",
+  RECOVER_PASSWORD: "/recover-password/reset",
   HOME: "/home",
+
+  PLANS: "/configuration/plans",
+  PLANS_CREATE: "/configuration/plans/create",
+  PLANS_EDIT: "/configuration/plans/edit/:id",
+  PLANS_DELETE: "/configuration/plans/delete/:id",
 
   USERS_LIST: "/configuration/users/list",
   USERS_CREATE: "/configuration/users/create",
@@ -31,11 +37,29 @@ export const ROUTES = {
 
   DASHBOARD: "/control-panel",
   CUSTOMERS: "/customers",
-  CONTRATS: "/contrats",
-  PLANS: "/plans",
-  FACTURATION: "/facturation",
-  INVENTORY: "/inventory",
+
+  CONTRACTS: "/contracts",
+  CONTRACTS_CREATE: "/contracts/create",
+  CONTRACTS_EDIT: "/contracts/edit/:id",
+  
   HISTORY: "/history",
   CONFIGURATION: "/configuration",
   TRAFICO: "/trafico",
+
+
+
+
+  INVENTORY: "/inventory",
+  INVENTORY_CREATE: "/inventory/create",
+  INVENTORY_EDIT: "/inventory/edit/:id",
+
+  ACTIVITY_LOGS: "/activity-logs",
+
+  INVOICES: "/invoices",
+  INVOICES_CREATE: "/invoices/create",
+  INVOICES_EDIT: "/invoices/edit/:id",
+
+  PAYMENTS: "/payments/:invoiceId",
+  PAYMENTS_CREATE: "/payments/:invoiceId/create",
+  PAYMENTS_EDIT: "/payments/:invoiceId/edit/:id",
 };

@@ -58,7 +58,7 @@ function Dropdown({ title, type = "button", children }: DropdownProps) {
       {isOpen && (
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+          className="dropdown-content menu bg-base-100 rounded-box z-[99999] w-52 p-2 shadow"
         >
           {React.Children.map(children, (child) => {
             return (

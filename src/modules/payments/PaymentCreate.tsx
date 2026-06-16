@@ -1,63 +1,35 @@
-import { useState } from "react";
-import Modal from "@/common/components/Modal";
+import { useParams } from "react-router-dom";
+import { usePaymentCommand } from "./hooks/usePaymentCommand";
+import { useEffect } from "react";
+import Header from "@/common/components/Header";
 import FormPayment from "./components/FormPayment";
-import { usePaymentsCommand } from "./hooks/usePaymentsCommand";
-import { PaymentCreate } from "@/common/models/Payment";
-import { Invoice } from "@/common/models/Invoice";
 
-interface CreatePaymentsProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onRefresh: () => void;
-  invoice: Invoice; // Ajusta el tipo de 'invoice' según el modelo que tengas
-}
-
-function CreatePayments({
-  isOpen,
-  onClose,
-  onRefresh,
-  invoice,
-}: CreatePaymentsProps) {
-  const [payment, setPayment] = useState<PaymentCreate>({
-    invoice_id: invoice?.id || "",
-    customer_id: invoice?.customer?.id || "",
-    methodPaid: "",
-    date: "",
-    amountPaid: invoice?.mount || 0,
-  });
-
-  const { createPayments, loadingAction } = usePaymentsCommand();
-
-  const handleChange = (updatedPayment: PaymentCreate) => {
-    setPayment(updatedPayment);
-  };
+function PaymentCreate() {
+  const { invoiceId } = useParams<{ invoiceId: string }>();
+  const { payment, handleChange, errors, createPayment, loading } =
+    usePaymentCommand();
 
   const handleSubmit = async () => {
-    if (!loadingAction) {
-      await createPayments(payment).then(() => {
-        setPayment({
-          invoice_id: invoice?.id || "",
-          customer_id: invoice?.customer?.id || "",
-          methodPaid: "",
-          date: "",
-          amountPaid: invoice?.mount || 0,
-        });
-        onRefresh();
-        onClose();
-      });
-    }
+    createPayment();
   };
 
+  useEffect(() => {
+    handleChange("invoiceId", invoiceId || "");
+  }, [invoiceId]);
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <h2>Crear Pago</h2>
-      <FormPayment
-        payment={payment}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-    </Modal>
+    <main>
+      <Header title="Crear Pago" />
+      <section className="p-5">
+        <FormPayment
+          data={payment}
+          onChange={handleChange}
+          errors={errors}
+          onSubmit={handleSubmit}
+        />
+      </section>
+    </main>
   );
 }
 
-export default CreatePayments;
+export default PaymentCreate;

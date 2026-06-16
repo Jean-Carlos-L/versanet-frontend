@@ -9,7 +9,7 @@ export const getRoleByIdService = (fetch: FetchData) => async (id: string): Prom
          url: `/api/roles/${id}`,
          method: "get"
       })
-      return roleAdapter(response.data.data);
+      return roleAdapter(response.data);
    } catch (error) {
       console.error(error);
       throw new Error(

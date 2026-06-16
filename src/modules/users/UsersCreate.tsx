@@ -10,7 +10,7 @@ function UsersCreate() {
     email: "",
     password: "",
     confirmPassword: "",
-    status: 1,
+    status: "activo",
   });
 
   const { createUser, loadingAction } = useUsersCommand();
@@ -26,7 +26,7 @@ function UsersCreate() {
         email: "",
         password: "",
         confirmPassword: "",
-        status: 1,
+        status: "activo",
         role: "",
       });
     });
@@ -36,12 +36,14 @@ function UsersCreate() {
     <main>
       <Header title="Crear usuario" />
 
-      <FormUser
-        user={user}
-        loading={loadingAction}
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-      />
+      <section className="p-5">
+        <FormUser
+          user={user}
+          loading={loadingAction}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+      </section>
     </main>
   );
 }

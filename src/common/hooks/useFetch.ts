@@ -6,6 +6,7 @@ import { logout } from "../redux/auth.slice";
 
 const defaultHeaders = {
   "Content-Type": "application/json",
+  Accept: "application/json",
 };
 
 axios.defaults.withCredentials = true;
@@ -30,7 +31,6 @@ export const useFetch = () => {
         headers,
         data: body,
         responseType,
-        withCredentials: true,
       };
 
       const response = await axios(config);

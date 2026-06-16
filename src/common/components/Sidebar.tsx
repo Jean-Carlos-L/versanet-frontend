@@ -48,31 +48,6 @@ function Sidebar() {
             label="Clientes"
           />
           <LinkComponent
-            to={ROUTES.CONTRATS}
-            code={PERMISSIONS.CONTRATS}
-            icon={
-              <ClipboardDocumentCheckIcon className="h-6 w-6 inline-block mb-1 mr-1" />
-            }
-            label="Contratos"
-          />
-
-          <LinkComponent
-            to={ROUTES.PLANS}
-            code={PERMISSIONS.PLANS}
-            icon={<ListBulletIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
-            label="Planes"
-          />
-
-          <LinkComponent
-            to={ROUTES.FACTURATION}
-            code={PERMISSIONS.FACTURATION}
-            icon={
-              <DocumentCurrencyDollarIcon className="h-6 w-6 inline-block mb-1 mr-1" />
-            }
-            label="Facturación"
-          />
-
-          <LinkComponent
             to={ROUTES.INVENTORY}
             code={PERMISSIONS.INVENTORY}
             icon={
@@ -80,13 +55,29 @@ function Sidebar() {
             }
             label="Inventario"
           />
-
           <LinkComponent
+            to={ROUTES.CONTRACTS}
+            code={PERMISSIONS.CONTRACTS}
+            icon={
+              <ClipboardDocumentCheckIcon className="h-6 w-6 inline-block mb-1 mr-1" />
+            }
+            label="Contratos"
+          />
+          <LinkComponent
+            to={ROUTES.INVOICES}
+            code={PERMISSIONS.INVOICES}
+            icon={
+              <DocumentCurrencyDollarIcon className="h-6 w-6 inline-block mb-1 mr-1" />
+            }
+            label="Facturación"
+          />
+
+          {/* <LinkComponent
             to={ROUTES.HISTORY}
             code={PERMISSIONS.HISTORY}
             icon={<ClockIcon className="h-6 w-6 inline-block mb-1 mr-1" />}
             label="Historial"
-          />
+          /> */}
           <LinkComponent
             to={ROUTES.CONFIGURATION}
             code={PERMISSIONS.CONFIGURATION}
@@ -94,12 +85,13 @@ function Sidebar() {
             label="Configuración"
           />
 
-
-          <button onClick={logout} className="px-4 py-4 text-gray-50 rounded-md text-start cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400">
-            <ArrowLeftStartOnRectangleIcon className="h-6 w-6 inline-block mb-1 mr-1" /> Cerrar
-            sesión
+          <button
+            onClick={logout}
+            className="px-4 py-4 text-gray-50 rounded-md text-start cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            <ArrowLeftStartOnRectangleIcon className="h-6 w-6 inline-block mb-1 mr-1" />{" "}
+            Cerrar sesión
           </button>
-
         </div>
       )}
     </aside>
@@ -118,8 +110,9 @@ function LinkComponent({ to, code, icon, label }) {
       to={to}
       state={{ code }}
       className={({ isActive }) => {
-        return `px-4 py-4 text-gray-50 rounded-md cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400 ${isActive ? "bg-gray-300 text-gray-800 shadow-md" : ""
-          }`;
+        return `px-4 py-4 text-gray-50 rounded-md cursor-pointer w-full hover:bg-gray-300 hover:text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400 ${
+          isActive ? "bg-gray-300 text-gray-800 shadow-md" : ""
+        }`;
       }}
     >
       {icon} {label}

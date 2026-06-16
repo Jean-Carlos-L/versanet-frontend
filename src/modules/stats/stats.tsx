@@ -13,56 +13,45 @@ import {
 function StatsList() {
   const { stats, loading } = useStats();
 
-  if (loading || !stats) {
-    return (
-      <main>
-        <Header title="Estadísticas" />
-        <div className="flex justify-center mt-10">
-          <Spinner />
-        </div>
-      </main>
-    );
-  }
-
-  const entities = [
-    {
-      name: "Contratos Activos",
-      value: stats.activeContracts,
-      icon: <WifiIcon className="h-6 w-6 text-green-500" />,
-    },
-    {
-      name: "Contratos Deshabilitados",
-      value: stats.inactiveContracts,
-      icon: <BoltSlashIcon className="h-6 w-6 text-red-500" />,
-    },
-    {
-      name: "Clientes Plan 30M",
-      value: stats.clientsWith30MPlan,
-      icon: <UserIcon className="h-6 w-6 text-blue-500" />,
-    },
-    {
-      name: "Clientes Plan 60M",
-      value: stats.clientsWith60MPlan,
-      icon: <UserIcon className="h-6 w-6 text-yellow-500" />,
-    },
-    {
-      name: "Clientes Plan 90M",
-      value: stats.clientsWith90MPlan,
-      icon: <UserIcon className="h-6 w-6 text-purple-500" />,
-    },
-    {
-      name: "Total Clientes",
-      value: stats.totalClients,
-      icon: <UserGroupIcon className="h-6 w-6 text-pink-500" />,
-    },
-  ];
+  // const entities = [
+  //   {
+  //     name: "Contratos Activos",
+  //     value: stats.activeContracts,
+  //     icon: <WifiIcon className="h-6 w-6 text-green-500" />,
+  //   },
+  //   {
+  //     name: "Contratos Deshabilitados",
+  //     value: stats.inactiveContracts,
+  //     icon: <BoltSlashIcon className="h-6 w-6 text-red-500" />,
+  //   },
+  //   {
+  //     name: "Clientes Plan 30M",
+  //     value: stats.clientsWith30MPlan,
+  //     icon: <UserIcon className="h-6 w-6 text-blue-500" />,
+  //   },
+  //   {
+  //     name: "Clientes Plan 60M",
+  //     value: stats.clientsWith60MPlan,
+  //     icon: <UserIcon className="h-6 w-6 text-yellow-500" />,
+  //   },
+  //   {
+  //     name: "Clientes Plan 90M",
+  //     value: stats.clientsWith90MPlan,
+  //     icon: <UserIcon className="h-6 w-6 text-purple-500" />,
+  //   },
+  //   {
+  //     name: "Total Clientes",
+  //     value: stats.totalClients,
+  //     icon: <UserGroupIcon className="h-6 w-6 text-pink-500" />,
+  //   },
+  // ];
 
   return (
     <main>
       <Header title="Estadísticas" />
 
       {/* Botones de Navegación */}
-      <div className="flex justify-center gap-4 p-6">
+      {/* <div className="flex justify-center gap-4 p-6">
         <Link
           to="/control-panel"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
@@ -97,7 +86,7 @@ function StatsList() {
             />
           </div>
         ))}
-      </section>
+      </section> */}
     </main>
   );
 }

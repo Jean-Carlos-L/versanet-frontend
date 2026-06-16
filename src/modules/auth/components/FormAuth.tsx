@@ -58,7 +58,7 @@ function FormAuth({ auth, loading, onSubmit, onChange }: FormAuthProps) {
         <Button type="submit" disabled={loading}>
           {loading ? "Cargando..." : "Iniciar Sesión"}
         </Button>
-        <Link to={ROUTES.RESET_PASSWORD} className="text-blue-500 text-center mt-4">
+        <Link to={ROUTES.GET_CODE_RECOVER_PASS} className="text-blue-500 text-center mt-4">
           ¿Olvidaste tu contraseña?
         </Link>
       </div>

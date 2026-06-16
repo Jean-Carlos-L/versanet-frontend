@@ -30,7 +30,6 @@ function UsersEdit() {
         role: user.role.id,
       });
     }
-
   }, [user]);
 
   const handleChange = (user: UserUpdate) => {
@@ -38,24 +37,21 @@ function UsersEdit() {
   };
 
   const handleSubmit = () => {
-    if (
-      window.confirm("¿Estás seguro de que deseas actualizar este usuario?")
-    ) {
-      if (!loadingAction) {
-        updateUser(userUpdate);
-      }
+    if (!loadingAction) {
+      updateUser(userUpdate);
     }
   };
 
   return (
     <div>
       <Header title="Editar usuario" />
-
-      <FormUser
-        user={userUpdate}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
+      <section className="p-5">
+        <FormUser
+          user={userUpdate}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      </section>
     </div>
   );
 }

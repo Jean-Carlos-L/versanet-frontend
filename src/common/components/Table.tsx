@@ -1,3 +1,5 @@
+import React from "react";
+
 function Table({ data, headers }: TableProps) {
    return (
       <div className="overflow-x-auto">
@@ -12,7 +14,13 @@ function Table({ data, headers }: TableProps) {
                </tr>
             </thead>
             <tbody className="text-gray-800 divide-y divide-gray-300">
-               {data}
+               {React.Children.toArray(data).length > 0 ? data : (
+                  <tr>
+                     <td colSpan={headers.length} className="px-4 py-6 text-center text-gray-500">
+                        No hay datos disponibles
+                     </td>
+                  </tr>
+               )}
             </tbody>
          </table>
       </div>

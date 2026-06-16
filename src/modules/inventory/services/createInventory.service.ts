@@ -4,7 +4,7 @@ import { InventoryCreate } from "@/common/models/Inventory";
 export const createInventoryService = (fetch: FetchData) => async (inventory: InventoryCreate) => {
     try{
         const response = await fetch({
-            url: "/api/inventario",
+            url: "/api/inventory",
             method: "post",
             body: inventory
         });
